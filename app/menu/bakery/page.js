@@ -95,38 +95,41 @@ export default function BakeryMenuPage() {
               <p>{cat.description}</p>
             </div>
 
-            <div className={styles.itemGrid}>
+            <div className={styles.itemListGrid}>
               {cat.items.map((item) => (
-                <div key={item.name} className={styles.itemCard}>
-                  <div className={styles.itemImageWrap}>
-                    {item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={280}
-                        height={280}
-                        className={styles.itemImage}
-                        loading="lazy"
-                      />
-                    ) : (
-                      <div className={styles.itemPlaceholder} aria-hidden="true">
-                        🍰
-                      </div>
-                    )}
-                    {item.tag && (
-                      <span className={styles.itemTag}>{item.tag}</span>
-                    )}
-                  </div>
-                  <div className={styles.itemBody}>
-                    <div className={styles.itemName}>{item.name}</div>
-                    {item.size && (
-                      <div className={styles.itemSize}>{item.size}</div>
-                    )}
+                <div key={item.name} className={styles.itemListCard}>
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      width={100}
+                      height={100}
+                      className={styles.itemListImage}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className={styles.itemListPlaceholder} aria-hidden="true">
+                      🍰
+                    </div>
+                  )}
+                  <div className={styles.itemListBody}>
+                    <div className={styles.itemListName}>{item.name}</div>
                     {item.description && (
-                      <div className={styles.itemDesc}>{item.description}</div>
+                      <div className={styles.itemListDesc}>{item.description}</div>
                     )}
-                    {item.price && (
-                      <div className={styles.itemPrice}>{item.price}</div>
+                    <div className={styles.itemListMeta}>
+                      {item.price && (
+                        <span className={styles.itemPrice}>{item.price}</span>
+                      )}
+                      {item.size && (
+                        <span className={styles.itemSize}>{item.size}</span>
+                      )}
+                      {item.tag && (
+                        <span className={styles.itemTag} style={{ position: "static" }}>{item.tag}</span>
+                      )}
+                    </div>
+                    {item.priceNote && (
+                      <div className={styles.itemPriceNote}>{item.priceNote}</div>
                     )}
                   </div>
                 </div>
