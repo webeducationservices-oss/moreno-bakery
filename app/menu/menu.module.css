@@ -124,8 +124,8 @@
 /* ── Hub Split Cards (Bakery / Food) ───────────────────── */
 .hubGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-2xl);
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
   margin-top: var(--space-xl);
 }
 
@@ -565,11 +565,11 @@
 
   .hubGrid {
     grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    gap: var(--space-lg);
   }
 
   .hubCard {
-    min-height: 320px;
+    min-height: 280px;
   }
 
   .itemListCard {

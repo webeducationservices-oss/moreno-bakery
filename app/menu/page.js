@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BAKERY_CATEGORIES, FOOD_CATEGORIES } from "../data/menu";
+import { BAKERY_CATEGORIES, FOOD_CATEGORIES, CATERING_CATEGORIES } from "../data/menu";
 import styles from "./menu.module.css";
 
 export const metadata = {
@@ -20,7 +20,7 @@ const MENU_SECTIONS = [
     href: "/menu/bakery",
     image: "/images/food/moreno-bakery-eclairs.jpg",
     description:
-      "Cupcakes, cakes, pies, cookies, pastries, brownies, bonbons, and fresh-baked breads — handmade daily.",
+      "Cupcakes, cakes, pies, cookies, pastries, brownies, and fresh-baked Cuban breads — handmade daily.",
     count: BAKERY_CATEGORIES.reduce((sum, c) => sum + c.items.length, 0),
   },
   {
@@ -28,7 +28,7 @@ const MENU_SECTIONS = [
     href: "/menu/food",
     image: "/images/food/moreno-bakery-cuban-sandwich.jpg",
     description:
-      "Cuban sandwiches, hot combos with sides, soups, salads, empanadas, and savory bites made from scratch.",
+      "Cuban sandwiches, hot combos, soups, salads, empanadas, and savory bites made from scratch.",
     count: FOOD_CATEGORIES.reduce(
       (sum, c) =>
         sum +
@@ -37,6 +37,14 @@ const MENU_SECTIONS = [
           : c.items.length),
       0
     ),
+  },
+  {
+    title: "Catering",
+    href: "/menu/catering",
+    image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg",
+    description:
+      "Entrée trays, sandwich platters, finger food, cookie and pastry trays, and custom cakes for any event.",
+    count: CATERING_CATEGORIES.reduce((sum, c) => sum + c.items.length, 0),
   },
 ];
 
@@ -182,6 +190,39 @@ export default function MenuPage() {
                             0
                           )
                         : cat.items.length}
+                    </span>
+                  </h3>
+                  <p>{cat.description}</p>
+                  <span className={styles.categoryCardCta}>
+                    View All <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <h3 style={{ marginBottom: "var(--space-md)", marginTop: "var(--space-3xl)" }}>
+            🎉 Catering
+          </h3>
+          <div className={styles.categoryGrid}>
+            {CATERING_CATEGORIES.map((cat) => (
+              <Link
+                key={cat.id}
+                href={`/menu/catering#${cat.id}`}
+                className={styles.categoryCard}
+              >
+                <Image
+                  src={cat.image}
+                  alt={cat.name}
+                  width={560}
+                  height={350}
+                  className={styles.categoryCardImage}
+                  loading="lazy"
+                />
+                <div className={styles.categoryCardBody}>
+                  <h3>
+                    {cat.name}
+                    <span className={styles.itemCount}>
+                      {cat.items.length}
                     </span>
                   </h3>
                   <p>{cat.description}</p>

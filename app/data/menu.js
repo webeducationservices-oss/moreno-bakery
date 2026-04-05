@@ -3,6 +3,119 @@
    Sourced from morenobakery.com (live site) + product photos
    ============================================================ */
 
+export const CATERING_CATEGORIES = [
+  {
+    id: "entrees",
+    name: "Entrées",
+    description: "Hot entrées for groups — lasagna, roast pork, ropa vieja, oxtail, and more. Served in catering trays.",
+    image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg",
+    items: [
+      { name: "Chicken or Beef Lasagna", price: "Serves 6–12 | $54.00", description: "Classic baked lasagna with your choice of meat sauce or chicken spinach." },
+      { name: "Roast Pork", price: "3 lbs $30 / 5 lbs $50", description: "Smothered in mojo then cooked with onions, garlic, and cumin. Serves 8–20.", image: "/images/food/moreno-bakery-roast-pork-combo.jpg" },
+      { name: "Chicken Marsala", price: "3 lbs $36 / 5 lbs $60", description: "Chicken breast in a marsala wine sauce with mushrooms, onions, garlic, and cream. Serves 8–20.", image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg" },
+      { name: "Rabo / Oxtail", price: "3 lbs $45 / 5 lbs $75", description: "Oxtail cooked with tomato paste, wine, olives, onion, peppers, garlic, and cumin. Serves 4–10.", image: "/images/food/moreno-bakery-oxtail.jpg" },
+      { name: "Carne con Papas (Beef Stew)", price: "3 lbs $45 / 5 lbs $75", description: "Beef in a sauce of tomato paste, wine, and beef stock with potatoes. Serves 8–20.", image: "/images/food/moreno-bakery-beef-stew-combo.jpg" },
+      { name: "Picadillo", price: "3 lbs $45 / 5 lbs $75", description: "Ground beef in tomato sauce with onions, garlic, peppers, olives, raisins, and capers. Serves 8–20.", image: "/images/food/moreno-bakery-picadillo-combo.jpg" },
+      { name: "Ropa Vieja", price: "3 lbs $45 / 5 lbs $75", description: "Shredded beef in a sauce of tomato, onion, bell pepper, garlic, and cumin. Serves 8–20.", image: "/images/food/moreno-bakery-ropa-vieja-combo.jpg" },
+      { name: "Shrimp Enchilado or Fried Shrimp", price: "3 lbs $42 / 5 lbs $70", description: "Your choice of shrimp preparation. Serves 8–20.", image: "/images/food/moreno-bakery-fried-shrimp.jpg" },
+      { name: "Arroz con Pollo / Fried Rice / Arroz con Gandules", price: "3 lbs $28 / 5 lbs $45", description: "Choose from three rice entrée options. Serves 6–13." },
+    ],
+  },
+  {
+    id: "finger-food",
+    name: "Finger Food",
+    description: "Platters of Cuban favorites for parties and events — deviled crabs, empanadas, meatballs, and more.",
+    image: "/images/food/moreno-bakery-chicken-empanadas.jpg",
+    items: [
+      { name: "Scachatta", price: "Half (serves 12–16) | $22.00", description: "Tampa-style pizza squares." },
+      { name: "Deviled Crabs", price: "30 pcs $120 / 100 pcs $400", description: "Classic Tampa-style deviled crab croquettes." },
+      { name: "Mini Meatball Platter", price: "50 pcs $40 / 150 pcs $115", description: "Mini meatballs served with marinara sauce." },
+      { name: "Mini Meat Pies / Empanadas", price: "30 pcs $105 / 100 pcs $350", description: "Choose from meat pies, chicken empanadas, or spinach empanadas.", image: "/images/food/moreno-bakery-chicken-empanadas.jpg" },
+      { name: "Mini Stuffed Potato Platter", price: "50 pcs $30 / 100 pcs $60", description: "Bite-sized stuffed potatoes.", image: "/images/food/moreno-bakery-stuffed-potatoes.jpg" },
+    ],
+  },
+  {
+    id: "sandwich-trays",
+    name: "Sandwich Trays",
+    description: "Pressed sandwich platters on fresh Tampa Cuban bread — perfect for meetings and events.",
+    image: "/images/food/moreno-bakery-cuban-sandwich.jpg",
+    items: [
+      { name: "Cuban / Media Noche / Turkey / Ham & Cheese", price: "Serves 12–16 $76 / Serves 40–50 $225", description: "Classic pressed sandwiches on Tampa Cuban bread.", image: "/images/food/moreno-bakery-cuban-sandwich.jpg" },
+      { name: "Ropa Vieja / Pastrami / Chicken Salad & Cheese", price: "Serves 12–16 $92 / Serves 40–50 $275", description: "Premium sandwich selections." },
+    ],
+  },
+  {
+    id: "catering-salads",
+    name: "Salads",
+    description: "Fresh salads for catering — garden, Greek, chopped, potato salad, and chicken salad by the pound.",
+    image: "/images/food/moreno-bakery-greek-salad.jpg",
+    items: [
+      { name: "Garden Salad", price: "8–15 $18 / 15–30 $30 / 30–50 $40", description: "Fresh garden salad with mixed greens." },
+      { name: "Moreno 2008 or Greek Salad", price: "8–15 $30 / 15–30 $40 / 30–50 $55", description: "Our signature salad or Greek with feta and olives.", tag: "Vegetarian", image: "/images/food/moreno-bakery-greek-salad.jpg" },
+      { name: "Rachel's Chopped Salad", price: "8–15 $35 / 15–30 $55 / 30–50 $75", description: "Applewood bacon, tomatoes, blue cheese crumbles with Parmesan vinaigrette.", image: "/images/food/moreno-bakery-rachels-chopped-salad.jpg" },
+      { name: "Potato Salad", price: "Per pound $8.00", description: "Fresh diced potatoes with mayo, onion, celery, creole mustard, and dill." },
+      { name: "Chicken Salad", price: "Per pound $9.00", description: "Chicken breast with tarragon, celery, onion, and Moreno mayonnaise." },
+    ],
+  },
+  {
+    id: "catering-sides",
+    name: "Sides",
+    description: "Catering-sized trays of homemade sides — rice, yuca, mac & cheese, plantains, and more.",
+    image: "/images/food/moreno-bakery-plantains-maduros.jpg",
+    items: [
+      { name: "Congris / Yellow / White Rice", price: "3 lbs $21 / 5 lbs $35", description: "Your choice of rice. Serves 8–20." },
+      { name: "Yuca", price: "3 lbs $18 / 5 lbs $30", description: "Boiled yuca. Serves 8–20.", image: "/images/food/moreno-bakery-yuca.jpg" },
+      { name: "Spinach Gratin", price: "3 lbs $24 / 5 lbs $40", description: "Creamy spinach bake. Serves 8–20.", image: "/images/food/moreno-bakery-spinach-gratin.jpg" },
+      { name: "Smoked Gouda Mac 'n Cheese", price: "3 lbs $24 / 5 lbs $40", description: "Rich and creamy mac & cheese. Serves 8–20.", image: "/images/food/moreno-bakery-smoked-gouda-mac-n-cheese.jpg" },
+      { name: "Mashed Potatoes", price: "3 lbs $18 / 5 lbs $30", description: "Homemade mashed potatoes. Serves 8–20.", image: "/images/food/moreno-bakery-mashed-potatoes.jpg" },
+      { name: "Sweet Potatoes", price: "3 lbs $18 / 5 lbs $30", description: "Seasoned sweet potatoes. Serves 8–20.", image: "/images/food/moreno-bakery-sweet-potatoes.jpg" },
+      { name: "Tostones", price: "25 pcs $20 / 40 pcs $32", description: "Crispy fried green plantains.", image: "/images/food/moreno-bakery-tostones.jpg" },
+      { name: "Platanos Maduro", price: "25 pcs $20 / 40 pcs $32", description: "Sweet ripe plantains.", image: "/images/food/moreno-bakery-plantains-maduros.jpg" },
+    ],
+  },
+  {
+    id: "cookie-trays",
+    name: "Cookie Trays",
+    description: "Assorted cookie platters for parties — jumbo, butter, and Italian cookie selections.",
+    image: "/images/food/moreno-bakery-chocolate-chunk-cookie.jpg",
+    items: [
+      { name: "Jumbo Cookie Tray", price: "24 cookies $72 / 48 half-sized $76", description: "Selection includes Chocolate Chunk, Oatmeal Raisin, Peanut Butter, Gingerbread, Tortica de Moron, Sprinkle, and Chinese Marble cookies.", image: "/images/food/moreno-bakery-chocolate-chunk-cookie.jpg" },
+      { name: "Butter Cookie Tray", price: "5 lbs $70", description: "Selection includes Guava Drop, Cherry, Chocolate Sprinkle, and Rainbow Sprinkle butter cookies." },
+      { name: "Italian Cookie Tray", price: "5 lbs $75", description: "Selection includes Sesame, Pignoli, Butter Spritz, Raspberry Sandwiches and Wedding cookies." },
+    ],
+  },
+  {
+    id: "pastry-trays",
+    name: "Pastry Trays",
+    description: "Miniature pastry platters — rugelach, brownies, almond delights, turnovers, and Danish.",
+    image: "/images/food/moreno-bakery-rugelach.jpg",
+    items: [
+      { name: "Rugelach Tray", price: "4 lbs $52", description: "Selection includes Chocolate, Raspberry, Apricot, and Cinnamon Raisin Walnut Rugelach.", image: "/images/food/moreno-bakery-rugelach.jpg" },
+      { name: "Brownie Buffet Tray", price: "36 pieces $50", description: "Miniature versions of Fudgy Brownies with Icing, Cheesecake Brownies, and Peanut Butter Brownies.", image: "/images/food/moreno-bakery-fudgy-brownies-with-icing.jpg" },
+      { name: "Almond Delight Tray", price: "30 pieces $55", description: "Miniature Almond Horns, Chocolate-dipped Almond Horns, Raspberry and Apricot Almond Sticks.", image: "/images/food/moreno-bakery-almond-horns.jpg" },
+      { name: "Turnover Tray", price: "32 pieces $44", description: "Miniature Guava, Cheese, and Guava & Cheese Turnovers." },
+      { name: "Danish Tray", price: "35 pieces $60", description: "Assorted miniature Cherry, Blueberry, Apple, Pineapple, and Cheese Danishes, topped with Almonds." },
+    ],
+  },
+  {
+    id: "catering-cakes",
+    name: "Custom Cakes",
+    description: "Mix and match from 10+ cake flavors, 18 fillings, and 13 icings. Starting at $45.",
+    image: "/images/food/moreno-bakery-heart-shaped-vanilla-cake.jpg",
+    items: [
+      { name: "8\" Round Cake", price: "Starting at $45", description: "Serves up to 14. Choose your cake flavor, filling, and icing." },
+      { name: "1/4 Sheet Cake", price: "Starting at $65", description: "Serves 25–30. Choose your cake flavor, filling, and icing." },
+      { name: "1/2 Sheet Cake", price: "Starting at $95", description: "Serves 60–85. Choose your cake flavor, filling, and icing." },
+      { name: "Full Sheet Cake", price: "Starting at $165", description: "Serves 150–200. Choose your cake flavor, filling, and icing." },
+      { name: "Amaretto Cake", price: "Starting at $45", description: "Vanilla cake brushed with amaretto syrup, layered with amaretto custard, frosted with amaretto buttercream, toasted almonds and chocolate ganache.", tag: "Specialty" },
+      { name: "Cannoli Cake", price: "Starting at $45", description: "Vanilla cake brushed with vanilla syrup, layered with cannoli filling, frosted with vanilla buttercream.", tag: "Specialty" },
+      { name: "Piña Colada Cake", price: "Starting at $45", description: "Coconut cake brushed with coconut syrup, layered with piña colada custard, frosted with rum buttercream and garnished with coconut, cherries and pineapple.", tag: "Specialty" },
+      { name: "Mudslide Cake", price: "Starting at $45", description: "Chocolate cake brushed with Kahlua syrup, layered with Irish Cream custard, frosted with Kahlua chocolate whipped cream.", tag: "Specialty" },
+      { name: "Strawberry Shortcake", price: "Starting at $45", description: "Vanilla cake brushed with orange syrup, layered with whipped cream and fresh strawberries, frosted with whipped cream.", tag: "Specialty" },
+    ],
+  },
+];
+
 export const BAKERY_CATEGORIES = [
   {
     id: "cupcakes",
