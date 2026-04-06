@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroSlideshow from "./HeroSlideshow";
 import styles from "./page.module.css";
 
 export const metadata = {
@@ -12,39 +13,7 @@ export default function Home() {
   return (
     <>
       {/* ── Section 1: Hero ──────────────────────────────── */}
-      <section className={styles.hero} aria-label="Welcome to Moreno Bakery">
-        <Image
-          src="/images/food/moreno-bakery-cuban-sandwich-brandon-fl.jpg"
-          alt="Moreno Bakery fresh Cuban sandwich"
-          width={1400}
-          height={800}
-          className={styles.heroImage}
-          priority
-        />
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroContent}>
-          <p className={`${styles.heroAccent} accent-heading`}>Unique - Handmade - Perfect</p>
-          <h1 className={styles.heroTitle}>
-            Brandon's Bakery for Cakes, Catering & Weddings
-          </h1>
-          <p className={styles.heroSub}>
-            From pastries, cakes, and Cuban favorites to office catering, custom
-            desserts, and wedding cakes — order for today or plan for the moments
-            that matter.
-          </p>
-          <div className={styles.heroCtas}>
-            <Link href="/menu" className="btn btn-white btn-lg">
-              View Menu
-            </Link>
-            <Link href="/catering" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
-              Request Catering
-            </Link>
-            <Link href="/events/wedding-cakes" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
-              Wedding Consultation
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroSlideshow />
 
       {/* ── Section 2: Quick Paths ───────────────────────── */}
       <section className={styles.quickPaths} aria-label="Quick actions">
