@@ -4,9 +4,8 @@
   min-height: 85vh;
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
-  background-color: #2a1f1a;
+  background-color: #1a1a2e;
 }
 
 .heroImage {
@@ -15,6 +14,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center right;
   transform: scale(1.03);
   animation: heroZoom 12s ease-out forwards;
 }
@@ -26,15 +26,24 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(1, 42, 80, 0.65) 0%, rgba(10, 10, 10, 0.45) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(1, 42, 80, 0.95) 0%,
+    rgba(1, 42, 80, 0.92) 25%,
+    rgba(1, 42, 80, 0.75) 45%,
+    rgba(1, 42, 80, 0.35) 65%,
+    transparent 85%
+  );
 }
 
 .heroContent {
   position: relative;
   z-index: 1;
-  text-align: center;
-  max-width: 800px;
+  max-width: var(--max-width);
+  margin: 0 auto;
   padding: var(--space-4xl) var(--space-xl);
+  width: 100%;
+  text-align: left;
 }
 
 .heroAccent {
@@ -47,21 +56,21 @@
   color: var(--color-white);
   font-size: var(--text-5xl);
   margin-bottom: var(--space-lg);
+  max-width: 580px;
   min-height: 120px;
 }
 
 .heroSub {
   color: rgba(255, 255, 255, 0.9) !important;
   font-size: var(--text-lg);
-  max-width: 620px;
-  margin: 0 auto var(--space-xl);
+  max-width: 520px;
+  margin: 0 0 var(--space-xl);
   min-height: 72px;
 }
 
 .heroCtas {
   display: flex;
   gap: var(--space-md);
-  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -358,20 +367,39 @@
 
 @media (max-width: 768px) {
   .hero {
-    min-height: 70vh;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .heroOverlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(1, 42, 80, 0.9) 0%,
+      rgba(1, 42, 80, 0.7) 60%,
+      rgba(1, 42, 80, 0.4) 100%
+    );
+  }
+
+  .heroContent {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-lg);
   }
 
   .heroTitle {
+    max-width: none;
     font-size: var(--text-3xl);
     min-height: 100px;
   }
 
   .heroSub {
+    max-width: none;
+    margin: 0 auto var(--space-xl);
     font-size: var(--text-base);
     min-height: 90px;
   }
 
   .heroCtas {
+    justify-content: center;
     flex-direction: column;
     align-items: center;
   }

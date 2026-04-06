@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  text-align: center;
+  background-color: #1a1a2e;
 }
 
 .heroImage {
@@ -18,6 +18,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center right;
   transform: scale(1.03);
   animation: heroZoom 12s ease-out forwards;
 }
@@ -29,7 +30,14 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(1, 42, 80, 0.6) 0%, rgba(10, 10, 10, 0.4) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(1, 42, 80, 0.95) 0%,
+    rgba(1, 42, 80, 0.92) 25%,
+    rgba(1, 42, 80, 0.75) 45%,
+    rgba(1, 42, 80, 0.35) 65%,
+    transparent 85%
+  );
 }
 
 .heroContent {
@@ -39,6 +47,7 @@
   margin: 0 auto;
   padding: var(--space-4xl) var(--space-xl);
   width: 100%;
+  text-align: left;
 }
 
 .heroBadge {
@@ -58,20 +67,20 @@
   color: var(--color-white);
   font-size: var(--text-4xl);
   margin-bottom: var(--space-md);
+  max-width: 560px;
 }
 
 .heroSub {
   color: rgba(255, 255, 255, 0.9);
   font-size: var(--text-lg);
-  max-width: 680px;
-  margin: 0 auto var(--space-xl);
+  max-width: 520px;
+  margin: 0 0 var(--space-xl);
   line-height: 1.7;
 }
 
 .heroCtas {
   display: flex;
   gap: var(--space-md);
-  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -216,9 +225,15 @@
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero h1 { font-size: var(--text-3xl); }
+  .hero { min-height: auto; }
+  .heroOverlay {
+    background: linear-gradient(to bottom, rgba(1,42,80,0.9) 0%, rgba(1,42,80,0.7) 60%, rgba(1,42,80,0.4) 100%);
+  }
+  .heroContent { text-align: center; padding: var(--space-3xl) var(--space-lg); }
+  .hero h1 { font-size: var(--text-3xl); max-width: none; }
+  .heroSub { max-width: none; margin: 0 auto var(--space-xl); }
+  .heroCtas { justify-content: center; }
   .splitContent { grid-template-columns: 1fr; gap: var(--space-xl); }
-  .heroCtas { flex-direction: column; align-items: center; }
   .ctaButtons { flex-direction: column; align-items: center; }
 }
 

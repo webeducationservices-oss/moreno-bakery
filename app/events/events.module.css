@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  background-color: #1a1a2e;
 }
 
 .heroImage {
@@ -18,6 +19,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center right;
   transform: scale(1.03);
   animation: heroZoom 12s ease-out forwards;
 }
@@ -29,7 +31,14 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(1, 42, 80, 0.55) 0%, rgba(10, 10, 10, 0.4) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(1, 42, 80, 0.95) 0%,
+    rgba(1, 42, 80, 0.92) 25%,
+    rgba(1, 42, 80, 0.75) 45%,
+    rgba(1, 42, 80, 0.35) 65%,
+    transparent 85%
+  );
 }
 
 .heroContent {
@@ -38,30 +47,28 @@
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--space-4xl) var(--space-xl);
-  text-align: center;
+  width: 100%;
+  text-align: left;
 }
 
 .heroContent h1 {
   color: var(--color-white);
   font-size: var(--text-4xl);
   margin-bottom: var(--space-md);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 580px;
 }
 
 .heroSub {
   color: rgba(255, 255, 255, 0.9) !important;
   font-size: var(--text-lg);
-  max-width: 680px;
-  margin: 0 auto var(--space-xl);
+  max-width: 520px;
+  margin: 0 0 var(--space-xl);
   line-height: 1.7;
 }
 
 .heroCtas {
   display: flex;
   gap: var(--space-md);
-  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -406,13 +413,14 @@
 }
 
 @media (max-width: 768px) {
-  .hero {
-    min-height: 55vh;
+  .hero { min-height: auto; }
+  .heroOverlay {
+    background: linear-gradient(to bottom, rgba(1,42,80,0.9) 0%, rgba(1,42,80,0.7) 60%, rgba(1,42,80,0.4) 100%);
   }
-
-  .heroContent h1 {
-    font-size: var(--text-3xl);
-  }
+  .heroContent { text-align: center; padding: var(--space-3xl) var(--space-lg); }
+  .heroContent h1 { max-width: none; }
+  .heroSub { max-width: none; margin: 0 auto var(--space-xl); }
+  .heroCtas { justify-content: center; }
 
   .hubGrid {
     grid-template-columns: 1fr;
@@ -451,14 +459,6 @@
 }
 
 @media (max-width: 480px) {
-  .hero {
-    min-height: 45vh;
-  }
-
-  .heroContent {
-    padding: var(--space-3xl) var(--space-md);
-  }
-
   .heroContent h1 {
     font-size: var(--text-2xl);
   }

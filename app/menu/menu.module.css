@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  text-align: center;
+  background-color: #1a1a2e;
 }
 
 .menuHeroImage {
@@ -19,6 +19,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center right;
   transform: scale(1.03);
   animation: heroZoom 12s ease-out forwards;
 }
@@ -30,7 +31,14 @@
 .menuHeroOverlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(1, 42, 80, 0.6) 0%, rgba(10, 10, 10, 0.4) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(1, 42, 80, 0.95) 0%,
+    rgba(1, 42, 80, 0.92) 25%,
+    rgba(1, 42, 80, 0.75) 45%,
+    rgba(1, 42, 80, 0.35) 65%,
+    transparent 85%
+  );
 }
 
 .menuHeroContent {
@@ -40,18 +48,20 @@
   margin: 0 auto;
   padding: var(--space-4xl) var(--space-xl);
   width: 100%;
+  text-align: left;
 }
 
 .menuHero h1 {
   color: var(--color-white);
   margin-bottom: var(--space-sm);
+  max-width: 560px;
 }
 
 .menuHeroSub {
   color: rgba(255, 255, 255, 0.85) !important;
   font-size: var(--text-lg);
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 520px;
+  margin: 0;
 }
 
 /* ── Breadcrumbs ───────────────────────────────────────── */
@@ -569,9 +579,13 @@
 }
 
 @media (max-width: 768px) {
-  .menuHero {
-    padding: var(--space-2xl) 0 var(--space-xl);
+  .menuHero { min-height: auto; }
+  .menuHeroOverlay {
+    background: linear-gradient(to bottom, rgba(1,42,80,0.9) 0%, rgba(1,42,80,0.7) 60%, rgba(1,42,80,0.4) 100%);
   }
+  .menuHeroContent { text-align: center; padding: var(--space-3xl) var(--space-lg); }
+  .menuHero h1 { max-width: none; }
+  .menuHeroSub { max-width: none; margin: 0 auto; }
 
   .categoryNav {
     top: var(--header-height-mobile, 70px);
