@@ -3,7 +3,7 @@
   position: relative;
   min-height: 92vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 55% 45%;
   overflow: hidden;
   background: #012A50;
 }
@@ -12,7 +12,7 @@
 .heroLeft {
   display: flex;
   align-items: center;
-  padding: 80px 60px 80px 0;
+  padding: 80px 40px 80px clamp(40px, 5vw, 80px);
   position: relative;
   z-index: 2;
 }
@@ -28,9 +28,8 @@
 .heroContent {
   position: relative;
   z-index: 2;
-  max-width: 620px;
-  margin: 0 auto;
-  padding: 0 var(--space-xl);
+  max-width: 100%;
+  padding: 0 var(--space-xl) 0 0;
   animation: fadeUp 0.9s ease both;
 }
 
@@ -74,7 +73,7 @@
   font-size: 1.15rem;
   line-height: 1.7;
   margin-bottom: 2rem;
-  max-width: 520px;
+  max-width: 620px;
   min-height: 72px;
 }
 
