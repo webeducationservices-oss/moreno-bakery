@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import CateringPlanner from "./CateringPlanner";
 
 export const metadata = {
   title: "Catering in Brandon, FL | Moreno Bakery",
@@ -62,8 +63,8 @@ export default function CateringPage() {
             trusted local bakery and kitchen.
           </p>
           <div className={styles.heroCtas}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
-              Request Catering
+            <a href="#catering-planner" className="btn btn-white btn-lg">
+              Plan Your Catering
             </a>
             <Link href="/menu/catering" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               View Catering Menu
@@ -94,6 +95,9 @@ export default function CateringPage() {
           </p>
         </div>
       </section>
+
+      {/* ── Catering Planner ──────────────────────────────── */}
+      <CateringPlanner />
 
       {/* ── Event Type Cards ──────────────────────────────── */}
       <section className="section-alt" aria-label="Event types">
