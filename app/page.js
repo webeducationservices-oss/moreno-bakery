@@ -71,28 +71,28 @@ export default function Home() {
           </p>
           <div className="grid-4">
             <CategoryCard
-              image="/images/food/moreno-bakery-cinnamon-roll.jpg"
+              image="/images/food/moreno-bakery-display-case-full-pastries.jpg"
               title="Bakery"
               description="Pastries, cakes, breads, cookies, pies, and bakery favorites baked fresh daily."
               href="/menu/bakery"
               cta="View Bakery Menu"
             />
             <CategoryCard
-              image="/images/food/moreno-bakery-cuban-sandwich.jpg"
+              image="/images/food/moreno-bakery-customers-eating-cuban-sandwiches.jpg"
               title="Kitchen"
               description="Breakfast, sandwiches, salads, soups, sides, and savory Cuban favorites."
               href="/menu/food"
               cta="View Food Menu"
             />
             <CategoryCard
-              image="/images/food/moreno-bakery-chicken-marsala-combo.jpg"
+              image="/images/food/moreno-bakery-catering-dessert-table-event.jpg"
               title="Catering"
               description="Feed a crowd with trays, entrees, and desserts that keep the homemade feel."
               href="/catering"
               cta="Request Catering"
             />
             <CategoryCard
-              image="/images/food/moreno-bakery-cheesecakes.jpg"
+              image="/images/food/moreno-bakery-wedding-couple-cutting-cake.jpg"
               title="Wedding Cakes"
               description="Custom wedding cakes, dessert tables, and celebration orders for your big day."
               href="/events/wedding-cakes"
