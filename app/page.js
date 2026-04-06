@@ -92,7 +92,7 @@ export default function Home() {
               cta="Request Catering"
             />
             <CategoryCard
-              image="/images/food/moreno-bakery-wedding-couple-cutting-cake.jpg"
+              image="/images/food/moreno-bakery-wedding-cake-black-gold-display.jpg"
               title="Wedding Cakes"
               description="Custom wedding cakes, dessert tables, and celebration orders for your big day."
               href="/events/wedding-cakes"
