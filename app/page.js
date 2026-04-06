@@ -146,8 +146,8 @@ export default function Home() {
           <div className={styles.sigGrid}>
             <div className={styles.sigCard}>
               <Image
-                src="/images/food/moreno-bakery-eclairs.jpg"
-                alt="Fresh eclairs from Moreno Bakery"
+                src="/images/food/moreno-bakery-cream-horns-powdered-sugar.jpg"
+                alt="Fresh cream horns with powdered sugar at Moreno Bakery"
                 width={400}
                 height={300}
                 className={styles.sigImage}
@@ -166,8 +166,8 @@ export default function Home() {
             </div>
             <div className={styles.sigCard}>
               <Image
-                src="/images/food/moreno-bakery-beef-stew-combo.jpg"
-                alt="Beef stew combo at Moreno Bakery"
+                src="/images/food/moreno-bakery-cuban-sandwich-pressed-deli.jpg"
+                alt="Pressed Cuban sandwich at Moreno Bakery"
                 width={400}
                 height={300}
                 className={styles.sigImage}
@@ -186,8 +186,8 @@ export default function Home() {
             </div>
             <div className={styles.sigCard}>
               <Image
-                src="/images/food/moreno-bakery-chicken-empanadas.jpg"
-                alt="Chicken empanadas for catering"
+                src="/images/food/moreno-bakery-cuban-sandwich-tray-catering.jpg"
+                alt="Cuban sandwich catering tray at Moreno Bakery"
                 width={400}
                 height={300}
                 className={styles.sigImage}
@@ -206,8 +206,8 @@ export default function Home() {
             </div>
             <div className={styles.sigCard}>
               <Image
-                src="/images/food/moreno-bakery-french-vanilla-cupcake.jpg"
-                alt="French vanilla cupcake for weddings"
+                src="/images/food/moreno-bakery-wedding-cake-black-gold-tiered.jpg"
+                alt="Elegant black and gold tiered wedding cake by Moreno Bakery"
                 width={400}
                 height={300}
                 className={styles.sigImage}
