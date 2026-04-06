@@ -1,0 +1,237 @@
+/* ============================================================
+   Moreno Bakery — Contact Page Styles
+   ============================================================ */
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: var(--space-3xl) 0;
+  text-align: center;
+}
+
+.hero h1 {
+  color: var(--color-white);
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-md);
+}
+
+.heroSub {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--text-lg);
+  max-width: 640px;
+  margin: 0 auto var(--space-xl);
+  line-height: 1.7;
+}
+
+.heroCtas {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Contact Grid ─────────────────────────────────────── */
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  padding: var(--space-4xl) 0;
+}
+
+/* ── Info Column ──────────────────────────────────────── */
+.infoCard {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2xl);
+}
+
+.infoCard h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-xl);
+}
+
+.infoItem {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.infoIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-bg-warm);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.infoItem h3 {
+  font-size: var(--text-base);
+  margin-bottom: 2px;
+}
+
+.infoItem p,
+.infoItem a {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  text-decoration: none;
+}
+
+.infoItem a:hover {
+  color: var(--color-primary);
+}
+
+.hoursTable {
+  width: 100%;
+  margin-top: var(--space-lg);
+  border-collapse: collapse;
+}
+
+.hoursTable td {
+  padding: var(--space-xs) 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hoursTable td:first-child {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.socialLinks {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.socialLink {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.socialLink:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+/* ── Form Column ──────────────────────────────────────── */
+.formCard {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2xl);
+}
+
+.formCard h2 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-lg);
+}
+
+.inquiryTabs {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.inquiryTab {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: transparent;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-family: inherit;
+}
+
+.inquiryTab:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.inquiryTabActive {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.successMessage {
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.successMessage h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.successMessage p {
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+/* ── Map ──────────────────────────────────────────────── */
+.mapSection {
+  background: var(--color-bg-alt);
+  padding: var(--space-3xl) 0;
+}
+
+.mapWrap {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  height: 400px;
+}
+
+.mapWrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ── Holiday ──────────────────────────────────────────── */
+.holidayNote {
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+.holidayNote p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* ── Responsive ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero h1 { font-size: var(--text-3xl); }
+  .contactGrid { grid-template-columns: 1fr; }
+  .formRow { grid-template-columns: 1fr; }
+  .heroCtas { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: var(--text-2xl); }
+  .heroCtas { flex-direction: column; align-items: center; }
+  .inquiryTabs { flex-direction: column; }
+}
