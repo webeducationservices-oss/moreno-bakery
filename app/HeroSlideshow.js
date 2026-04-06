@@ -8,15 +8,15 @@ import styles from "./page.module.css";
 const SLIDES = [
   {
     src: "/images/heroes/hero-slide-1.jpg",
-    alt: "Moreno Bakery team member serving a customer at the pastry counter",
-  },
-  {
-    src: "/images/heroes/hero-slide-2.jpg",
     alt: "Young girl smiling at decorated cookies at Moreno Bakery",
   },
   {
+    src: "/images/heroes/hero-slide-2.jpg",
+    alt: "Moreno Bakery team member serving a customer at the pastry counter",
+  },
+  {
     src: "/images/heroes/hero-slide-3.jpg",
-    alt: "Susan Moreno serving a customer lunch at Moreno Bakery",
+    alt: "Moreno Bakery storefront window sign in Brandon FL",
   },
 ];
 
