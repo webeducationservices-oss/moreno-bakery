@@ -27,7 +27,17 @@ const NAV_ITEMS = [
       { label: "Birthdays & Graduations", href: "/events/birthdays-graduations" },
     ],
   },
-  { label: "Our Story", href: "/about" },
+  {
+    label: "About",
+    href: "/about",
+    children: [
+      { label: "Our Story", href: "/about" },
+      { label: "Featured on NBC", href: "/featured-on-nbc" },
+      { label: "Stories", href: "/stories" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Join the Team", href: "/join-the-team" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 

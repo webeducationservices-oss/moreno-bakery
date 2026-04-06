@@ -63,9 +63,9 @@ export default function Footer() {
               <ul>
                 <li><Link href="/about">Our Story</Link></li>
                 <li><Link href="/gallery">Gallery</Link></li>
-                <li><Link href="/press">As Featured on NBC</Link></li>
-                <li><Link href="/blog">Stories</Link></li>
-                <li><Link href="/careers">Join the Team</Link></li>
+                <li><Link href="/featured-on-nbc">As Featured on NBC</Link></li>
+                <li><Link href="/stories">Stories</Link></li>
+                <li><Link href="/join-the-team">Join the Team</Link></li>
                 <li><Link href="/contact">Contact</Link></li>
               </ul>
             </div>

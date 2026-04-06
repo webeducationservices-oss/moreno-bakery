@@ -1,0 +1,242 @@
+/* ============================================================
+   Moreno Bakery — Join the Team Page Styles
+   ============================================================ */
+
+/* ── Hero ──────────────────────────────────────────────── */
+.hero {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: var(--space-3xl) 0;
+  text-align: center;
+}
+
+.hero h1 {
+  color: var(--color-white);
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-md);
+}
+
+.heroSub {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--text-lg);
+  max-width: 680px;
+  margin: 0 auto var(--space-xl);
+  line-height: 1.7;
+}
+
+.heroCtas {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Intro ────────────────────────────────────────────── */
+.introText {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.introText h2 {
+  margin-bottom: var(--space-lg);
+}
+
+.introText p {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+.introText p + p {
+  margin-top: var(--space-md);
+}
+
+/* ── Role Cards ───────────────────────────────────────── */
+.roleGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.roleCard {
+  text-align: center;
+  padding: var(--space-xl);
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.roleIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-md);
+}
+
+.roleCard h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-xs);
+}
+
+.roleCard p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+/* ── Split Content ────────────────────────────────────── */
+.splitContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+}
+
+.splitContent h2 {
+  margin-bottom: var(--space-md);
+}
+
+.splitContent p {
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+.splitImage {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.splitImage img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.traitList {
+  list-style: none;
+  padding: 0;
+  margin-top: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.traitList li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.traitList svg {
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+/* ── Centered Block ───────────────────────────────────── */
+.centeredBlock {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.centeredBlock h2 {
+  margin-bottom: var(--space-lg);
+}
+
+.centeredBlock p {
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+/* ── Application Form ─────────────────────────────────── */
+.formWrap {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.formWrap form {
+  text-align: left;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.successMessage {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.successMessage h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.successMessage a {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+/* ── FAQ ──────────────────────────────────────────────── */
+.faqList {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.faqItem {
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-lg) 0;
+}
+
+.faqItem summary {
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faqItem summary::after {
+  content: "+";
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--color-primary);
+  transition: transform var(--transition-base);
+}
+
+.faqItem[open] summary::after {
+  content: "−";
+}
+
+.faqItem p {
+  margin-top: var(--space-md);
+  line-height: 1.8;
+  color: var(--color-text-muted);
+}
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero h1 { font-size: var(--text-3xl); }
+  .roleGrid { grid-template-columns: 1fr; }
+  .splitContent { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .traitList { grid-template-columns: 1fr; }
+  .formRow { grid-template-columns: 1fr; }
+  .heroCtas { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: var(--text-2xl); }
+}
