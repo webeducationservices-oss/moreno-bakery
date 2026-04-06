@@ -13,6 +13,14 @@ export default function Home() {
     <>
       {/* ── Section 1: Hero ──────────────────────────────── */}
       <section className={styles.hero} aria-label="Welcome to Moreno Bakery">
+        <Image
+          src="/images/food/moreno-bakery-cuban-sandwich-brandon-fl.jpg"
+          alt="Moreno Bakery fresh Cuban sandwich"
+          width={1400}
+          height={800}
+          className={styles.heroImage}
+          priority
+        />
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <p className={`${styles.heroAccent} accent-heading`}>Unique - Handmade - Perfect</p>

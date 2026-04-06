@@ -53,7 +53,9 @@ export default function MenuPage() {
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className={styles.menuHero}>
-        <div className="container">
+        <Image src="/images/heroes/hero-menu.jpg" alt="Moreno Bakery pastry display case" width={1400} height={800} className={styles.menuHeroImage} priority />
+        <div className={styles.menuHeroOverlay} />
+        <div className={styles.menuHeroContent}>
           <h1>Our Menu</h1>
           <p className={styles.menuHeroSub}>
             From the bakery case to the kitchen — everything is made fresh daily

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
@@ -42,7 +43,9 @@ export default function ContactPage() {
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className={styles.hero}>
-        <div className="container">
+        <Image src="/images/heroes/hero-contact.jpg" alt="Moreno Bakery storefront in Brandon, FL" width={1400} height={800} className={styles.heroImage} priority />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
           <h1>Contact Moreno Bakery in Brandon, FL</h1>
           <p className={styles.heroSub}>
             Whether you want to stop in for bakery favorites, ask about a cake,

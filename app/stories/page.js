@@ -51,7 +51,9 @@ export default function StoriesPage() {
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className={styles.hero}>
-        <div className="container">
+        <Image src="/images/heroes/hero-stories.jpg" alt="Fresh Cuban bread loaves at Moreno Bakery" width={1400} height={800} className={styles.heroImage} priority />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
           <h1>Unique Stories from Moreno Bakery</h1>
           <p className={styles.heroSub}>
             Customer spotlights, behind-the-scenes stories, event features, and

@@ -113,7 +113,9 @@ export default function GalleryPage() {
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className={styles.hero}>
-        <div className="container">
+        <Image src="/images/heroes/hero-gallery.jpg" alt="Assorted cupcake tower at Moreno Bakery" width={1400} height={800} className={styles.heroImage} priority />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
           <h1>See Moreno Bakery in Brandon, FL</h1>
           <p className={styles.heroSub}>
             Explore the pastries, cakes, Cuban bread, food, catering trays, and

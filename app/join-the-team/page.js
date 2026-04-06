@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 
@@ -72,7 +73,9 @@ export default function JoinTheTeamPage() {
     <>
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className={styles.hero}>
-        <div className="container">
+        <Image src="/images/heroes/hero-careers.jpg" alt="Moreno Bakery staff holding a heart cake" width={1400} height={800} className={styles.heroImage} priority />
+        <div className={styles.heroOverlay} />
+        <div className={styles.heroContent}>
           <h1>Join the Team at Moreno Bakery in Brandon, FL</h1>
           <p className={styles.heroSub}>
             Moreno Bakery is built on handmade baking, real teamwork, and
