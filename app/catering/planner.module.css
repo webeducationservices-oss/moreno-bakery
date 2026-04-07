@@ -3,17 +3,17 @@
    ============================================================ */
 
 .planner {
-  padding: var(--space-3xl) 0;
-  background: var(--color-cream);
+  padding: 0;
+  background: transparent;
 }
 
 .plannerCard {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   background: var(--color-white);
   border-radius: var(--radius-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  padding: var(--space-2xl) var(--space-2xl) var(--space-xl);
+  padding: var(--space-2xl) var(--space-xl) var(--space-xl);
   overflow: hidden;
 }
 
@@ -70,7 +70,7 @@
 /* ── Option Grid (event types) ────────────────────────── */
 .optionGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-sm);
 }
 
@@ -232,7 +232,7 @@
 
 .suggestionsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: var(--space-md);
 }
 

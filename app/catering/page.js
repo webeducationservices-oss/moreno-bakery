@@ -76,33 +76,35 @@ export default function CateringPage() {
         </div>
       </section>
 
-      {/* ── Intro ─────────────────────────────────────────── */}
+      {/* ── Intro + Catering Planner ────────────────────── */}
       <section className={styles.intro}>
         <div className="container">
-          <h2 className="text-center" style={{ marginBottom: "var(--space-xl)" }}>
-            Catering You Can Trust from a Bakery You Already Know
-          </h2>
           <div className={styles.introGrid}>
-            <p>
-              When people look for catering in Brandon, they usually need more
-              than just a list of food. They need a place they can trust to feed a
-              group well, offer options that fit the event, and make the ordering
-              process simple. Moreno Bakery is built for exactly that kind of need.
-            </p>
-            <p>
-              Moreno Bakery has the everyday strength of a neighborhood bakery and
-              the capacity of a kitchen that can serve both small and large
-              gatherings. Whether the order is for a breakfast meeting, a lunch
-              drop-off, a birthday, a shower, a church event, a school function,
-              or a family celebration, the bakery can guide customers toward trays,
-              entrees, sides, pastries, desserts, and cakes that fit the moment.
-            </p>
+            <div className={styles.introText}>
+              <h2>
+                Catering You Can Trust from a Bakery You Already Know
+              </h2>
+              <p>
+                When people look for catering in Brandon, they usually need more
+                than just a list of food. They need a place they can trust to feed a
+                group well, offer options that fit the event, and make the ordering
+                process simple. Moreno Bakery is built for exactly that kind of need.
+              </p>
+              <p>
+                Moreno Bakery has the everyday strength of a neighborhood bakery and
+                the capacity of a kitchen that can serve both small and large
+                gatherings. Whether the order is for a breakfast meeting, a lunch
+                drop-off, a birthday, a shower, a church event, a school function,
+                or a family celebration, the bakery can guide customers toward trays,
+                entrees, sides, pastries, desserts, and cakes that fit the moment.
+              </p>
+            </div>
+            <div className={styles.introFormCol}>
+              <CateringPlanner />
+            </div>
           </div>
         </div>
       </section>
-
-      {/* ── Catering Planner ──────────────────────────────── */}
-      <CateringPlanner />
 
       {/* ── Event Type Cards ──────────────────────────────── */}
       <section className="section-alt" aria-label="Event types">

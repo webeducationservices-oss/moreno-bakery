@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
@@ -106,8 +106,38 @@ const CATEGORY_NAMES = Object.keys(CATEGORIES);
 
 export default function GalleryPage() {
   const [active, setActive] = useState("All");
+  const [lightbox, setLightbox] = useState(null); // index into current photos array
 
   const photos = active === "All" ? ALL_PHOTOS : CATEGORIES[active];
+
+  const openLightbox = (index) => setLightbox(index);
+  const closeLightbox = () => setLightbox(null);
+
+  const goPrev = useCallback(() => {
+    if (lightbox === null) return;
+    setLightbox((i) => (i - 1 + photos.length) % photos.length);
+  }, [lightbox, photos.length]);
+
+  const goNext = useCallback(() => {
+    if (lightbox === null) return;
+    setLightbox((i) => (i + 1) % photos.length);
+  }, [lightbox, photos.length]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (lightbox === null) return;
+    function handleKey(e) {
+      if (e.key === "Escape") closeLightbox();
+      else if (e.key === "ArrowLeft") goPrev();
+      else if (e.key === "ArrowRight") goNext();
+    }
+    window.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
+  }, [lightbox, goPrev, goNext]);
 
   return (
     <>
@@ -138,7 +168,7 @@ export default function GalleryPage() {
             key={cat}
             type="button"
             className={`${styles.filterBtn} ${active === cat ? styles.filterBtnActive : ""}`}
-            onClick={() => setActive(cat)}
+            onClick={() => { setActive(cat); setLightbox(null); }}
           >
             {cat}
           </button>
@@ -149,8 +179,14 @@ export default function GalleryPage() {
       <section className={styles.gallerySection}>
         <div className="container">
           <div className={styles.galleryGrid}>
-            {photos.map((img) => (
-              <div key={img.src} className={styles.galleryItem}>
+            {photos.map((img, i) => (
+              <button
+                key={img.src}
+                type="button"
+                className={styles.galleryItem}
+                onClick={() => openLightbox(i)}
+                aria-label={`View ${img.alt}`}
+              >
                 <Image
                   src={img.src}
                   alt={img.alt}
@@ -159,11 +195,43 @@ export default function GalleryPage() {
                   loading="lazy"
                 />
                 <div className={styles.galleryCaption}>{img.alt}</div>
-              </div>
+              </button>
             ))}
           </div>
         </div>
       </section>
+
+      {/* ── Lightbox ──────────────────────────────────────── */}
+      {lightbox !== null && (
+        <div className={styles.lightboxOverlay} onClick={closeLightbox} role="dialog" aria-label="Image viewer">
+          <button className={styles.lightboxClose} onClick={closeLightbox} aria-label="Close">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+
+          <button className={`${styles.lightboxNav} ${styles.lightboxPrev}`} onClick={(e) => { e.stopPropagation(); goPrev(); }} aria-label="Previous image">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+
+          <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
+            <Image
+              src={photos[lightbox].src}
+              alt={photos[lightbox].alt}
+              width={1200}
+              height={900}
+              className={styles.lightboxImage}
+              priority
+            />
+            <div className={styles.lightboxCaption}>
+              <span>{photos[lightbox].alt}</span>
+              <span className={styles.lightboxCounter}>{lightbox + 1} / {photos.length}</span>
+            </div>
+          </div>
+
+          <button className={`${styles.lightboxNav} ${styles.lightboxNext}`} onClick={(e) => { e.stopPropagation(); goNext(); }} aria-label="Next image">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      )}
 
       {/* ── CTA Band ──────────────────────────────────────── */}
       <section className={styles.ctaBand} aria-label="Next steps">

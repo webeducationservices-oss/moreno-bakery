@@ -312,8 +312,7 @@ export default function CateringPlanner() {
   const progress = Math.round(((step + 1) / 6) * 100);
 
   return (
-    <section className={styles.planner} id="catering-planner">
-      <div className="container">
+    <div className={styles.planner} id="catering-planner">
         <div className={styles.plannerCard}>
           <div className={styles.plannerHeader}>
             <h2>Plan Your Catering</h2>
@@ -547,7 +546,6 @@ export default function CateringPlanner() {
             </div>
           )}
         </div>
-      </div>
-    </section>
+    </div>
   );
 }
