@@ -3,7 +3,7 @@
   position: relative;
   min-height: 92vh;
   display: grid;
-  grid-template-columns: 55% 45%;
+  grid-template-columns: 58% 42%;
   overflow: hidden;
   background: #012A50;
 }
@@ -29,7 +29,7 @@
   position: relative;
   z-index: 2;
   max-width: 100%;
-  padding: 0 var(--space-xl) 0 0;
+  padding: 0 var(--space-md) 0 0;
   animation: fadeUp 0.9s ease both;
 }
 
@@ -123,15 +123,22 @@
 .heroRight {
   position: relative;
   overflow: hidden;
+  margin-left: -5%;
 }
 
-/* Left-to-right fade dissolve */
+/* Left-to-right fade dissolve — gradual multi-stop */
 .heroRight::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to right, #012A50 0%, transparent 30%);
+  background: linear-gradient(
+    to right,
+    #012A50 0%,
+    rgba(1, 42, 80, 0.6) 10%,
+    rgba(1, 42, 80, 0.2) 25%,
+    transparent 45%
+  );
 }
 
 /* Bottom fade */
@@ -142,7 +149,7 @@
   left: 0;
   right: 0;
   z-index: 1;
-  height: 200px;
+  height: 160px;
   background: linear-gradient(to top, #012A50 0%, transparent 100%);
 }
 
@@ -468,6 +475,7 @@
 
   .heroRight {
     height: 420px;
+    margin-left: 0;
   }
 
   .heroRight::before {
