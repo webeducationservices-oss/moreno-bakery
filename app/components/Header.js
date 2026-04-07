@@ -29,9 +29,9 @@ const NAV_ITEMS = [
   },
   {
     label: "About",
-    href: "/about",
+    href: "/our-story",
     children: [
-      { label: "Our Story", href: "/about" },
+      { label: "Our Story", href: "/our-story" },
       { label: "Featured on NBC", href: "/featured-on-nbc" },
       { label: "Stories", href: "/stories" },
       { label: "Gallery", href: "/gallery" },

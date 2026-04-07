@@ -61,7 +61,7 @@ export default function Footer() {
             <div className={styles.footerCol}>
               <h4 className={styles.footerHeading}>Company</h4>
               <ul>
-                <li><Link href="/about">Our Story</Link></li>
+                <li><Link href="/our-story">Our Story</Link></li>
                 <li><Link href="/gallery">Gallery</Link></li>
                 <li><Link href="/featured-on-nbc">As Featured on NBC</Link></li>
                 <li><Link href="/stories">Stories</Link></li>
