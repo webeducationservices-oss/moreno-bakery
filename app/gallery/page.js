@@ -64,7 +64,6 @@ const CATEGORIES = {
   ],
   "Sandwiches & Food": [
     { src: "/images/food/moreno-bakery-cuban-sandwich.jpg", alt: "Cuban sandwich" },
-    { src: "/images/food/moreno-bakery-cuban-sandwich-brandon-fl.jpg", alt: "Cuban sandwich pressed" },
     { src: "/images/food/moreno-bakery-media-noche-8in.jpg", alt: "Media Noche" },
     { src: "/images/food/moreno-bakery-italian-blt.jpg", alt: "Italian BLT" },
     { src: "/images/food/moreno-bakery-pastrami-sandwich.jpg", alt: "Pastrami sandwich" },
