@@ -17,7 +17,7 @@ const CATEGORIES = {
     { src: "/images/food/moreno-bakery-gooey-butter-cake.jpg", alt: "Gooey butter cake" },
     { src: "/images/events/birthday-cake-celebration.webp", alt: "Birthday celebration cake" },
     { src: "/images/events/graduation-dessert-table.webp", alt: "Graduation dessert table" },
-    { src: "/images/events/party-dessert-table.webp", alt: "Party dessert table" },
+    { src: "/images/catering/party-dessert-table.webp", alt: "Party dessert table" },
   ],
   "Cupcakes & Sweets": [
     { src: "/images/food/moreno-bakery-french-vanilla-cupcake.jpg", alt: "French vanilla cupcake" },
