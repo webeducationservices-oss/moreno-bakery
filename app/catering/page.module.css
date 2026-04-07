@@ -64,13 +64,13 @@
   padding: var(--space-4xl) 0;
 }
 
-.introInner {
-  max-width: 780px;
-  margin: 0 auto;
-  text-align: center;
+.introGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
 }
 
-.introInner p {
+.introGrid p {
   font-size: var(--text-lg);
   line-height: 1.8;
   color: var(--color-text-muted);
@@ -349,6 +349,10 @@
 
   .heroContent h1 {
     font-size: var(--text-3xl);
+  }
+
+  .introGrid {
+    grid-template-columns: 1fr;
   }
 
   .eventGrid {
