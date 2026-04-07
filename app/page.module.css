@@ -5,7 +5,7 @@
   display: grid;
   grid-template-columns: 58% 42%;
   overflow: hidden;
-  background: #013A6B;
+  background: #0166B7;
 }
 
 /* Left column — text content */
@@ -134,9 +134,9 @@
   z-index: 1;
   background: linear-gradient(
     to right,
-    #013A6B 0%,
-    rgba(1, 58, 107, 0.6) 10%,
-    rgba(1, 58, 107, 0.2) 25%,
+    #0166B7 0%,
+    rgba(1, 102, 183, 0.6) 10%,
+    rgba(1, 102, 183, 0.2) 25%,
     transparent 45%
   );
 }
@@ -150,7 +150,7 @@
   right: 0;
   z-index: 1;
   height: 160px;
-  background: linear-gradient(to top, #013A6B 0%, transparent 100%);
+  background: linear-gradient(to top, #0166B7 0%, transparent 100%);
 }
 
 /* Slideshow images */
@@ -479,7 +479,7 @@
   }
 
   .heroRight::before {
-    background: linear-gradient(to bottom, #013A6B 0%, transparent 40%);
+    background: linear-gradient(to bottom, #0166B7 0%, transparent 40%);
   }
 }
 
