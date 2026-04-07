@@ -221,6 +221,221 @@
   line-height: 1.7;
 }
 
+/* ── Wedding Form Steps ──────────────────────────────── */
+.stepIndicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-xl);
+  position: relative;
+  padding: 0 var(--space-md);
+}
+
+.stepLine {
+  position: absolute;
+  top: 20px;
+  left: 48px;
+  right: 48px;
+  height: 3px;
+  background: var(--color-border);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.stepLineFill {
+  height: 100%;
+  background: var(--color-primary);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.stepDot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  font-family: inherit;
+}
+
+.stepIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-bg-alt);
+  border: 3px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stepDotActive .stepIcon {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(1, 102, 183, 0.15);
+}
+
+.stepDotDone .stepIcon {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+  font-size: 0.85rem;
+}
+
+.stepLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stepDotActive .stepLabel {
+  color: var(--color-primary);
+}
+
+.stepContent {
+  animation: stepFade 0.3s ease;
+}
+
+@keyframes stepFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.stepTitle {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-lg);
+  color: var(--color-text);
+}
+
+.stepNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Yes / No toggle buttons */
+.yesNoRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+.yesNoGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.yesNoLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.yesNoButtons {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.yesNoBtn {
+  padding: var(--space-xs) var(--space-lg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.yesNoBtn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.yesNoBtnActive {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* Cake style picker */
+.cakeStyleGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+.cakeStyleBtn {
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  font-family: inherit;
+}
+
+.cakeStyleBtn:hover {
+  border-color: var(--color-primary);
+  background: rgba(1, 102, 183, 0.04);
+}
+
+.cakeStyleBtnActive {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+/* Order summary */
+.orderSummary {
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-lg) 0;
+  border: 1px solid var(--color-border);
+}
+
+.orderSummary h4 {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Success icon */
+.successIcon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
 /* ── Map ──────────────────────────────────────────────── */
 .mapSection {
   background: var(--color-bg-alt);
@@ -255,6 +470,9 @@
 @media (max-width: 768px) {
   .contactGrid { grid-template-columns: 1fr; }
   .formRow { grid-template-columns: 1fr; }
+  .yesNoRow { grid-template-columns: 1fr; }
+  .cakeStyleGrid { grid-template-columns: 1fr; }
+  .stepLabel { font-size: 0.6rem; }
 }
 
 @media (max-width: 480px) {

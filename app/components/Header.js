@@ -14,10 +14,18 @@ const NAV_ITEMS = [
       { label: "Bakery Menu", href: "/menu/bakery" },
       { label: "Food Menu", href: "/menu/food" },
       { label: "Catering Menu", href: "/menu/catering" },
+      { label: "Order a Custom Cake", href: "/contact?form=cake-order" },
     ],
   },
   { label: "Catering", href: "/catering" },
-  { label: "Weddings", href: "/events/wedding-cakes" },
+  {
+    label: "Weddings",
+    href: "/events/wedding-cakes",
+    children: [
+      { label: "Wedding Cakes", href: "/events/wedding-cakes" },
+      { label: "Wedding Cake Inquiry", href: "/contact?form=wedding-cake" },
+    ],
+  },
   {
     label: "Events",
     href: "/events",
