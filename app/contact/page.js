@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -525,7 +525,7 @@ function CakeOrderForm({ onSubmit, sending }) {
   );
 }
 
-export default function ContactPage() {
+function ContactPageInner() {
   const searchParams = useSearchParams();
   const formParam = searchParams.get("form");
 
@@ -795,5 +795,13 @@ export default function ContactPage() {
         </div>
       </section>
     </>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense>
+      <ContactPageInner />
+    </Suspense>
   );
 }
