@@ -13,6 +13,7 @@ const NAV_ITEMS = [
     children: [
       { label: "Bakery", href: "/menu/bakery" },
       { label: "Food", href: "/menu/food" },
+      { label: "Catering Menu", href: "/catering" },
     ],
   },
   { label: "Catering", href: "/catering" },
