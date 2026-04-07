@@ -53,7 +53,7 @@ export default function HeroSlideshow() {
             that matter.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/menu" className="btn btn-primary btn-lg" style={{ fontSize: "1rem", padding: "16px 40px" }}>
+            <Link href="/menu" className="btn btn-lg" style={{ fontSize: "1rem", padding: "16px 40px", background: "#002B50", color: "#fff" }}>
               View Menu
             </Link>
             <Link href="/catering" className="btn btn-outline btn-lg">
