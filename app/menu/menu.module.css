@@ -6,11 +6,13 @@
 /* ── Page Hero ─────────────────────────────────────────── */
 .menuHero {
   position: relative;
-  min-height: 480px;
+  min-height: 300px;
   display: flex;
   align-items: center;
+  justify-content: center;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(1, 102, 183, 0.88) 0%, rgba(1, 79, 143, 0.92) 100%);
+  text-align: center;
 }
 
 .menuHeroImage {
@@ -54,6 +56,7 @@
   font-size: var(--text-lg);
   max-width: 600px;
   margin: 0 auto;
+  line-height: 1.7;
 }
 
 /* ── Breadcrumbs ───────────────────────────────────────── */
