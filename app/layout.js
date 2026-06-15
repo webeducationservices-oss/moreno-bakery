@@ -1,4 +1,5 @@
 import "./globals.css";
+import Script from "next/script";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -43,6 +44,10 @@ export default function RootLayout({ children }) {
         <Header />
         <main id="main-content">{children}</main>
         <Footer />
+        {/* myaieditor inline-edit loader — self-exits instantly for real
+            visitors (not in an iframe), so zero overhead in production.
+            Only injects the editor snippet when framed by myaieditor. */}
+        <Script src="/mae-edit-loader.js" strategy="afterInteractive" />
       </body>
     </html>
   );
