@@ -62,14 +62,14 @@ export default function BirthdaysGraduationsPage() {
             easy to share.
           </p>
           <div className={styles.heroCtas}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
               Start a Celebration Order
             </a>
             <Link href="/menu/bakery" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               View Bakery Menu
             </Link>
-            <a href="tel:+18136551861" className="btn btn-secondary btn-lg" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff" }}>
-              Call (813) 655-1861
+            <a href="tel:8136890320" className="btn btn-secondary btn-lg" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff" }}>
+              Call 813.689.0320
             </a>
           </div>
         </div>
@@ -244,7 +244,7 @@ export default function BirthdaysGraduationsPage() {
                 into a fuller event spread.
               </p>
               <p style={{ marginTop: "var(--space-lg)" }}>
-                <a href="tel:+18136551861" className="btn btn-primary">
+                <a href="tel:8136890320" className="btn btn-primary">
                   Start a Celebration Order
                 </a>
               </p>
@@ -378,8 +378,8 @@ export default function BirthdaysGraduationsPage() {
             Bakery is ready to celebrate with you.
           </p>
           <div className={styles.ctaButtons}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
-              Call (813) 655-1861
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
+              Call 813.689.0320
             </a>
             <Link href="/menu/bakery" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               View Bakery Menu

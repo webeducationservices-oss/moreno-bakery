@@ -238,7 +238,7 @@ export default function JoinTheTeamPage() {
                 <p>
                   Your application has been submitted. Moreno Bakery will review
                   it and be in touch. For faster service, call{" "}
-                  <a href="tel:+18136551861">(813) 655-1861</a>.
+                  <a href="tel:8136890320">813.689.0320</a>.
                 </p>
               </div>
             )}

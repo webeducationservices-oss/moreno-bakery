@@ -15,7 +15,7 @@ const EVENT_TYPES = [
 ];
 
 const MEAL_PREFS = [
-  { id: "cuban", label: "Cuban Favorites", desc: "Roast pork, Cuban sandwiches, congris rice" },
+  { id: "cuban", label: "Cuban Favorites", desc: "Mini Cuban sandwiches (app), yellow rice & black beans, Moreno 2008 Salad, Platanos Maduros" },
   { id: "mixed", label: "Mix of Everything", desc: "Entrees, sandwiches, sides — a crowd pleaser" },
   { id: "sandwiches", label: "Sandwich Trays", desc: "Cuban, Media Noche, Turkey, and more" },
   { id: "finger", label: "Finger Foods", desc: "Empanadas, croquetas, meatballs, stuffed potatoes" },
@@ -37,6 +37,50 @@ const BUDGET_LEVELS = [
   { id: "premium", label: "All Out", desc: "Full spread, no holding back" },
 ];
 
+// Read a File as base64 (no data: prefix) — the format form-notify expects.
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const r = String(reader.result || "");
+      const i = r.indexOf(",");
+      resolve(i >= 0 ? r.slice(i + 1) : r);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Downscale/compress common image types so the base64 payload stays under
+// Vercel's 4.5MB serverless body limit. Non-raster types fall back to raw.
+async function compressImage(file, maxDim = 1600, quality = 0.8) {
+  if (!/image\/(jpeg|jpg|png|webp)/i.test(file.type)) return fileToBase64(file);
+  const dataUrl = await new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+  const img = await new Promise((res, rej) => {
+    const im = new window.Image();
+    im.onload = () => res(im);
+    im.onerror = rej;
+    im.src = dataUrl;
+  });
+  let { width, height } = img;
+  if (width > maxDim || height > maxDim) {
+    const scale = maxDim / Math.max(width, height);
+    width = Math.round(width * scale);
+    height = Math.round(height * scale);
+  }
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+  const out = canvas.toDataURL("image/jpeg", quality);
+  return out.slice(out.indexOf(",") + 1);
+}
+
 function buildSuggestions(data) {
   const { eventType, guestCount, mealPref, dessertPref, budgetLevel } = data;
   const gc = parseInt(guestCount) || 20;
@@ -46,25 +90,21 @@ function buildSuggestions(data) {
   const mealMenus = {
     cuban: {
       value: [
-        { item: "Roast Pork (5 lbs)", price: 50, per: 20 },
-        { item: "Congris Rice (5 lbs)", price: 35, per: 20 },
-        { item: "Tostones (40 pcs)", price: 32, per: 40 },
+        { item: "Mini Cuban Sandwiches — appetizer (50 pcs)", price: 90, per: 50 },
+        { item: "Yellow Rice & Black Beans (5 lbs)", price: 40, per: 20 },
+        { item: "Platanos Maduros (40 pcs)", price: 32, per: 40 },
       ],
       balanced: [
-        { item: "Roast Pork (5 lbs)", price: 50, per: 20 },
-        { item: "Chicken Marsala (3 lbs)", price: 36, per: 8 },
-        { item: "Yellow Rice (5 lbs)", price: 35, per: 20 },
+        { item: "Mini Cuban Sandwiches — appetizer (50 pcs)", price: 90, per: 50 },
+        { item: "Yellow Rice & Black Beans (5 lbs)", price: 40, per: 20 },
+        { item: "Moreno 2008 Salad (15-30)", price: 40, per: 30 },
         { item: "Platanos Maduros (40 pcs)", price: 32, per: 40 },
-        { item: "Garden Salad (15-30)", price: 30, per: 30 },
       ],
       premium: [
-        { item: "Roast Pork (5 lbs)", price: 50, per: 20 },
-        { item: "Ropa Vieja (5 lbs)", price: 75, per: 20 },
-        { item: "Congris Rice (5 lbs)", price: 35, per: 20 },
-        { item: "Yuca (5 lbs)", price: 30, per: 20 },
-        { item: "Tostones (40 pcs)", price: 32, per: 40 },
-        { item: "Platanos Maduros (40 pcs)", price: 32, per: 40 },
-        { item: "Rachel's Chopped Salad (15-30)", price: 55, per: 30 },
+        { item: "Mini Cuban Sandwiches — appetizer (100 pcs)", price: 175, per: 100 },
+        { item: "Yellow Rice & Black Beans (10 lbs)", price: 75, per: 40 },
+        { item: "Moreno 2008 Salad (30-50)", price: 70, per: 50 },
+        { item: "Platanos Maduros (80 pcs)", price: 60, per: 80 },
       ],
     },
     mixed: {
@@ -228,10 +268,32 @@ export default function CateringPlanner() {
     phone: "",
     eventDate: "",
     notes: "",
+    taxExemptBase64: "",
+    taxExemptName: "",
   });
   const [suggestions, setSuggestions] = useState(null);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [uploadErr, setUploadErr] = useState("");
+  const [uploading, setUploading] = useState(false);
+
+  async function onTaxExemptFile(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    setUploadErr("");
+    if (!file.type.startsWith("image/")) { setUploadErr("Please upload a photo or scan (JPG, PNG, or HEIC) of your certificate."); return; }
+    if (file.size > 15 * 1024 * 1024) { setUploadErr("That file is too large — please choose one under 15MB."); return; }
+    setUploading(true);
+    try {
+      const b64 = await compressImage(file);
+      if (b64.length > 4_000_000) { setUploadErr("That image is too large to send — please choose a smaller one."); setUploading(false); return; }
+      update("taxExemptBase64", b64);
+      update("taxExemptName", file.name);
+    } catch {
+      setUploadErr("We couldn't read that file — please try another image.");
+    }
+    setUploading(false);
+  }
 
   function update(field, value) {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -253,7 +315,7 @@ export default function CateringPlanner() {
     if (step === 1) return data.guestCount && parseInt(data.guestCount) > 0;
     if (step === 2) return data.mealPref;
     if (step === 3) return data.dessertPref;
-    if (step === 4) return data.name && data.email;
+    if (step === 4) return data.name && data.email && data.phone;
     return true;
   }
 
@@ -293,6 +355,10 @@ export default function CateringPlanner() {
       event_date: data.eventDate || "Not specified",
       notes: data.notes || "None",
       menu_suggestions: suggestionsText,
+      ...(data.eventType === "school"
+        ? { tax_exempt: data.taxExemptBase64 ? "Certificate attached" : "Not provided" }
+        : {}),
+      ...(data.taxExemptBase64 ? { photo_base64: data.taxExemptBase64 } : {}),
       _honey: "",
     };
 
@@ -431,7 +497,7 @@ export default function CateringPlanner() {
                   </div>
                   <div className="form-group">
                     <label htmlFor="planner-phone" className="form-label">Phone</label>
-                    <input type="tel" id="planner-phone" className="form-input" value={data.phone} onChange={(e) => update("phone", e.target.value)} />
+                    <input type="tel" id="planner-phone" className="form-input" value={data.phone} onChange={(e) => update("phone", e.target.value)} required />
                   </div>
                 </div>
                 <div className="form-group">
@@ -446,6 +512,22 @@ export default function CateringPlanner() {
                   <label htmlFor="planner-notes" className="form-label">Anything else we should know?</label>
                   <textarea id="planner-notes" className="form-input form-textarea" rows={3} value={data.notes} onChange={(e) => update("notes", e.target.value)} />
                 </div>
+                {data.eventType === "school" && (
+                  <div className="form-group">
+                    <label htmlFor="planner-taxexempt" className="form-label">Tax-exempt? Upload your exemption certificate (optional)</label>
+                    {data.taxExemptName ? (
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3" }}>
+                        <span style={{ fontSize: "0.9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📎 {data.taxExemptName}</span>
+                        <button type="button" onClick={() => { update("taxExemptBase64", ""); update("taxExemptName", ""); }} aria-label="Remove file" style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
+                      </div>
+                    ) : (
+                      <input type="file" id="planner-taxexempt" accept="image/*" className="form-input" onChange={onTaxExemptFile} disabled={uploading} />
+                    )}
+                    <p style={{ fontSize: "0.8rem", color: "#6a6560", marginTop: "6px" }}>Schools &amp; churches: a photo or scan of your Florida tax-exemption certificate lets us bill without sales tax.</p>
+                    {uploading && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing…</p>}
+                    {uploadErr && <p style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "6px" }}>{uploadErr}</p>}
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -517,7 +599,7 @@ export default function CateringPlanner() {
                   <p>
                     We have emailed your catering plan and notified Moreno Bakery.
                     They will follow up with you soon. For faster service, call{" "}
-                    <a href="tel:+18136551861">(813) 655-1861</a>.
+                    <a href="tel:8136890320">813.689.0320</a>.
                   </p>
                 </div>
               )}

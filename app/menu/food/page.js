@@ -222,7 +222,7 @@ export default function FoodMenuPage() {
             >
               Order on DoorDash
             </a>
-            <a href="tel:+18136551861" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
+            <a href="tel:8136890320" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               Call to Order
             </a>
             <Link href="/menu/bakery" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>

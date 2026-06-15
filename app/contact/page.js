@@ -49,6 +49,92 @@ const CAKE_STYLES = [
   "Not sure yet — help me decide!",
 ];
 
+// ── Shared upload helpers ──────────────────────────────────────────
+// Read a File as base64 (no data: prefix) — the format form-notify expects.
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const r = String(reader.result || "");
+      const i = r.indexOf(",");
+      resolve(i >= 0 ? r.slice(i + 1) : r);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// Downscale/compress common image types client-side so the base64 payload
+// stays under Vercel's 4.5MB serverless body limit. HEIC and others fall back
+// to raw base64 (guarded by a size check in the uploader).
+async function compressImage(file, maxDim = 1400, quality = 0.8) {
+  if (!/image\/(jpeg|jpg|png|webp)/i.test(file.type)) return fileToBase64(file);
+  const dataUrl = await new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+  const img = await new Promise((res, rej) => {
+    const im = new window.Image();
+    im.onload = () => res(im);
+    im.onerror = rej;
+    im.src = dataUrl;
+  });
+  let { width, height } = img;
+  if (width > maxDim || height > maxDim) {
+    const scale = maxDim / Math.max(width, height);
+    width = Math.round(width * scale);
+    height = Math.round(height * scale);
+  }
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+  const out = canvas.toDataURL("image/jpeg", quality);
+  return out.slice(out.indexOf(",") + 1);
+}
+
+// Reusable inspiration-photo uploader. Writes base64 to data.photo_base64
+// (the field form-notify uploads to the lead) + a filename to data.photo_name.
+function InspirationPhoto({ data, update, label = "Add an inspiration photo (optional)" }) {
+  const [err, setErr] = useState("");
+  const [busy, setBusy] = useState(false);
+  async function onFile(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    setErr("");
+    if (!file.type.startsWith("image/")) { setErr("Please choose an image file (JPG, PNG, or HEIC)."); return; }
+    if (file.size > 15 * 1024 * 1024) { setErr("That image is too large — please pick one under 15MB."); return; }
+    setBusy(true);
+    try {
+      const b64 = await compressImage(file);
+      if (b64.length > 4_000_000) { setErr("That photo is too large to send — please choose a smaller image."); setBusy(false); return; }
+      update("photo_base64", b64);
+      update("photo_name", file.name);
+    } catch {
+      setErr("We couldn't read that file — please try another image.");
+    }
+    setBusy(false);
+  }
+  function clearPhoto() { update("photo_base64", ""); update("photo_name", ""); }
+  return (
+    <div className="form-group">
+      <label className="form-label">{label}</label>
+      {data.photo_name ? (
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3" }}>
+          <span style={{ fontSize: "0.9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📎 {data.photo_name}</span>
+          <button type="button" onClick={clearPhoto} aria-label="Remove photo" style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
+        </div>
+      ) : (
+        <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
+      )}
+      {busy && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing photo…</p>}
+      {err && <p style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "6px" }}>{err}</p>}
+    </div>
+  );
+}
+
 function WeddingCakeForm({ onSubmit, sending }) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState({
@@ -69,6 +155,8 @@ function WeddingCakeForm({ onSubmit, sending }) {
     weddingTime: "",
     cakeCutTime: "",
     cocktailHour: "",
+    photo_base64: "",
+    photo_name: "",
     _honey: "",
   });
 
@@ -112,6 +200,7 @@ function WeddingCakeForm({ onSubmit, sending }) {
       phone: data.phone,
       inquiry_type: "Wedding",
       message,
+      photo_base64: data.photo_base64,
       _honey: data._honey,
     });
   }
@@ -164,7 +253,7 @@ function WeddingCakeForm({ onSubmit, sending }) {
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.partner1 || !data.email}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.partner1 || !data.email || !data.phone}>
               Next: Your Wedding →
             </button>
           </div>
@@ -260,9 +349,11 @@ function WeddingCakeForm({ onSubmit, sending }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="w-design" className="form-label">Do you have a design in mind? (Pinterest links, photos, ideas welcome!)</label>
-            <textarea id="w-design" className="form-input form-textarea" rows={3} value={data.designIdea} onChange={(e) => update("designIdea", e.target.value)} placeholder="Describe your vision, share Pinterest links, or tell us your color scheme..." />
+            <label htmlFor="w-design" className="form-label">Tell us about your vision — what you love, what to avoid, and what you&apos;re looking for</label>
+            <textarea id="w-design" className="form-input form-textarea" rows={3} value={data.designIdea} onChange={(e) => update("designIdea", e.target.value)} placeholder="Colors, style, Pinterest links, must-haves, and anything you'd rather not have..." />
           </div>
+
+          <InspirationPhoto data={data} update={update} label="Share an inspiration photo (optional)" />
 
           <div className={styles.formRow}>
             <div className="form-group">
@@ -318,9 +409,10 @@ function CakeOrderForm({ onSubmit, sending }) {
     name: "", phone: "", email: "",
     pickupDate: "", pickupTime: "",
     pickupType: "",
-    cakeSize: "", cakeFlavor: "",
+    cakeSize: "", cakeServes: "", cakeFlavor: "",
     fillingFlavor: "", icingFlavor: "",
     colors: "", designInfo: "", cakeMessage: "",
+    photo_base64: "", photo_name: "",
     _honey: "",
   });
 
@@ -337,7 +429,7 @@ function CakeOrderForm({ onSubmit, sending }) {
       `Pickup Date: ${data.pickupDate}`,
       `Pickup Time: ${data.pickupTime}`,
       `Pickup Type: ${data.pickupType}`,
-      `Cake Size: ${data.cakeSize}`,
+      `Cake Size: ${data.cakeSize}${data.cakeSize === "Other" && data.cakeServes ? ` (needs to serve ${data.cakeServes})` : ""}`,
       `Cake Flavor: ${data.cakeFlavor}`,
       `Filling: ${data.fillingFlavor}`,
       `Icing: ${data.icingFlavor}`,
@@ -354,6 +446,7 @@ function CakeOrderForm({ onSubmit, sending }) {
       phone: data.phone,
       inquiry_type: "Cake Order",
       message,
+      photo_base64: data.photo_base64,
       _honey: data._honey,
     });
   }
@@ -405,7 +498,7 @@ function CakeOrderForm({ onSubmit, sending }) {
           <div className="form-group">
             <label className="form-label">How are you getting it?</label>
             <div className={styles.yesNoButtons} style={{ gap: "var(--space-xs)" }}>
-              {["In-Bakery Pickup", "Curbside", "Delivery"].map((opt) => (
+              {["In-Bakery Pickup", "Delivery"].map((opt) => (
                 <button type="button" key={opt} className={`${styles.yesNoBtn} ${data.pickupType === opt ? styles.yesNoBtnActive : ""}`} onClick={() => update("pickupType", opt)}>
                   {opt}
                 </button>
@@ -414,7 +507,7 @@ function CakeOrderForm({ onSubmit, sending }) {
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.pickupDate}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate}>
               Next: Your Cake →
             </button>
           </div>
@@ -438,6 +531,13 @@ function CakeOrderForm({ onSubmit, sending }) {
               ))}
             </div>
           </div>
+
+          {data.cakeSize === "Other" && (
+            <div className="form-group">
+              <label htmlFor="co-serves" className="form-label">How many people do you need to serve?</label>
+              <input type="number" id="co-serves" min="1" className="form-input" required value={data.cakeServes} onChange={(e) => update("cakeServes", e.target.value)} placeholder="e.g. 60" />
+            </div>
+          )}
 
           <div className="form-group">
             <label className="form-label">Cake Flavor</label>
@@ -474,7 +574,7 @@ function CakeOrderForm({ onSubmit, sending }) {
 
           <div className={styles.stepNav}>
             <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.cakeSize || !data.cakeFlavor}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.cakeSize || !data.cakeFlavor || (data.cakeSize === "Other" && !data.cakeServes)}>
               Next: Design →
             </button>
           </div>
@@ -492,9 +592,11 @@ function CakeOrderForm({ onSubmit, sending }) {
           </div>
 
           <div className="form-group">
-            <label htmlFor="co-design" className="form-label">Design details (theme, decorations, inspiration)</label>
-            <textarea id="co-design" className="form-input form-textarea" rows={3} value={data.designInfo} onChange={(e) => update("designInfo", e.target.value)} placeholder="Describe your design, share Pinterest ideas, or tell us the occasion..." />
+            <label htmlFor="co-design" className="form-label">Design details — what you like, what to avoid, and what you&apos;re looking for</label>
+            <textarea id="co-design" className="form-input form-textarea" rows={3} value={data.designInfo} onChange={(e) => update("designInfo", e.target.value)} placeholder="Theme, decorations, the occasion, Pinterest ideas, must-haves..." />
           </div>
+
+          <InspirationPhoto data={data} update={update} label="Share an inspiration photo (optional)" />
 
           <div className="form-group">
             <label htmlFor="co-message" className="form-label">Message on the cake</label>
@@ -517,6 +619,200 @@ function CakeOrderForm({ onSubmit, sending }) {
             <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
             <button type="submit" className="btn btn-primary btn-lg" disabled={sending}>
               {sending ? "Sending..." : "Submit Cake Order 🎂"}
+            </button>
+          </div>
+        </div>
+      )}
+    </form>
+  );
+}
+
+const CATERING_INQUIRY_STEPS = [
+  { id: 1, label: "Your Event", icon: "📅" },
+  { id: 2, label: "The Food", icon: "🍽️" },
+  { id: 3, label: "Your Vision", icon: "✨" },
+];
+
+const CATERING_EVENT_TYPES = [
+  "Office / Corporate", "Birthday Party", "Shower / Baby Shower", "Graduation",
+  "Family Gathering", "Wedding / Rehearsal", "School / Church", "Other",
+];
+
+const CATERING_MEAL_STYLES = [
+  "Cuban Favorites", "Mix of Everything", "Sandwich Trays", "Finger Foods",
+  "Breakfast / Brunch", "Desserts & Sweets", "Not sure — suggest for me",
+];
+
+const CATERING_BUDGETS = ["Budget-friendly", "Balanced", "All out", "Not sure yet"];
+
+function CateringInquiryForm({ onSubmit, sending }) {
+  const [step, setStep] = useState(1);
+  const [data, setData] = useState({
+    name: "", phone: "", email: "",
+    eventType: "", eventDate: "", guestCount: "",
+    mealStyle: "", budget: "", serviceType: "", venue: "",
+    dietary: "", vision: "",
+    photo_base64: "", photo_name: "",
+    _honey: "",
+  });
+
+  function update(field, value) { setData((prev) => ({ ...prev, [field]: value })); }
+  function nextStep() { setStep((s) => Math.min(s + 1, 3)); }
+  function prevStep() { setStep((s) => Math.max(s - 1, 1)); }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const message = [
+      `Event Type: ${data.eventType}`,
+      `Event Date: ${data.eventDate || "Not specified"}`,
+      `Guest Count: ${data.guestCount}`,
+      `Meal Style: ${data.mealStyle || "Open to suggestions"}`,
+      `Budget: ${data.budget || "Not specified"}`,
+      `Service: ${data.serviceType || "Not specified"}`,
+      `Venue / Location: ${data.venue || "N/A"}`,
+      `Dietary Needs: ${data.dietary || "None"}`,
+      `Vision / Notes: ${data.vision || "None"}`,
+    ].join("\n");
+
+    onSubmit({
+      site_slug: "moreno-bakery",
+      form_type: "catering",
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      inquiry_type: "Catering",
+      message,
+      photo_base64: data.photo_base64,
+      _honey: data._honey,
+    });
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" value={data._honey} onChange={(e) => update("_honey", e.target.value)} />
+
+      <div className={styles.stepIndicator}>
+        {CATERING_INQUIRY_STEPS.map((s) => (
+          <button type="button" key={s.id} className={`${styles.stepDot} ${step === s.id ? styles.stepDotActive : ""} ${step > s.id ? styles.stepDotDone : ""}`} onClick={() => setStep(s.id)}>
+            <span className={styles.stepIcon}>{step > s.id ? "✓" : s.icon}</span>
+            <span className={styles.stepLabel}>{s.label}</span>
+          </button>
+        ))}
+        <div className={styles.stepLine}>
+          <div className={styles.stepLineFill} style={{ width: `${((step - 1) / 2) * 100}%` }} />
+        </div>
+      </div>
+
+      {/* Step 1: Your Event */}
+      {step === 1 && (
+        <div className={styles.stepContent}>
+          <h3 className={styles.stepTitle}>Tell us about your event!</h3>
+          <div className="form-group">
+            <label htmlFor="ci-name" className="form-label">Your Name</label>
+            <input type="text" id="ci-name" className="form-input" required value={data.name} onChange={(e) => update("name", e.target.value)} placeholder="First & last name" />
+          </div>
+          <div className={styles.formRow}>
+            <div className="form-group">
+              <label htmlFor="ci-phone" className="form-label">Phone Number</label>
+              <input type="tel" id="ci-phone" className="form-input" required value={data.phone} onChange={(e) => update("phone", e.target.value)} placeholder="(813) 555-1234" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="ci-email" className="form-label">Email</label>
+              <input type="email" id="ci-email" className="form-input" required value={data.email} onChange={(e) => update("email", e.target.value)} placeholder="you@email.com" />
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="form-label">What kind of event is it?</label>
+            <div className={styles.cakeStyleGrid}>
+              {CATERING_EVENT_TYPES.map((t) => (
+                <button type="button" key={t} className={`${styles.cakeStyleBtn} ${data.eventType === t ? styles.cakeStyleBtnActive : ""}`} onClick={() => update("eventType", t)}>{t}</button>
+              ))}
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="ci-date" className="form-label">Event Date</label>
+            <input type="date" id="ci-date" className="form-input" value={data.eventDate} onChange={(e) => update("eventDate", e.target.value)} />
+          </div>
+          <div className={styles.stepNav}>
+            <div />
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.eventType}>
+              Next: The Food →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 2: The Food */}
+      {step === 2 && (
+        <div className={styles.stepContent}>
+          <h3 className={styles.stepTitle}>Let&apos;s talk food!</h3>
+          <div className="form-group">
+            <label htmlFor="ci-guests" className="form-label">About how many guests?</label>
+            <select id="ci-guests" className="form-input" required value={data.guestCount} onChange={(e) => update("guestCount", e.target.value)}>
+              <option value="">Select a range</option>
+              <option value="Under 25">Under 25</option>
+              <option value="25–50">25 – 50</option>
+              <option value="50–100">50 – 100</option>
+              <option value="100–150">100 – 150</option>
+              <option value="150–250">150 – 250</option>
+              <option value="250+">250+</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label className="form-label">What sounds good?</label>
+            <div className={styles.cakeStyleGrid}>
+              {CATERING_MEAL_STYLES.map((m) => (
+                <button type="button" key={m} className={`${styles.cakeStyleBtn} ${data.mealStyle === m ? styles.cakeStyleBtnActive : ""}`} onClick={() => update("mealStyle", m)}>{m}</button>
+              ))}
+            </div>
+          </div>
+          <div className="form-group">
+            <label className="form-label">Budget feel</label>
+            <div className={styles.cakeStyleGrid}>
+              {CATERING_BUDGETS.map((b) => (
+                <button type="button" key={b} className={`${styles.cakeStyleBtn} ${data.budget === b ? styles.cakeStyleBtnActive : ""}`} onClick={() => update("budget", b)}>{b}</button>
+              ))}
+            </div>
+          </div>
+          <div className={styles.yesNoRow}>
+            <div className={styles.yesNoGroup}>
+              <span className={styles.yesNoLabel}>Pickup or delivery?</span>
+              <div className={styles.yesNoButtons}>
+                <button type="button" className={`${styles.yesNoBtn} ${data.serviceType === "Pickup" ? styles.yesNoBtnActive : ""}`} onClick={() => update("serviceType", "Pickup")}>Pickup</button>
+                <button type="button" className={`${styles.yesNoBtn} ${data.serviceType === "Delivery" ? styles.yesNoBtnActive : ""}`} onClick={() => update("serviceType", "Delivery")}>Delivery</button>
+              </div>
+            </div>
+          </div>
+          <div className="form-group">
+            <label htmlFor="ci-venue" className="form-label">Venue / delivery location (optional)</label>
+            <input type="text" id="ci-venue" className="form-input" value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Address or venue name and city" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="ci-dietary" className="form-label">Any allergies or dietary needs? (optional)</label>
+            <input type="text" id="ci-dietary" className="form-input" value={data.dietary} onChange={(e) => update("dietary", e.target.value)} placeholder="e.g. vegetarian options, nut allergy..." />
+          </div>
+          <div className={styles.stepNav}>
+            <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.guestCount}>
+              Next: Your Vision →
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 3: Your Vision */}
+      {step === 3 && (
+        <div className={styles.stepContent}>
+          <h3 className={styles.stepTitle}>Anything else we should know?</h3>
+          <div className="form-group">
+            <label htmlFor="ci-vision" className="form-label">Tell us what you&apos;re picturing — what you like, what to avoid, and what you&apos;re looking for</label>
+            <textarea id="ci-vision" className="form-input form-textarea" rows={4} value={data.vision} onChange={(e) => update("vision", e.target.value)} placeholder="Favorite dishes, must-haves, things to skip, presentation ideas, theme..." />
+          </div>
+          <InspirationPhoto data={data} update={update} label="Share an inspiration photo (optional)" />
+          <div className={styles.stepNav}>
+            <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
+            <button type="submit" className="btn btn-primary btn-lg" disabled={sending}>
+              {sending ? "Sending..." : "Send Catering Request 🍽️"}
             </button>
           </div>
         </div>
@@ -595,8 +891,8 @@ function ContactPageInner() {
             next step simple.
           </p>
           <div className={styles.heroCtas}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
-              Call (813) 655-1861
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
+              Call 813.689.0320
             </a>
             <a
               href="https://maps.google.com/?q=Moreno+Bakery+737+W+Brandon+Blvd+Brandon+FL"
@@ -635,7 +931,7 @@ function ContactPageInner() {
                 </div>
                 <div>
                   <h3>Phone</h3>
-                  <a href="tel:+18136551861">(813) 655-1861</a>
+                  <a href="tel:8136890320">813.689.0320</a>
                 </div>
               </div>
 
@@ -680,7 +976,8 @@ function ContactPageInner() {
               <h2>
                 {inquiryType === "Wedding Cake" && "Wedding Cake Questionnaire"}
                 {inquiryType === "Cake Order" && "Custom Cake Order"}
-                {inquiryType !== "Wedding Cake" && inquiryType !== "Cake Order" && "Send an Inquiry"}
+                {inquiryType === "Catering" && "Catering Inquiry"}
+                {inquiryType !== "Wedding Cake" && inquiryType !== "Cake Order" && inquiryType !== "Catering" && "Send an Inquiry"}
               </h2>
 
               {!submitted ? (
@@ -702,6 +999,8 @@ function ContactPageInner() {
                     <WeddingCakeForm onSubmit={handleWeddingSubmit} sending={sending} />
                   ) : inquiryType === "Cake Order" ? (
                     <CakeOrderForm onSubmit={handleWeddingSubmit} sending={sending} />
+                  ) : inquiryType === "Catering" ? (
+                    <CateringInquiryForm onSubmit={handleWeddingSubmit} sending={sending} />
                   ) : (
                     <form onSubmit={handleSubmit}>
                       <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
@@ -712,7 +1011,7 @@ function ContactPageInner() {
                         </div>
                         <div className="form-group">
                           <label htmlFor="phone" className="form-label">Phone</label>
-                          <input type="tel" id="phone" name="phone" className="form-input" />
+                          <input type="tel" id="phone" name="phone" className="form-input" required />
                         </div>
                       </div>
                       <div className="form-group">
@@ -735,19 +1034,21 @@ function ContactPageInner() {
               ) : (
                 <div className={styles.successMessage}>
                   <div className={styles.successIcon}>
-                    {inquiryType === "Wedding Cake" ? "💍🎂" : inquiryType === "Cake Order" ? "🎂✨" : "✓"}
+                    {inquiryType === "Wedding Cake" ? "💍🎂" : inquiryType === "Cake Order" ? "🎂✨" : inquiryType === "Catering" ? "🍽️✨" : "✓"}
                   </div>
                   <h3>
-                    {inquiryType === "Wedding Cake" ? "We Can't Wait to Create Your Dream Cake!" : inquiryType === "Cake Order" ? "Your Cake Order Has Been Submitted!" : "Thank You!"}
+                    {inquiryType === "Wedding Cake" ? "We Can't Wait to Create Your Dream Cake!" : inquiryType === "Cake Order" ? "Your Cake Order Has Been Submitted!" : inquiryType === "Catering" ? "Your Catering Request Is In!" : "Thank You!"}
                   </h3>
                   <p>
                     {inquiryType === "Wedding Cake"
                       ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 1–2 business days to schedule your tasting consultation."
                       : inquiryType === "Cake Order"
                       ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 1 business day."
+                      : inquiryType === "Catering"
+                      ? "Your catering request has been sent to our events team. We'll reach out within 1–2 business days to plan the details."
                       : `Your ${inquiryType.toLowerCase()} inquiry has been sent. Moreno Bakery will get back to you soon.`}
                     {" "}For faster service, call{" "}
-                    <a href="tel:+18136551861">(813) 655-1861</a>.
+                    <a href="tel:8136890320">813.689.0320</a>.
                   </p>
                 </div>
               )}
@@ -782,7 +1083,7 @@ function ContactPageInner() {
           </p>
           <div style={{ display: "flex", gap: "var(--space-md)", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/menu" className="btn btn-primary btn-lg">View Menu</Link>
-            <a href="tel:+18136551861" className="btn btn-secondary btn-lg">Call Now</a>
+            <a href="tel:8136890320" className="btn btn-secondary btn-lg">Call Now</a>
             <a
               href="https://maps.google.com/?q=Moreno+Bakery+737+W+Brandon+Blvd+Brandon+FL"
               target="_blank"

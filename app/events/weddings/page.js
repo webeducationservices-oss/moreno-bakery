@@ -431,7 +431,7 @@ export default function WeddingsPage() {
                 addressRegion: "FL",
                 postalCode: "33511",
               },
-              telephone: "+1-813-655-1861",
+              telephone: "+1-813-689-0320",
             },
             areaServed: {
               "@type": "City",

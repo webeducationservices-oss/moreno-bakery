@@ -39,7 +39,7 @@ export default function EventsPage() {
             memorable.
           </p>
           <div className={styles.heroCtas}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
               Start Your Event Order
             </a>
             <a href="#event-types" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
@@ -337,7 +337,7 @@ export default function EventsPage() {
             you from there.
           </p>
           <div className={styles.ctaButtons}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
               Request Event Details
             </a>
             <Link href="/menu/catering" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
@@ -370,7 +370,7 @@ export default function EventsPage() {
                 addressRegion: "FL",
                 postalCode: "33511",
               },
-              telephone: "+1-813-655-1861",
+              telephone: "+1-813-689-0320",
             },
             areaServed: { "@type": "City", name: "Brandon, FL" },
             serviceType: "Event Catering",

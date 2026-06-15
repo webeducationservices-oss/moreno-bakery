@@ -145,23 +145,35 @@ export default function OurStoryPage() {
       {/* ── Jose and Susan ────────────────────────────────── */}
       <section className={styles.storySection}>
         <div className={styles.storyInner}>
-          <div className={styles.storyText}>
-            <h2>Jose and Susan Moreno Built Moreno Bakery Together</h2>
-            <p>
-              Moreno Bakery is also the story of partnership. Jose brings the
-              baker&apos;s hands, the technique, and the love of the craft. Susan has
-              helped shape the business side, the customer experience, and the
-              growth behind the scenes. Together, they built a bakery that feels
-              personal to regular customers while also operating with the
-              organization needed to support weddings, catering, and large custom
-              orders.
-            </p>
-            <p style={{ marginTop: "var(--space-md)" }}>
-              That balance is one of the bakery&apos;s biggest strengths. Customers get
-              the warmth of a family-owned business and the confidence that comes
-              from a team that has grown, adapted, and invested in better service
-              over time.
-            </p>
+          <div className={styles.splitContent}>
+            <div>
+              <h2>Jose and Susan Moreno Built Moreno Bakery Together</h2>
+              <p style={{ lineHeight: 1.9, color: "var(--color-text-muted)" }}>
+                Moreno Bakery is also the story of partnership. Jose brings the
+                baker&apos;s hands, the technique, and the love of the craft. Susan has
+                helped shape the business side, the customer experience, and the
+                growth behind the scenes. Together, they built a bakery that feels
+                personal to regular customers while also operating with the
+                organization needed to support weddings, catering, and large custom
+                orders.
+              </p>
+              <p style={{ marginTop: "var(--space-md)", lineHeight: 1.9, color: "var(--color-text-muted)" }}>
+                That balance is one of the bakery&apos;s biggest strengths. Customers get
+                the warmth of a family-owned business and the confidence that comes
+                from a team that has grown, adapted, and invested in better service
+                over time.
+              </p>
+            </div>
+            <div className={styles.splitImage} style={{ display: "flex", justifyContent: "center", overflow: "visible" }}>
+              <Image
+                src="/images/story/jose-and-susan-moreno.webp"
+                alt="Jose and Susan Moreno, founders of Moreno Bakery in Brandon, FL"
+                width={600}
+                height={800}
+                loading="lazy"
+                style={{ width: "100%", maxWidth: "420px", aspectRatio: "3 / 4", objectFit: "cover", borderRadius: "var(--radius-lg)" }}
+              />
+            </div>
           </div>
         </div>
       </section>
@@ -309,7 +321,7 @@ export default function OurStoryPage() {
               addressRegion: "FL",
               postalCode: "33511",
             },
-            telephone: "+1-813-655-1861",
+            telephone: "+1-813-689-0320",
           }),
         }}
       />

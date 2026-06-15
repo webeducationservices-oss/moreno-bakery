@@ -62,14 +62,14 @@ export default function PrivateEventsPage() {
             flexible, and easy to plan.
           </p>
           <div className={styles.heroCtas}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
               Start a Private Event Order
             </a>
             <Link href="/menu/catering" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               View Catering Menu
             </Link>
-            <a href="tel:+18136551861" className="btn btn-secondary btn-lg" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff" }}>
-              Call (813) 655-1861
+            <a href="tel:8136890320" className="btn btn-secondary btn-lg" style={{ borderColor: "rgba(255,255,255,0.5)", color: "#fff" }}>
+              Call 813.689.0320
             </a>
           </div>
         </div>
@@ -236,7 +236,7 @@ export default function PrivateEventsPage() {
                 handle bigger event needs when the gathering calls for it.
               </p>
               <p style={{ marginTop: "var(--space-lg)" }}>
-                <a href="tel:+18136551861" className="btn btn-primary">
+                <a href="tel:8136890320" className="btn btn-primary">
                   Start Your Event Order
                 </a>
               </p>
@@ -370,8 +370,8 @@ export default function PrivateEventsPage() {
             kitchen, one order.
           </p>
           <div className={styles.ctaButtons}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
-              Call (813) 655-1861
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
+              Call 813.689.0320
             </a>
             <Link href="/menu/catering" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               View Catering Menu

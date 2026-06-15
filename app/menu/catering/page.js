@@ -140,8 +140,8 @@ export default function CateringMenuPage() {
             Call us to place your catering order or discuss custom options for your event.
           </p>
           <div className={styles.orderButtons}>
-            <a href="tel:+18136551861" className="btn btn-white btn-lg">
-              Call (813) 655-1861
+            <a href="tel:8136890320" className="btn btn-white btn-lg">
+              Call 813.689.0320
             </a>
             <Link href="/menu/bakery" className="btn btn-secondary btn-lg" style={{ borderColor: "#fff", color: "#fff" }}>
               View Bakery Menu →
