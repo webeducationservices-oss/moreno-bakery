@@ -292,11 +292,12 @@ export default function Home() {
           <div className={styles.splitSection}>
             <div className={styles.splitImage}>
               <Image
-                src="/images/food/moreno-bakery-bread-pudding-cuban-style.jpg"
-                alt="Cuban style bread pudding at Moreno Bakery"
-                width={560}
-                height={420}
+                src="/images/story/jose-and-susan-moreno.webp"
+                alt="Jose and Susan Moreno, founders of Moreno Bakery in Brandon, FL"
+                width={600}
+                height={800}
                 className={styles.roundedImage}
+                style={{ maxWidth: "400px", maxHeight: "520px", aspectRatio: "3 / 4", objectFit: "cover" }}
               />
             </div>
             <div className={styles.splitText}>
