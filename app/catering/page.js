@@ -184,7 +184,7 @@ export default function CateringPage() {
               <h2>Menu Options That Make Group Ordering Easier</h2>
               <p>
                 Moreno Bakery offers catering options that cover the full spread
-                — entrees, finger foods, sandwich trays, salads, sides, cookie
+                of entrees, finger foods, sandwich trays, salads, sides, cookie
                 trays, pastry trays, and custom cakes. Whether you're planning a
                 business lunch with trays and sides, a shower with finger foods
                 and pastries, or an all-day event mixing savory items with
