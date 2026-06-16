@@ -471,15 +471,21 @@
 
   .heroLeft {
     padding: 60px 0 40px;
+    order: 2;
   }
 
   .heroRight {
-    height: 420px;
+    height: 300px;
     margin-left: 0;
+    order: 1;
   }
 
   .heroRight::before {
-    background: linear-gradient(to bottom, #0166B7 0%, transparent 40%);
+    background: linear-gradient(to bottom, transparent 60%, #0166B7 100%);
+  }
+
+  .heroRight::after {
+    height: 80px;
   }
 }
 
