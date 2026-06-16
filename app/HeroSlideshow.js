@@ -21,11 +21,14 @@ const SLIDES = [
 ];
 
 export default function HeroSlideshow() {
-  const [active, setActive] = useState(0);
+  // Track the previous slide too, so it can stay fully opaque *beneath* the
+  // incoming one while that fades in — otherwise both are semi-transparent
+  // mid-crossfade and the blue hero background flashes through.
+  const [{ active, prev }, setSlide] = useState({ active: 0, prev: -1 });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setActive((prev) => (prev + 1) % SLIDES.length);
+      setSlide((s) => ({ active: (s.active + 1) % SLIDES.length, prev: s.active }));
     }, 3000);
     return () => clearInterval(timer);
   }, []);
@@ -88,17 +91,20 @@ export default function HeroSlideshow() {
 
       {/* Right: Slideshow */}
       <div className={styles.heroRight}>
-        {SLIDES.map((slide, i) => (
-          <Image
-            key={slide.src}
-            src={slide.src}
-            alt={slide.alt}
-            width={1400}
-            height={800}
-            className={`${styles.heroSlide} ${i === active ? styles.heroSlideActive : ""}`}
-            priority={i === 0}
-          />
-        ))}
+        {SLIDES.map((slide, i) => {
+          const state = i === active ? styles.heroSlideActive : i === prev ? styles.heroSlidePrev : "";
+          return (
+            <Image
+              key={slide.src}
+              src={slide.src}
+              alt={slide.alt}
+              width={1400}
+              height={800}
+              className={`${styles.heroSlide} ${state}`}
+              priority={i === 0}
+            />
+          );
+        })}
       </div>
     </section>
   );
