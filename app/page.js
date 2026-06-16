@@ -156,7 +156,7 @@ export default function Home() {
                 <h3>Bakery</h3>
                 <p>
                   From cookies, pastries, cupcakes, pies, and breads to custom
-                  cakes and seasonal favorites — an easy place to find dessert,
+                  cakes and seasonal favorites, Moreno Bakery is an easy place to find dessert,
                   gifts, and something worth bringing home.
                 </p>
                 <Link href="/menu/bakery" className="btn btn-primary btn-sm">
