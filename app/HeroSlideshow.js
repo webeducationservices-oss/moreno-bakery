@@ -49,7 +49,7 @@ export default function HeroSlideshow() {
           </h1>
           <p className={styles.heroSub}>
             From pastries, cakes, and Cuban favorites to office catering, custom
-            desserts, and wedding cakes — order for today or plan for the moments
+            desserts, and wedding cakes. Order today or plan for the moments
             that matter.
           </p>
           <div className={styles.heroCtas}>
