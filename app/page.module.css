@@ -165,7 +165,6 @@
   z-index: 0;
   transform: scale(1.03);
   transition: opacity 2s ease, transform 8s ease;
-  z-index: 0;
 }
 
 /* Outgoing slide: stays fully opaque BENEATH the incoming one so the hero
@@ -179,7 +178,6 @@
   opacity: 1;
   z-index: 2;
   transform: scale(1);
-  z-index: 1;
 }
 
 /* ── Quick Paths ────────────────────────────────────────── */
