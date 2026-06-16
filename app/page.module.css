@@ -163,7 +163,7 @@
   object-position: center top;
   opacity: 0;
   transform: scale(1.03);
-  transition: opacity 1.2s ease, transform 8s ease;
+  transition: opacity 2s ease, transform 8s ease;
 }
 
 .heroSlideActive {
