@@ -124,6 +124,9 @@
   position: relative;
   overflow: hidden;
   margin-left: -5%;
+  /* Self-contained stacking context: keeps the slide/gradient z-indexes below
+     from competing with the text column (.heroLeft, z-index 2). */
+  isolation: isolate;
 }
 
 /* Left-to-right fade dissolve — gradual multi-stop */
@@ -131,7 +134,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
   background: linear-gradient(
     to right,
     #0166B7 0%,
@@ -148,7 +151,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: 3;
   height: 160px;
   background: linear-gradient(to top, #0166B7 0%, transparent 100%);
 }
@@ -167,11 +170,13 @@
   transition: opacity 2s ease, transform 8s ease;
 }
 
-/* Outgoing slide: stays fully opaque BENEATH the incoming one so the hero
-   background never flashes through during the crossfade. */
+/* Outgoing slide: snaps to fully opaque (no transition) and sits BENEATH the
+   incoming one, so there's always a solid image backstop while the new slide
+   fades in — the hero background can never flash through. */
 .heroSlidePrev {
   opacity: 1;
   z-index: 1;
+  transition: none;
 }
 
 .heroSlideActive {
