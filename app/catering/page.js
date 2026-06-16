@@ -114,8 +114,8 @@ export default function CateringPage() {
           </h2>
           <p className="text-center text-muted" style={{ maxWidth: 640, margin: "0 auto" }}>
             Moreno Bakery catering works well for both professional and personal
-            events — from routine office orders to celebrations that need the
-            warmth and handmade feel that makes the bakery memorable.
+            events. From routine office orders to celebrations that need the
+            warmth and handmade feel that make the bakery memorable, we are here for you.
           </p>
           <div className={styles.eventGrid}>
             <div className={styles.eventCard}>
