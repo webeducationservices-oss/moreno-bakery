@@ -117,6 +117,29 @@ export default function WeddingsPage() {
         </div>
       </section>
 
+      {/* ── Press Badge ───────────────────────────────────── */}
+      <div style={{ background: "#faf7f3", borderBottom: "1px solid #e7e1d9", padding: "14px 0", textAlign: "center" }}>
+        <div className="container">
+          <p style={{ margin: 0, fontSize: "0.95rem", color: "var(--color-text-muted)" }}>
+            <span style={{ textTransform: "uppercase", fontWeight: 700, fontSize: "0.72rem", letterSpacing: "0.14em", marginRight: "10px", color: "var(--color-primary)" }}>
+              As Featured In
+            </span>
+            <a
+              href="https://marrymetampabay.com/tampa-wedding-vendor/moreno-bakery/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ fontWeight: 700 }}
+            >
+              Marry Me Tampa Bay
+            </a>
+            <span style={{ margin: "0 8px", opacity: 0.5 }}>·</span>
+            <Link href="/stories/marry-me-tampa-bay-black-and-white-wedding">
+              See the black &amp; white wedding at Hotel Flor →
+            </Link>
+          </p>
+        </div>
+      </div>
+
       {/* ── Intro ─────────────────────────────────────────── */}
       <section className={styles.intro}>
         <div className={styles.introInner}>

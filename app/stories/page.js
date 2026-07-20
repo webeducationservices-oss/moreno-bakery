@@ -15,6 +15,15 @@ export const metadata = {
 
 const STORIES = [
   {
+    slug: "marry-me-tampa-bay-black-and-white-wedding",
+    title: "Featured on Marry Me Tampa Bay: A Timeless Black and White Wedding",
+    excerpt:
+      "Moreno Bakery was the cake and dessert vendor for Laryn and Chris' black and white wedding at Hotel Flor in downtown Tampa.",
+    image: "/images/weddings/wedding-cake-elegant.webp",
+    imageAlt: "Elegant tiered wedding cake by Moreno Bakery",
+    tag: "Featured",
+  },
+  {
     slug: "moreno-bakery-brandon-story",
     title: "From Bread and Guava Turnovers to a Brandon Favorite",
     excerpt:
