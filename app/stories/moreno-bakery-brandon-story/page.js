@@ -63,7 +63,7 @@ export default function BrandonStoryPost() {
 
         <h2>Starting Small and Growing the Right Way</h2>
         <p>
-          In the beginning, the menu was simple — bread, guava turnovers, and
+          In the beginning, the menu was simple: bread, guava turnovers, and
           guava cheese turnovers. From there, the bakery grew naturally. A
           baker joined the team early on and helped expand the menu into more
           pastries and cookies. Then customers began asking for birthday cakes.

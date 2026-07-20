@@ -89,7 +89,7 @@ export default function AmazonTreatsPost() {
         <p>
           Large companies often have national systems, but that does not mean
           every order should feel national. Local bakery partners bring
-          something different — more room for communication, more flexibility
+          something different: more room for communication, more flexibility
           in how an order is shaped, and more pride in the outcome.
         </p>
         <p>

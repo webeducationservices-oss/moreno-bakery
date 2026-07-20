@@ -19,8 +19,8 @@ const STORIES = [
     title: "Featured on Marry Me Tampa Bay: A Timeless Black and White Wedding",
     excerpt:
       "Moreno Bakery was the cake and dessert vendor for Laryn and Chris' black and white wedding at Hotel Flor in downtown Tampa.",
-    image: "/images/weddings/wedding-cake-elegant.webp",
-    imageAlt: "Elegant tiered wedding cake by Moreno Bakery",
+    image: "/images/story/marry-me-tampa-bay-wedding-cake-wide.webp",
+    imageAlt: "Moreno Bakery's four-tier white wedding cake in the ballroom at Hotel Flor in downtown Tampa",
     tag: "Featured",
   },
   {
@@ -158,7 +158,7 @@ export default function StoriesPage() {
           <h2>Have a Story to Share?</h2>
           <p>
             Whether you are planning a celebration, need catering for the
-            office, or want to start a conversation — we would love to hear
+            office, or want to start a conversation, we would love to hear
             from you.
           </p>
           <div className={styles.ctaButtons}>

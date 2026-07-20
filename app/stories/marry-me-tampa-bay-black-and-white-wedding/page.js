@@ -23,10 +23,10 @@ export default function MarryMeTampaBayPost() {
       {/* ── Hero ──────────────────────────────────────────── */}
       <section className={styles.articleHero}>
         <Image
-          src="/images/weddings/wedding-cake-elegant.webp"
-          alt="Elegant tiered wedding cake by Moreno Bakery"
-          width={1400}
-          height={600}
+          src="/images/story/marry-me-tampa-bay-wedding-cake-wide.webp"
+          alt="Moreno Bakery's four-tier white wedding cake in the candlelit ballroom at Hotel Flor in downtown Tampa"
+          width={1600}
+          height={900}
           className={styles.articleHeroImage}
           priority
         />
@@ -44,7 +44,7 @@ export default function MarryMeTampaBayPost() {
       <article className={styles.articleBody}>
         <p>
           Moreno Bakery was the cake and dessert vendor for Laryn and Chris&apos;
-          wedding at Hotel Flor in downtown Tampa — and the celebration was
+          wedding at Hotel Flor in downtown Tampa, and the celebration was
           featured on{" "}
           <a href={ARTICLE_URL} target="_blank" rel="noopener noreferrer">
             Marry Me Tampa Bay
@@ -55,7 +55,7 @@ export default function MarryMeTampaBayPost() {
           The couple built their day around a timeless black and white palette
           with soft gold accents: black linens, warm candlelight, ivory florals,
           and a restored historic ballroom that did a lot of the work on its
-          own. The dessert had to match that restraint — elegant enough to hold
+          own. The dessert had to match that restraint: elegant enough to hold
           the room, simple enough not to compete with it.
         </p>
 
@@ -81,7 +81,7 @@ export default function MarryMeTampaBayPost() {
           The cake was four tiers, finished in white, with sculpted floral and
           leaf appliqué worked across every tier and small gold centers in the
           blossoms. A gold monogram topper finished it off. Against black
-          linen and candlelight, the texture is what carries it — the detail
+          linen and candlelight, the texture is what carries it. The detail
           reads clearly from across a ballroom without adding a single
           competing color.
         </p>
@@ -95,7 +95,7 @@ export default function MarryMeTampaBayPost() {
         <div className={styles.pullQuote}>
           <p>
             When the palette is that disciplined, the cake should feel like it
-            belongs to the room — not like it is competing with it.
+            belongs to the room, not like it is competing with it.
           </p>
         </div>
 
@@ -126,7 +126,7 @@ export default function MarryMeTampaBayPost() {
         </p>
         <p>
           Whether the vision is timeless and monochrome or colorful and
-          personal, the process starts the same way — a consultation, a tasting,
+          personal, the process starts the same way: a consultation, a tasting,
           and a conversation about the room your cake is going to live in.
         </p>
 
