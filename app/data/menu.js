@@ -125,7 +125,7 @@ export const BAKERY_CATEGORIES = [
     items: [
       { name: "French Vanilla Cupcake", price: "$4.50", description: "Vanilla cupcake topped with vanilla buttercream.", image: "/images/food/moreno-bakery-french-vanilla-cupcake.jpg" },
       { name: "Chocolate Mousse Cupcake", price: "$4.50", description: "Chocolate cupcake filled with chocolate mousse, iced with chocolate buttercream, finished with drizzled chocolate and shaved chocolate.", image: "/images/food/moreno-bakery-chocolate-mousse-cupcake.jpg" },
-      { name: "German Chocolate Cupcake", price: "$4.50", description: "Chocolate cupcake with dark chocolate border, topped with German chocolate filling and a glazed cherry.", image: "/images/food/moreno-bakery-german-chocolate-cupcake.jpg" },
+      { name: "German Chocolate Cupcake", price: "$4.50", description: "Chocolate cupcake with German chocolate filling on top (contains coconut and pecans) with a border of our dark chocolate buttercream.", image: "/images/food/moreno-bakery-german-chocolate-cupcake.jpg" },
       { name: "Red Velvet Cupcake", price: "$4.50", description: "Red velvet cupcake with cream cheese icing, topped with red sprinkles.", image: "/images/food/moreno-bakery-red-velvet-cupcake.jpg" },
       { name: "Boston Crème Cupcake", price: "$4.50", description: "Yellow cupcake filled with custard mixed with whipped topping, covered with chocolate ganache.", image: "/images/food/moreno-bakery-boston-creme-cupcake.jpg" },
       { name: "Carrot Cake Cupcake", price: "$4.50", description: "Carrot cake cupcake with cream cheese icing, garnished with crushed nut & cinnamon topping.", image: "/images/food/moreno-bakery-carrot-cake-cupcake.jpg" },
