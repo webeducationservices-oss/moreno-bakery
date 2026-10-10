@@ -152,6 +152,46 @@ export default function WeddingCakesPage() {
         </div>
       </section>
 
+      {/* ── Tastings Teaser ───────────────────────────────── */}
+      <section className="section-warm" aria-label="Wedding cake tastings">
+        <div className="container">
+          <div className={styles.splitContent}>
+            <div className={styles.splitImage}>
+              <Image
+                src="/images/susan-reaching.webp"
+                alt="Susan Moreno with a decorated cake at the Moreno Bakery counter in Brandon, FL"
+                width={800}
+                height={600}
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <p className="accent-heading" style={{ fontSize: "var(--text-xl)", marginBottom: "var(--space-sm)" }}>
+                Taste Before You Decide
+              </p>
+              <h2>Wedding Cake Tastings: Five Flavors for $25</h2>
+              <p>
+                Sit down with Susan, try five flavors from our cake, filling, and
+                icing menu, and talk through which combinations fit your wedding
+                menu. To book, call <a href="tel:8136890320">813.689.0320</a>.
+              </p>
+              <p style={{ marginTop: "var(--space-md)" }}>
+                Short on time? Order tasting cupcakes by phone, pick them up in
+                store, and see what you like at home.
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-sm)", marginTop: "var(--space-lg)" }}>
+                <Link href="/events/wedding-cakes/tastings" className="btn btn-primary">
+                  See Tasting Details
+                </Link>
+                <a href="tel:8136890320" className="btn btn-secondary">
+                  Call to Book
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Dessert Tables ────────────────────────────────── */}
       <section className={styles.contentSection}>
         <div className="container">
