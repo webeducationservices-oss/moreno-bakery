@@ -497,6 +497,9 @@
 /* ── Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
   .contactGrid { grid-template-columns: 1fr; }
+  .heroGrid { grid-template-columns: 1fr; gap: var(--space-xl); }
+  .heroText { text-align: center; }
+  .heroText .heroCtas { justify-content: center; }
   .formRow { grid-template-columns: 1fr; }
   .yesNoRow { grid-template-columns: 1fr; }
   .cakeStyleGrid { grid-template-columns: 1fr; }
