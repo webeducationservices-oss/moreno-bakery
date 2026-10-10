@@ -20,14 +20,22 @@ const CAKE_FLAVORS = ["Chocolate", "Vanilla", "Marble", "Coconut", "Carrot", "Re
 
 const FILLING_FLAVORS = [
   "Chocolate Mousse", "Dulce de Leche Mousse", "Strawberry Jam",
-  "Fresh Strawberry (+$)", "Fresh Strawberry with Glaze (+$)", "Cream Cheese", "Raspberry Jam", "Cannoli",
+  "Fresh Strawberry (+$)", "Fresh Strawberry with Glaze (+$)", "Cream Cheese", "Raspberry Jam", "Cannoli (+$)",
   "Pina Colada Custard", "Vanilla Custard", "Vanilla Buttercream",
   "Chocolate Buttercream", "Whipped Cream",
+  "Amaretto Custard (+$)", "Bacardi Custard (+$)", "Irish Cream Custard (+$)",
+  "Chocolate Custard", "Coconut Custard", "Dulce de Leche Custard",
+  "Frangelico Custard (+$)", "Kahlua Custard (+$)", "Strawberry Mousse",
+  "German Chocolate (+$)", "Tiramisu (+$)",
+  "Cherry", "Guava", "Lemon", "Pineapple",
 ];
 
 const ICING_FLAVORS = [
   "Vanilla Buttercream", "Chocolate Buttercream", "Whipped Cream",
-  "Chocolate Whipped Cream", "Cream Cheese", "Fondant",
+  "Chocolate Whipped Cream", "Cream Cheese (+$)", "Fondant",
+  "Amaretto Buttercream (+$)", "Bacardi Buttercream (+$)",
+  "Lemon Buttercream", "Mocha Buttercream", "Nutella Buttercream",
+  "Peanut Butter Buttercream (+$)", "Kahlua Chocolate Whipped Cream (+$)",
 ];
 
 const PICKUP_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
