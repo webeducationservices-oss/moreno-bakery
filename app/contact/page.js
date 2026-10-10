@@ -884,25 +884,113 @@ function ContactPageInner() {
         <Image src="/images/heroes/hero-contact.jpg" alt="Moreno Bakery storefront in Brandon, FL" width={1400} height={800} className={styles.heroImage} priority />
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
-          <h1>Contact Moreno Bakery in Brandon, FL</h1>
-          <p className={styles.heroSub}>
-            Whether you want to stop in for bakery favorites, ask about a cake,
-            start a catering order, or plan a wedding consultation — we make the
-            next step simple.
-          </p>
-          <div className={styles.heroCtas}>
-            <a href="tel:8136890320" className="btn btn-white btn-lg">
-              Call 813.689.0320
-            </a>
-            <a
-              href="https://maps.google.com/?q=Moreno+Bakery+737+W+Brandon+Blvd+Brandon+FL"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary btn-lg"
-              style={{ borderColor: "#fff", color: "#fff" }}
-            >
-              Get Directions
-            </a>
+          <div className={styles.heroGrid}>
+            {/* ── Form Card (left column) ─── */}
+            <div className={styles.formCard}>
+              <h2>
+                {inquiryType === "Wedding Cake" && "Wedding Cake Questionnaire"}
+                {inquiryType === "Cake Order" && "Custom Cake Order"}
+                {inquiryType === "Catering" && "Catering Inquiry"}
+                {inquiryType !== "Wedding Cake" && inquiryType !== "Cake Order" && inquiryType !== "Catering" && "Send an Inquiry"}
+              </h2>
+
+              {!submitted ? (
+                <>
+                  <div className={styles.inquiryTabs}>
+                    {INQUIRY_TYPES.map((type) => (
+                      <button
+                        key={type}
+                        type="button"
+                        className={`${styles.inquiryTab} ${inquiryType === type ? styles.inquiryTabActive : ""}`}
+                        onClick={() => setInquiryType(type)}
+                      >
+                        {type === "Wedding Cake" ? "💍 Wedding" : type === "Cake Order" ? "🎂 Cake Order" : type}
+                      </button>
+                    ))}
+                  </div>
+
+                  {inquiryType === "Wedding Cake" ? (
+                    <WeddingCakeForm onSubmit={handleWeddingSubmit} sending={sending} />
+                  ) : inquiryType === "Cake Order" ? (
+                    <CakeOrderForm onSubmit={handleWeddingSubmit} sending={sending} />
+                  ) : inquiryType === "Catering" ? (
+                    <CateringInquiryForm onSubmit={handleWeddingSubmit} sending={sending} />
+                  ) : (
+                    <form onSubmit={handleSubmit}>
+                      <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+                      <div className={styles.formRow}>
+                        <div className="form-group">
+                          <label htmlFor="name" className="form-label">Name</label>
+                          <input type="text" id="name" name="name" className="form-input" required />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="phone" className="form-label">Phone</label>
+                          <input type="tel" id="phone" name="phone" className="form-input" required />
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input type="email" id="email" name="email" className="form-input" required />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="message" className="form-label">
+                          {inquiryType === "General" && "How can we help?"}
+                          {inquiryType === "Catering" && "Tell us about your event (date, guest count, menu ideas)"}
+                        </label>
+                        <textarea id="message" name="message" className="form-input form-textarea" rows={5} required />
+                      </div>
+                      <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending}>
+                        {sending ? "Sending..." : `Send ${inquiryType} Inquiry`}
+                      </button>
+                    </form>
+                  )}
+                </>
+              ) : (
+                <div className={styles.successMessage}>
+                  <div className={styles.successIcon}>
+                    {inquiryType === "Wedding Cake" ? "💍🎂" : inquiryType === "Cake Order" ? "🎂✨" : inquiryType === "Catering" ? "🍽️✨" : "✓"}
+                  </div>
+                  <h3>
+                    {inquiryType === "Wedding Cake" ? "We Can't Wait to Create Your Dream Cake!" : inquiryType === "Cake Order" ? "Your Cake Order Has Been Submitted!" : inquiryType === "Catering" ? "Your Catering Request Is In!" : "Thank You!"}
+                  </h3>
+                  <p>
+                    {inquiryType === "Wedding Cake"
+                      ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 1–2 business days to schedule your tasting consultation."
+                      : inquiryType === "Cake Order"
+                      ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 1 business day."
+                      : inquiryType === "Catering"
+                      ? "Your catering request has been sent to our events team. We'll reach out within 1–2 business days to plan the details."
+                      : `Your ${inquiryType.toLowerCase()} inquiry has been sent. Moreno Bakery will get back to you soon.`}
+                    {" "}For faster service, call{" "}
+                    <a href="tel:8136890320">813.689.0320</a>.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* ── Hero text (right column) ─── */}
+            <div className={styles.heroText}>
+              <h1>Contact Moreno Bakery in Brandon, FL</h1>
+              <p className={styles.heroSub}>
+                Whether you want to stop in for bakery favorites, ask about a cake,
+                start a catering order, or plan a wedding consultation — we make the
+                next step simple.
+              </p>
+              <div className={styles.heroCtas}>
+                <a href="tel:8136890320" className="btn btn-white btn-lg">
+                  Call 813.689.0320
+                </a>
+                <a
+                  href="https://maps.google.com/?q=Moreno+Bakery+737+W+Brandon+Blvd+Brandon+FL"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary btn-lg"
+                  style={{ borderColor: "#fff", color: "#fff" }}
+                >
+                  Get Directions
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
