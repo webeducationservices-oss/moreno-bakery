@@ -20,7 +20,7 @@ const CAKE_FLAVORS = ["Chocolate", "Vanilla", "Marble", "Coconut", "Carrot", "Re
 
 const FILLING_FLAVORS = [
   "Chocolate Mousse", "Dulce de Leche Mousse", "Strawberry Jam",
-  "Fresh Strawberry (+$)", "Cream Cheese", "Raspberry Jam", "Cannoli",
+  "Fresh Strawberry (+$)", "Fresh Strawberry with Glaze (+$)", "Cream Cheese", "Raspberry Jam", "Cannoli",
   "Pina Colada Custard", "Vanilla Custard", "Vanilla Buttercream",
   "Chocolate Buttercream", "Whipped Cream",
 ];
