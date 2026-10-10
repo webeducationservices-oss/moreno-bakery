@@ -411,7 +411,7 @@ function CakeOrderForm({ onSubmit, sending }) {
     pickupType: "",
     cakeSize: "", cakeServes: "", cakeFlavor: "",
     fillingFlavor: "", icingFlavor: "",
-    colors: "", designInfo: "", cakeMessage: "",
+    colors: "", designInfo: "", cakeMessage: "", topperLink: "",
     photo_base64: "", photo_name: "",
     _honey: "",
   });
