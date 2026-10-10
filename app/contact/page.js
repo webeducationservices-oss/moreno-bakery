@@ -32,7 +32,10 @@ const FILLING_FLAVORS = [
 
 const ICING_FLAVORS = [
   "Vanilla Buttercream", "Chocolate Buttercream", "Whipped Cream",
-  "Chocolate Whipped Cream", "Cream Cheese", "Fondant",
+  "Chocolate Whipped Cream", "Cream Cheese (+$)", "Fondant",
+  "Amaretto Buttercream (+$)", "Bacardi Buttercream (+$)",
+  "Lemon Buttercream", "Mocha Buttercream", "Nutella Buttercream",
+  "Peanut Butter Buttercream (+$)", "Kahlua Chocolate Whipped Cream (+$)",
 ];
 
 const PICKUP_DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
