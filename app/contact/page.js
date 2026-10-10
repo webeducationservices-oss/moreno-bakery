@@ -411,7 +411,7 @@ function CakeOrderForm({ onSubmit, sending }) {
     pickupType: "",
     cakeSize: "", cakeServes: "", cakeFlavor: "",
     fillingFlavor: "", icingFlavor: "",
-    colors: "", designInfo: "", cakeMessage: "",
+    colors: "", designInfo: "", cakeMessage: "", topperLink: "",
     photo_base64: "", photo_name: "",
     _honey: "",
   });
@@ -436,6 +436,7 @@ function CakeOrderForm({ onSubmit, sending }) {
       `Colors: ${data.colors || "N/A"}`,
       `Design Info: ${data.designInfo || "N/A"}`,
       `Message on Cake: ${data.cakeMessage || "None"}`,
+      `Custom Topper Link: ${data.topperLink || "None"}`,
     ].join("\n");
 
     onSubmit({
@@ -597,6 +598,11 @@ function CakeOrderForm({ onSubmit, sending }) {
           </div>
 
           <InspirationPhoto data={data} update={update} label="Share an inspiration photo (optional)" />
+
+          <div className="form-group">
+            <label htmlFor="co-topper" className="form-label">Custom topper link (optional)</label>
+            <input type="url" id="co-topper" className="form-input" value={data.topperLink} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link to the topper you'd like, if you need one" />
+          </div>
 
           <div className="form-group">
             <label htmlFor="co-message" className="form-label">Message on the cake</label>
@@ -955,11 +961,11 @@ function ContactPageInner() {
                   </h3>
                   <p>
                     {inquiryType === "Wedding Cake"
-                      ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 1–2 business days to schedule your tasting consultation."
+                      ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 24-48 hours to schedule your tasting consultation."
                       : inquiryType === "Cake Order"
-                      ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 1 business day."
+                      ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 24-48 hours."
                       : inquiryType === "Catering"
-                      ? "Your catering request has been sent to our events team. We'll reach out within 1–2 business days to plan the details."
+                      ? "Your catering request has been sent to our events team. We'll reach out within 24-48 hours to plan the details."
                       : `Your ${inquiryType.toLowerCase()} inquiry has been sent. Moreno Bakery will get back to you soon.`}
                     {" "}For faster service, call{" "}
                     <a href="tel:8136890320">813.689.0320</a>.
