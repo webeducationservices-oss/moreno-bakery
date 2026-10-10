@@ -436,6 +436,7 @@ function CakeOrderForm({ onSubmit, sending }) {
       `Colors: ${data.colors || "N/A"}`,
       `Design Info: ${data.designInfo || "N/A"}`,
       `Message on Cake: ${data.cakeMessage || "None"}`,
+      `Custom Topper Link: ${data.topperLink || "None"}`,
     ].join("\n");
 
     onSubmit({
