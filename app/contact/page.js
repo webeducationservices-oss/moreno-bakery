@@ -965,7 +965,7 @@ function ContactPageInner() {
                       : inquiryType === "Cake Order"
                       ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 24-48 hours."
                       : inquiryType === "Catering"
-                      ? "Your catering request has been sent to our events team. We'll reach out within 1–2 business days to plan the details."
+                      ? "Your catering request has been sent to our events team. We'll reach out within 24-48 hours to plan the details."
                       : `Your ${inquiryType.toLowerCase()} inquiry has been sent. Moreno Bakery will get back to you soon.`}
                     {" "}For faster service, call{" "}
                     <a href="tel:8136890320">813.689.0320</a>.
