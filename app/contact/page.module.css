@@ -511,3 +511,21 @@
   .heroCtas { flex-direction: column; align-items: center; }
   .inquiryTabs { flex-direction: column; }
 }
+
+/* ── Mobile containment for the hero form ─────────────────
+   A 1fr grid track grows to its content's min width, so on step 2 the
+   cake size buttons pushed the form card past the screen edge and the
+   hero clipped it. minmax(0, 1fr) plus min-width: 0 keeps the card in
+   its column; the lighter padding gives the fields room on a phone. */
+@media (max-width: 768px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr); }
+  .heroGrid > * { min-width: 0; }
+  .formCard { padding: var(--space-lg) var(--space-md); }
+}
+
+/* Back + Submit do not fit side by side on a phone; stack them. */
+@media (max-width: 480px) {
+  .stepNav { flex-direction: column-reverse; align-items: stretch; gap: var(--space-sm); }
+  .stepNav > * { width: 100%; }
+  .stepNav > div:empty { display: none; }
+}
