@@ -600,6 +600,11 @@ function CakeOrderForm({ onSubmit, sending }) {
           <InspirationPhoto data={data} update={update} label="Share an inspiration photo (optional)" />
 
           <div className="form-group">
+            <label htmlFor="co-topper" className="form-label">Custom topper link (optional)</label>
+            <input type="url" id="co-topper" className="form-input" value={data.topperLink} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link to the topper you'd like, if you need one" />
+          </div>
+
+          <div className="form-group">
             <label htmlFor="co-message" className="form-label">Message on the cake</label>
             <input type="text" id="co-message" className="form-input" value={data.cakeMessage} onChange={(e) => update("cakeMessage", e.target.value)} placeholder='e.g. "Happy Birthday Sarah!"' />
           </div>
