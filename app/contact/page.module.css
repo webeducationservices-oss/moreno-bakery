@@ -59,10 +59,38 @@
   flex-wrap: wrap;
 }
 
+/* ── Two-column hero (form left, text right) ─────────── */
+.heroContent {
+  text-align: left;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: center;
+  text-align: left;
+}
+
+.heroText h1 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.heroText .heroSub {
+  margin: 0 0 var(--space-xl);
+}
+
+.heroText .heroCtas {
+  justify-content: flex-start;
+}
+
 /* ── Contact Grid ─────────────────────────────────────── */
 .contactGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
+  max-width: 720px;
+  margin: 0 auto;
   gap: var(--space-3xl);
   padding: var(--space-4xl) 0;
 }
