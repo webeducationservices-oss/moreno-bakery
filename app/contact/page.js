@@ -630,9 +630,6 @@ function CakeOrderForm({ onSubmit, sending }) {
           <p style={{ marginTop: "var(--space-md)", fontSize: "0.85rem", color: "#6a6560", textAlign: "center" }}>
             Please note: this form is not a finished order form. Submitting it does not complete or guarantee your order. We&apos;ll contact you to confirm the details.
           </p>
-          <p style={{ marginTop: "var(--space-sm)", fontSize: "0.85rem", color: "#6a6560", textAlign: "center" }}>
-            Please note that this is not a finalized or confirmed order. Every order will require a deposit to confirm it.
-          </p>
         </div>
       )}
     </form>
