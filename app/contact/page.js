@@ -973,7 +973,7 @@ function ContactPageInner() {
                     {" "}For faster service, call{" "}
                     <a href="tel:8136890320">813.689.0320</a>.
                   </p>
-                  {inquiryType === "Cake Order" && (
+                  {(inquiryType === "Cake Order" || inquiryType === "Wedding Cake" || inquiryType === "Catering") && (
                     <p>
                       Please note that this is not a finalized or confirmed order. Every order will require a deposit to confirm it.
                     </p>
