@@ -961,7 +961,7 @@ function ContactPageInner() {
                   </h3>
                   <p>
                     {inquiryType === "Wedding Cake"
-                      ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 1–2 business days to schedule your tasting consultation."
+                      ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 24-48 hours to schedule your tasting consultation."
                       : inquiryType === "Cake Order"
                       ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 24-48 hours."
                       : inquiryType === "Catering"
