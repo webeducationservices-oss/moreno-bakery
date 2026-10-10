@@ -20,7 +20,7 @@ const CAKE_FLAVORS = ["Chocolate", "Vanilla", "Marble", "Coconut", "Carrot", "Re
 
 const FILLING_FLAVORS = [
   "Chocolate Mousse", "Dulce de Leche Mousse", "Strawberry Jam",
-  "Fresh Strawberry (+$)", "Cream Cheese", "Raspberry Jam", "Cannoli",
+  "Fresh Strawberry (+$)", "Fresh Strawberry with Glaze (+$)", "Cream Cheese", "Raspberry Jam", "Cannoli",
   "Pina Colada Custard", "Vanilla Custard", "Vanilla Buttercream",
   "Chocolate Buttercream", "Whipped Cream",
 ];
@@ -627,6 +627,9 @@ function CakeOrderForm({ onSubmit, sending }) {
               {sending ? "Sending..." : "Submit Cake Order 🎂"}
             </button>
           </div>
+          <p style={{ marginTop: "var(--space-md)", fontSize: "0.85rem", color: "#6a6560", textAlign: "center" }}>
+            Please note: this form is not a finished order form. Submitting it does not complete or guarantee your order. We&apos;ll contact you to confirm the details.
+          </p>
         </div>
       )}
     </form>
@@ -970,6 +973,11 @@ function ContactPageInner() {
                     {" "}For faster service, call{" "}
                     <a href="tel:8136890320">813.689.0320</a>.
                   </p>
+                  {(inquiryType === "Cake Order" || inquiryType === "Wedding Cake" || inquiryType === "Catering") && (
+                    <p>
+                      Please note that this is not a finalized or confirmed order. Every order will require a deposit to confirm it.
+                    </p>
+                  )}
                 </div>
               )}
             </div>
