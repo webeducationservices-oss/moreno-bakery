@@ -963,7 +963,7 @@ function ContactPageInner() {
                     {inquiryType === "Wedding Cake"
                       ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 1–2 business days to schedule your tasting consultation."
                       : inquiryType === "Cake Order"
-                      ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 1 business day."
+                      ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 24-48 hours."
                       : inquiryType === "Catering"
                       ? "Your catering request has been sent to our events team. We'll reach out within 1–2 business days to plan the details."
                       : `Your ${inquiryType.toLowerCase()} inquiry has been sent. Moreno Bakery will get back to you soon.`}
