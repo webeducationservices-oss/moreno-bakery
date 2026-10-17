@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -143,8 +143,20 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
   );
 }
 
-function WeddingCakeForm({ onSubmit, sending }) {
+// Tell the page when the customer moves to another step, so it can bring the
+// top of the form back into view (Next sits at the bottom of a tall step).
+function useStepReveal(step, onStepChange) {
+  const lastStep = useRef(step);
+  useEffect(() => {
+    if (lastStep.current === step) return;
+    lastStep.current = step;
+    if (onStepChange) onStepChange();
+  }, [step, onStepChange]);
+}
+
+function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
+  useStepReveal(step, onStepChange);
   const [data, setData] = useState({
     partner1: "",
     partner2: "",
@@ -411,8 +423,9 @@ const CAKE_ORDER_STEPS = [
   { id: 3, label: "Design", icon: "🎨" },
 ];
 
-function CakeOrderForm({ onSubmit, sending }) {
+function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
+  useStepReveal(step, onStepChange);
   const [data, setData] = useState({
     name: "", phone: "", email: "",
     pickupDate: "", pickupTime: "",
@@ -444,7 +457,7 @@ function CakeOrderForm({ onSubmit, sending }) {
       `Colors: ${data.colors || "N/A"}`,
       `Design Info: ${data.designInfo || "N/A"}`,
       `Message on Cake: ${data.cakeMessage || "None"}`,
-      `Custom Topper Link: ${data.topperLink || "None"}`,
+      `Custom Topper: ${data.topperLink || "None"}`,
     ].join("\n");
 
     onSubmit({
@@ -608,8 +621,8 @@ function CakeOrderForm({ onSubmit, sending }) {
           <InspirationPhoto data={data} update={update} label="Share an inspiration photo (optional)" />
 
           <div className="form-group">
-            <label htmlFor="co-topper" className="form-label">Custom topper link (optional)</label>
-            <input type="url" id="co-topper" className="form-input" value={data.topperLink} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link to the topper you'd like, if you need one" />
+            <label htmlFor="co-topper" className="form-label">Custom topper (optional)</label>
+            <input type="text" id="co-topper" className="form-input" value={data.topperLink} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link or describe the topper you'd like" />
           </div>
 
           <div className="form-group">
@@ -662,8 +675,9 @@ const CATERING_MEAL_STYLES = [
 
 const CATERING_BUDGETS = ["Budget-friendly", "Balanced", "All out", "Not sure yet"];
 
-function CateringInquiryForm({ onSubmit, sending }) {
+function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
+  useStepReveal(step, onStepChange);
   const [data, setData] = useState({
     name: "", phone: "", email: "",
     eventType: "", eventDate: "", guestCount: "",
@@ -845,6 +859,26 @@ function ContactPageInner() {
   const [inquiryType, setInquiryType] = useState("General");
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
+  const cardRef = useRef(null);
+
+  // After Next, Back or Submit the new content can start above the screen,
+  // so customers missed the next step or the confirmation. Scroll the top of
+  // the form card back into view (below the sticky header) when it is not
+  // already showing.
+  const revealCard = useCallback(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    const header = document.querySelector("header");
+    const offset = (header ? header.getBoundingClientRect().bottom : 0) + 12;
+    const top = card.getBoundingClientRect().top;
+    if (top < offset || top > window.innerHeight * 0.6) {
+      window.scrollTo({ top: window.scrollY + top - offset, behavior: "smooth" });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (submitted) revealCard();
+  }, [submitted, revealCard]);
 
   useEffect(() => {
     if (formParam === "wedding-cake") setInquiryType("Wedding Cake");
@@ -903,7 +937,7 @@ function ContactPageInner() {
         <div className={styles.heroContent}>
           <div className={styles.heroGrid}>
             {/* ── Form Card (left column) ─── */}
-            <div className={styles.formCard}>
+            <div className={styles.formCard} ref={cardRef}>
               <h2>
                 {inquiryType === "Wedding Cake" && "Wedding Cake Questionnaire"}
                 {inquiryType === "Cake Order" && "Custom Cake Order"}
@@ -927,11 +961,11 @@ function ContactPageInner() {
                   </div>
 
                   {inquiryType === "Wedding Cake" ? (
-                    <WeddingCakeForm onSubmit={handleWeddingSubmit} sending={sending} />
+                    <WeddingCakeForm onSubmit={handleWeddingSubmit} sending={sending} onStepChange={revealCard} />
                   ) : inquiryType === "Cake Order" ? (
-                    <CakeOrderForm onSubmit={handleWeddingSubmit} sending={sending} />
+                    <CakeOrderForm onSubmit={handleWeddingSubmit} sending={sending} onStepChange={revealCard} />
                   ) : inquiryType === "Catering" ? (
-                    <CateringInquiryForm onSubmit={handleWeddingSubmit} sending={sending} />
+                    <CateringInquiryForm onSubmit={handleWeddingSubmit} sending={sending} onStepChange={revealCard} />
                   ) : (
                     <form onSubmit={handleSubmit}>
                       <input type="text" name="_honey" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
@@ -974,7 +1008,7 @@ function ContactPageInner() {
                     {inquiryType === "Wedding Cake"
                       ? "Your wedding cake questionnaire has been sent to our cake team. We'll be in touch within 24-48 hours to schedule your tasting consultation."
                       : inquiryType === "Cake Order"
-                      ? "Your custom cake order has been sent to our bakers. We'll confirm your order within 24-48 hours."
+                      ? "Your custom cake order has been sent to our bakers. We'll reach out within 24-48 hours to go over the details and your deposit."
                       : inquiryType === "Catering"
                       ? "Your catering request has been sent to our events team. We'll reach out within 24-48 hours to plan the details."
                       : `Your ${inquiryType.toLowerCase()} inquiry has been sent. Moreno Bakery will get back to you soon.`}

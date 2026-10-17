@@ -64,12 +64,18 @@
   text-align: left;
 }
 
+/* minmax(0, 1fr): plain 1fr tracks grow to their content, so the columns
+   changed width on every form step. */
 .heroGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--space-3xl);
   align-items: center;
   text-align: left;
+}
+
+.heroGrid > * {
+  min-width: 0;
 }
 
 .heroText h1 {
@@ -495,11 +501,19 @@
 }
 
 /* ── Responsive ────────────────────────────────────────── */
+/* Below 1024px the form and the banner text stack. The heading and the
+   Call button come first: on a phone they are what most visitors want, and
+   with the form first they sat a full form-length down the page. */
+@media (max-width: 1024px) {
+  .heroGrid { grid-template-columns: minmax(0, 1fr); gap: var(--space-xl); }
+  .heroText { order: -1; text-align: center; }
+  .heroText .heroSub { margin-left: auto; margin-right: auto; }
+  .heroText .heroCtas { justify-content: center; }
+  .formCard { width: 100%; max-width: 640px; margin: 0 auto; }
+}
+
 @media (max-width: 768px) {
   .contactGrid { grid-template-columns: 1fr; }
-  .heroGrid { grid-template-columns: 1fr; gap: var(--space-xl); }
-  .heroText { text-align: center; }
-  .heroText .heroCtas { justify-content: center; }
   .formRow { grid-template-columns: 1fr; }
   .yesNoRow { grid-template-columns: 1fr; }
   .cakeStyleGrid { grid-template-columns: 1fr; }
