@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.css";
+import SiteSearch from "./SiteSearch";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
