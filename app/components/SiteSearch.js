@@ -35,6 +35,22 @@ function buildIndex() {
   return rows;
 }
 
+function buildCategoryGroups() {
+  const group = (cats, menuLabel, path) => ({
+    menuLabel,
+    categories: cats.map((cat) => ({
+      name: cat.name,
+      menuLabel,
+      href: `${path}#${cat.id}`,
+    })),
+  });
+  return [
+    group(BAKERY_CATEGORIES, "Bakery Menu", "/menu/bakery"),
+    group(FOOD_CATEGORIES, "Food Menu", "/menu/food"),
+    group(CATERING_CATEGORIES, "Catering Menu", "/menu/catering"),
+  ];
+}
+
 export default function SiteSearch({ onNavigate, variant = "bar" }) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
