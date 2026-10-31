@@ -82,6 +82,62 @@
   color: #555;
 }
 
+/* Main nav version (white background) */
+.wrapNav {
+  width: 100%;
+}
+
+.wrapNav .icon {
+  color: #555;
+}
+
+.wrapNav .input {
+  width: 160px;
+  color: #222;
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 0.45rem 0.7rem 0.45rem 1.9rem;
+  font-size: 0.85rem;
+}
+
+.wrapNav .input::placeholder {
+  color: #777;
+}
+
+.wrapNav .input:focus {
+  width: 200px;
+  background: #fff;
+  border-color: var(--color-primary);
+}
+
+.wrapNav .results {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1024px) {
+  .wrapNav .input,
+  .wrapNav .input:focus {
+    width: 100%;
+  }
+  .wrapNav {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 640px) {
+  .wrapNav .results {
+    position: fixed;
+    top: 4.5rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+    transform: none;
+  }
+}
+
 /* Mobile menu version */
 .wrapMobile {
   margin-bottom: 1rem;
