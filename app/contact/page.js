@@ -27,7 +27,7 @@ const FILLING_FLAVORS = [
   "Chocolate Custard", "Coconut Custard", "Dulce de Leche Custard",
   "Frangelico Custard (+$)", "Kahlua Custard (+$)", "Strawberry Mousse",
   "German Chocolate (+$)", "Tiramisu (+$)",
-  "Cherry (+$)", "Guava (+$)", "Lemon (+$)", "Pineapple (+$)",
+  "Cherry (+$)", "Guava (+$)",
 ];
 
 const ICING_FLAVORS = [
