@@ -35,11 +35,28 @@ function buildIndex() {
   return rows;
 }
 
+function buildCategoryGroups() {
+  const group = (cats, menuLabel, path) => ({
+    menuLabel,
+    categories: cats.map((cat) => ({
+      name: cat.name,
+      menuLabel,
+      href: `${path}#${cat.id}`,
+    })),
+  });
+  return [
+    group(BAKERY_CATEGORIES, "Bakery Menu", "/menu/bakery"),
+    group(FOOD_CATEGORIES, "Food Menu", "/menu/food"),
+    group(CATERING_CATEGORIES, "Catering Menu", "/menu/catering"),
+  ];
+}
+
 export default function SiteSearch({ onNavigate, variant = "bar" }) {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
   const index = useMemo(buildIndex, []);
+  const categoryGroups = useMemo(buildCategoryGroups, []);
 
   useEffect(() => {
     const handler = (e) => {
@@ -62,6 +79,14 @@ export default function SiteSearch({ onNavigate, variant = "bar" }) {
       })
       .slice(0, 8);
   }, [q, index]);
+
+  const matchingCategories = useMemo(() => {
+    if (q.length < 2) return [];
+    return categoryGroups
+      .flatMap((g) => g.categories)
+      .filter((c) => c.name.toLowerCase().includes(q))
+      .slice(0, 4);
+  }, [q, categoryGroups]);
 
   const close = () => {
     setOpen(false);
@@ -89,14 +114,44 @@ export default function SiteSearch({ onNavigate, variant = "bar" }) {
         onFocus={() => setOpen(true)}
         onKeyDown={(e) => {
           if (e.key === "Escape") setOpen(false);
-          if (e.key === "Enter" && results[0]) {
-            window.location.href = results[0].href;
+          if (e.key === "Enter") {
+            const first = matchingCategories[0] || results[0];
+            if (first) window.location.href = first.href;
           }
         }}
       />
+      {open && q.length < 2 && (
+        <div className={styles.results}>
+          <div className={styles.suggestHeading}>Browse by category</div>
+          {categoryGroups.map((g) => (
+            <div key={g.menuLabel} className={styles.suggestGroup}>
+              <div className={styles.suggestMenu}>{g.menuLabel}</div>
+              <div className={styles.chips}>
+                {g.categories.map((c) => (
+                  <Link key={c.href} href={c.href} className={styles.chip} onClick={close}>
+                    {c.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
       {open && q.length >= 2 && (
         <div className={styles.results}>
-          {results.length === 0 ? (
+          {matchingCategories.length > 0 && (
+            <div className={styles.suggestGroup}>
+              <div className={styles.suggestMenu}>Categories</div>
+              <div className={styles.chips}>
+                {matchingCategories.map((c) => (
+                  <Link key={c.href} href={c.href} className={styles.chip} onClick={close}>
+                    {c.name} <span className={styles.chipMeta}>· {c.menuLabel}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+          {results.length === 0 && matchingCategories.length === 0 ? (
             <div className={styles.empty}>No matches. Try another word, or call us at (813) 689-0320.</div>
           ) : (
             <ul>

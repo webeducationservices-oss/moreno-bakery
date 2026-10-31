@@ -82,6 +82,57 @@
   color: #555;
 }
 
+/* Category suggestions */
+.suggestHeading {
+  padding: 0.7rem 0.9rem 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #222;
+}
+
+.suggestGroup {
+  padding: 0.5rem 0.9rem 0.7rem;
+  border-bottom: 1px solid #eee;
+}
+
+.suggestMenu {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #777;
+  margin-bottom: 0.4rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #222;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.chip:hover {
+  background: #e6effa;
+  border-color: var(--color-primary);
+  color: #222;
+}
+
+.chipMeta {
+  color: #777;
+  font-size: 0.72rem;
+}
+
 /* Main nav version (white background) */
 .wrapNav {
   width: 100%;
