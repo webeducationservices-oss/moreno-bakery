@@ -83,6 +83,13 @@
   width: auto;
 }
 
+.searchSlot {
+  display: flex;
+  justify-content: center;
+  flex: 0 1 auto;
+  margin: 0 var(--space-md);
+}
+
 .navList {
   display: flex;
   gap: var(--space-xs);
