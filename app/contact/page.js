@@ -649,7 +649,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
             </button>
           </div>
           <p style={{ marginTop: "var(--space-md)", fontSize: "0.85rem", color: "#6a6560", textAlign: "center" }}>
-            Please note: this form is not a finished order form. Submitting it does not complete or guarantee your order. We&apos;ll contact you to confirm the details.
+            Please note: this form is not a finished order form. Submitting it does not complete or guarantee your order. We&apos;ll contact you to confirm the details. Make sure all your information is correct before submitting this form or else we may be unable to contact you.
           </p>
         </div>
       )}
