@@ -248,8 +248,6 @@ export const BAKERY_CATEGORIES = [
       { name: "Peanut Butter Brownies", price: "$3.50", description: "Fudgy brownie layered with creamy peanut butter.", image: "/images/food/moreno-bakery-peanut-butter-brownies.jpg" },
       { name: "Cheesecake Brownies", price: "$3.50", description: "Fudgy brownie swirled with creamy cheesecake batter.", image: "/images/food/moreno-bakery-cheesecake-brownies.jpg" },
       { name: "Rainbow Squares", price: "$3.00", description: "Colorful layered almond cake with raspberry jam and chocolate.", image: "/images/food/moreno-bakery-rainbow-squares.jpg" },
-      { name: "Pecan Square", price: "$3.50", description: "Buttery shortbread base topped with caramelized pecans.", image: "/images/food/moreno-bakery-pecan-square.jpg" },
-      { name: "Mom's Apple Square", price: "$3.50", description: "Homestyle apple filling on a buttery pastry base with crumb topping.", image: "/images/food/moreno-bakery-moms-apple-square.jpg" },
       { name: "Chocolate or Raspberry Cigars", price: "$3.00", description: "Rolled pastry filled with chocolate or raspberry.", image: "/images/food/moreno-bakery-chocolate-or-raspberry-cigars.jpg" },
       { name: "Rugelach", price: "Individual $0.85 / Half lb $6 / One lb $12", description: "Apricot, Chocolate, Cinnamon Raisin Walnut, or Raspberry.", image: "/images/food/moreno-bakery-rugelach.jpg" },
       { name: "Babka", price: "$15.00", description: "Chocolate, Raisin, or Raspberry. Available by special order.", image: "/images/food/moreno-bakery-babka.jpg" },
