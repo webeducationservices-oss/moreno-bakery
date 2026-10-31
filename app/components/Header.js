@@ -107,6 +107,11 @@ export default function Header() {
             />
           </Link>
 
+          {/* Search (shows on desktop and mobile) */}
+          <div className={styles.searchSlot}>
+            <SiteSearch variant="nav" />
+          </div>
+
           {/* Desktop Nav */}
           <ul className={styles.navList}>
             {NAV_ITEMS.map((item) => (
