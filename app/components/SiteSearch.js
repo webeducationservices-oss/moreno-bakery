@@ -80,6 +80,14 @@ export default function SiteSearch({ onNavigate, variant = "bar" }) {
       .slice(0, 8);
   }, [q, index]);
 
+  const matchingCategories = useMemo(() => {
+    if (q.length < 2) return [];
+    return categoryGroups
+      .flatMap((g) => g.categories)
+      .filter((c) => c.name.toLowerCase().includes(q))
+      .slice(0, 4);
+  }, [q, categoryGroups]);
+
   const close = () => {
     setOpen(false);
     setQuery("");
