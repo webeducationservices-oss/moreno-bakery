@@ -56,6 +56,7 @@ export default function SiteSearch({ onNavigate, variant = "bar" }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef(null);
   const index = useMemo(buildIndex, []);
+  const categoryGroups = useMemo(buildCategoryGroups, []);
 
   useEffect(() => {
     const handler = (e) => {
