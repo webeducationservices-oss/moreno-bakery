@@ -159,6 +159,7 @@ export default function Header() {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className={styles.mobileMenu}>
+          <SiteSearch variant="mobile" onNavigate={() => setMobileOpen(false)} />
           {/* Mobile Quick Actions */}
           <div className={styles.mobileActions}>
             <a href="https://www.doordash.com/store/moreno-bakery-brandon-138952/81523961/" className="btn btn-primary btn-sm" target="_blank" rel="noopener noreferrer">
