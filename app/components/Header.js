@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Header.module.css";
+import SiteSearch from "./SiteSearch";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
@@ -105,6 +106,11 @@ export default function Header() {
               priority
             />
           </Link>
+
+          {/* Search (shows on desktop and mobile) */}
+          <div className={styles.searchSlot}>
+            <SiteSearch variant="nav" />
+          </div>
 
           {/* Desktop Nav */}
           <ul className={styles.navList}>

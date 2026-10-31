@@ -83,6 +83,13 @@
   width: auto;
 }
 
+.searchSlot {
+  display: flex;
+  justify-content: center;
+  flex: 0 1 auto;
+  margin: 0 var(--space-md);
+}
+
 .navList {
   display: flex;
   gap: var(--space-xs);
@@ -274,6 +281,7 @@
   .mobileToggle { display: flex; }
   .mobileMenu { display: block; }
   .utilityLinks { gap: var(--space-md); }
+  .searchSlot { flex: 1; margin: 0 var(--space-md); }
 }
 
 @media (max-width: 640px) {
