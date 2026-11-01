@@ -734,7 +734,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
               <input type="checkbox" id="co-topper-own" checked={data.topperLink === "Bringing my own toppers"} onChange={(e) => update("topperLink", e.target.checked ? "Bringing my own toppers" : "")} />
               Bringing my own toppers
             </label>
-            <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "12px", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "0", lineHeight: 1.7 }}>
               You may buy your own <strong>toppers</strong> and bring them into the bakery before your pickup date to be added to your cake with no extra fee. If you are bringing your own topper, just select &quot;Bringing my own toppers&quot; instead of pasting a link.
             </p>
           </div>
