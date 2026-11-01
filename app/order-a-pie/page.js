@@ -141,7 +141,7 @@ export default function OrderAPiePage() {
                 Thank you! Our bakers will reach out to confirm the details. For faster service,
                 call <a href="tel:8136890320">813-689-0320</a>.
               </p>
-              <p>Please note this is a request and not a confirmed order until we contact you.</p>
+              <p>Please note this is a request and not a confirmed order. Your order is only confirmed once a member of our team contacts you to confirm it.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
