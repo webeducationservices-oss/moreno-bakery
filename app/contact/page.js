@@ -558,6 +558,11 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
                 </button>
               ))}
             </div>
+            {data.pickupType === "Delivery" && (
+              <p role="note" style={{ color: "#b3261e", fontSize: "0.9rem", fontWeight: 600, marginTop: "var(--space-sm)" }}>
+                Delivery has its own separate fee, which will be added to the price of the order at the time the order is placed. The price is unique to every customer, depending on delivery location and order.
+              </p>
+            )}
           </div>
           <div className={styles.stepNav}>
             <div />
