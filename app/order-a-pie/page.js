@@ -11,9 +11,12 @@ const PIE_TOPPINGS = ["Smooth top w/ icing", "Smooth top no icing", "Dutch crumb
 // Builds the list of allowed pickup times (every 15 minutes) for the chosen day.
 function pickupTimeOptions(isSunday) {
   const start = isSunday ? 9 * 60 : 7 * 60;
-  const end = isSunday ? 15 * 60 + 45 : 18 * 60 + 45;
+  const end = isSunday ? 15 * 60 + 55 : 18 * 60 + 45;
   const options = [];
-  for (let m = start; m <= end; m += 15) {
+  const slots = [];
+  for (let m = start; m <= end; m += 15) slots.push(m);
+  if (slots[slots.length - 1] !== end) slots.push(end);
+  for (const m of slots) {
     const h24 = Math.floor(m / 60);
     const min = m % 60;
     const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
