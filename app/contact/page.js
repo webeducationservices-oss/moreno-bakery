@@ -770,7 +770,9 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
       `Meal Style: ${data.mealStyle || "Open to suggestions"}`,
       `Budget: ${data.budget || "Not specified"}`,
       `Service: ${data.serviceType || "Not specified"}`,
-      `Venue / Location: ${data.venue || "N/A"}`,
+      ...(data.serviceType === "Delivery"
+        ? [`Delivery Location: ${data.deliveryVenue}, ${data.deliveryCity}, FL ${data.deliveryZip}`]
+        : [`Venue / Location: ${data.venue || "N/A"}`]),
       `Dietary Needs: ${data.dietary || "None"}`,
       `Vision / Notes: ${data.vision || "None"}`,
     ].join("\n");
