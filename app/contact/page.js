@@ -450,6 +450,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
     name: "", phone: "", email: "",
     pickupDate: "", pickupTime: "",
     pickupType: "",
+    deliveryVenue: "", deliveryCity: "", deliveryZip: "",
     cakeSize: "", cakeServes: "", cakeFlavor: "",
     fillingFlavor: "", icingFlavor: "",
     colors: "", designInfo: "", cakeMessage: "", topperLink: "",
