@@ -423,6 +423,23 @@ const CAKE_ORDER_STEPS = [
   { id: 3, label: "Design", icon: "🎨" },
 ];
 
+// Builds the list of allowed pickup times (every 15 minutes) for the chosen day.
+function pickupTimeOptions(isSunday) {
+  const start = isSunday ? 9 * 60 : 7 * 60;
+  const end = isSunday ? 15 * 60 + 45 : 18 * 60 + 45;
+  const options = [];
+  for (let m = start; m <= end; m += 15) {
+    const h24 = Math.floor(m / 60);
+    const min = m % 60;
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+    options.push({
+      value: `${String(h24).padStart(2, "0")}:${String(min).padStart(2, "0")}`,
+      label: `${h12}:${String(min).padStart(2, "0")} ${h24 < 12 ? "AM" : "PM"}`,
+    });
+  }
+  return options;
+}
+
 function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
   useStepReveal(step, onStepChange);
