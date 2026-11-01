@@ -103,6 +103,16 @@ async function compressImage(file, maxDim = 1400, quality = 0.8) {
   return out.slice(out.indexOf(",") + 1);
 }
 
+// Turns the chosen photos into the fields sent with the form (first photo
+// uses the original photo_base64 field; extras are photo_base64_2 / _3).
+function photoFields(data) {
+  const photos = data.photos || [];
+  const out = { photo_base64: photos[0] ? photos[0].b64 : "" };
+  if (photos[1]) out.photo_base64_2 = photos[1].b64;
+  if (photos[2]) out.photo_base64_3 = photos[2].b64;
+  return out;
+}
+
 // Reusable inspiration-photo uploader. Writes base64 to data.photo_base64
 // (the field form-notify uploads to the lead) + a filename to data.photo_name.
 function InspirationPhoto({ data, update, label = "Add an inspiration photo (optional)" }) {
