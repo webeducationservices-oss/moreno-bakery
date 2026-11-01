@@ -751,6 +751,7 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
     name: "", phone: "", email: "",
     eventType: "", eventDate: "", guestCount: "",
     mealStyle: "", budget: "", serviceType: "", venue: "",
+    deliveryVenue: "", deliveryCity: "", deliveryZip: "",
     dietary: "", vision: "",
     photo_base64: "", photo_name: "",
     _honey: "",
