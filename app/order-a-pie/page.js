@@ -225,7 +225,7 @@ export default function OrderAPiePage() {
                 <textarea id="pie-notes" className="form-input form-textarea" rows={3} value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="e.g. Nut allergy, gift box, etc." />
               </div>
 
-              <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending || !hasPie}>
+              <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending || !hasPie || timeOutOfRange}>
                 {sending ? "Sending..." : "Submit Pie Order 🥧"}
               </button>
               <p className={styles.note}>
