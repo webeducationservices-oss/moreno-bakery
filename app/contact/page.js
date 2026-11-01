@@ -574,7 +574,8 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           <div className={styles.formRow}>
             <div className="form-group">
               <label htmlFor="co-date" className="form-label">Pickup / Delivery Date</label>
-              <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+              <input type="date" id="co-date" className="form-input" required min={minPickupDate} value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+              <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Orders need at least 3 days&apos; notice.</p>
             </div>
             <div className="form-group">
               <label htmlFor="co-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
