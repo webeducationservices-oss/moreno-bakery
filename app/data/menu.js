@@ -458,7 +458,7 @@ export const FOOD_CATEGORIES = [
       { name: "Spinach Empanadas", price: "$3.50", description: "Savory spinach-filled pastry.", tag: "Vegetarian", image: "/images/food/moreno-bakery-food-spinach-empanadas.jpg" },
       { name: "Meat Pies", price: "$3.50", description: "Savory meat-filled pastry pies.", image: "/images/food/moreno-bakery-meat-pie.jpg" },
       { name: "Deviled Crabs", price: "$4.00", description: "Classic Tampa-style deviled crab croquettes.", image: "/images/food/moreno-bakery-deviled-crabs.jpg" },
-      { name: "Ham Croquetas", price: "$1.25", description: "Traditional Cuban ham croquettes.", image: "/images/food/moreno-bakery-ham-croquetas.jpg" },
+      { name: "Ham Croquetas", price: "$1.25 per pc.", description: "Traditional Cuban ham croquettes.", image: "/images/food/moreno-bakery-ham-croquetas.jpg" },
       { name: "Stuffed Potatoes", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Potatoes stuffed with savory filling.", image: "/images/food/moreno-bakery-stuffed-potatoes.jpg" },
     ],
   },
