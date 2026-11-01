@@ -761,6 +761,10 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
   function nextStep() { setStep((s) => Math.min(s + 1, 3)); }
   function prevStep() { setStep((s) => Math.max(s - 1, 1)); }
 
+  // Delivery must be within Florida (FL ZIP codes run 32003–34997)
+  const zipOk = /^3[2-4]\d{3}$/.test(data.deliveryZip);
+  const deliveryIncomplete = data.serviceType === "Delivery" && (!data.deliveryVenue.trim() || !data.deliveryCity.trim() || !zipOk);
+
   function handleSubmit(e) {
     e.preventDefault();
     const message = [
