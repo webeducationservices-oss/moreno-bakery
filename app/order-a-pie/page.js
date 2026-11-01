@@ -185,7 +185,7 @@ export default function OrderAPiePage() {
                     <label htmlFor={`pie-topping-${i}`} className="form-label">Topping</label>
                     <select id={`pie-topping-${i}`} className="form-input" value={pie.topping} onChange={(e) => updatePie(i, "topping", e.target.value)}>
                       {PIE_TOPPINGS.map((t) => (
-                        <option key={t} value={t}>{t}</option>
+                        <option key={t} value={t}>{t === "Lattice top" ? `${t} +$` : t}</option>
                       ))}
                     </select>
                   </div>
