@@ -347,7 +347,8 @@ export const FOOD_CATEGORIES = [
   {
     id: "hot-food",
     name: "Hot Food Combos",
-    description: "Cuban-style hot meals served with your choice of two sides. Extra side upcharge-$2.50",
+    description: "Cuban-style hot meals served with your choice of two sides.",
+    priceNote: "Extra side upcharge-$2.50",
     image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg",
     subcategories: [
       {
