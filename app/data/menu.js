@@ -263,6 +263,16 @@ export const BAKERY_CATEGORIES = [
     ],
   },
   {
+    id: "flan-pudding",
+    name: "Flan / Pudding",
+    description: "Creamy Cuban-style flan and traditional bread pudding, baked in-house.",
+    image: "/images/food/moreno-bakery-flan-de-queso.jpg",
+    items: [
+      { name: "Bread Pudding (Cuban Style)", price: "Slice $3.00 / Whole $10", description: "Traditional Cuban-style bread pudding baked in-house.", image: "/images/food/moreno-bakery-bread-pudding-cuban-style.jpg" },
+      { name: "Flan de Queso", price: "Mini $3.00 / 6.5\" $9", description: "Creamy Cuban cheese flan — silky smooth with caramel.", image: "/images/food/moreno-bakery-flan-de-queso.jpg" },
+    ],
+  },
+  {
     id: "breads",
     name: "Breads",
     description: "Fresh-baked Cuban bread, pan de queso, guava stuffed bread, media noche rolls, and dinner rolls.",
