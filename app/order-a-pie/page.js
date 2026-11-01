@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 
 const PIE_FLAVORS = (BAKERY_CATEGORIES.find((c) => c.id === "pies")?.items || []).map((p) => p.name);
 const PIE_SIZES = ['3"', '5"', '9"'];
-const PIE_TOPPINGS = ["Smooth top w/ icing", "Dutch crumble topping", "Lattice top"];
+const PIE_TOPPINGS = ["Smooth top w/ icing", "Smooth top no icing", "Dutch crumble topping", "Lattice top"];
 
 function emptyPie() {
   return { flavor: "", size: '9"', topping: PIE_TOPPINGS[0], qty: "1" };
