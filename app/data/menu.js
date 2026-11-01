@@ -262,7 +262,7 @@ export const BAKERY_CATEGORIES = [
     image: "/images/food/moreno-bakery-short-cuban-bread.jpg",
     items: [
       { name: "24\" Short Cuban Bread", price: "$1.00", description: "Authentic Tampa-style Cuban bread baked fresh daily.", image: "/images/food/moreno-bakery-short-cuban-bread.jpg" },
-      { name: "Buttered Cuban Bread", price: "$4.00", description: "Fresh Cuban bread sliced and spread with butter, pressed warm.", image: "/images/food/moreno-bakery-buttered-cuban-bread.jpg" },
+      { name: "Buttered Cuban Bread", price: "$4.00", description: "Fresh Cuban bread sliced and spread with butter, pressed warm. Special order only.", tag: "Special Order", image: "/images/food/moreno-bakery-buttered-cuban-bread.jpg" },
       { name: "Guava & Cheese Stuffed Bread", price: "$8.00", description: "Cuban bread filled with sweet guava paste and cream cheese.", image: "/images/food/moreno-bakery-guava-and-cheese-stuffed-bread.jpg" },
       { name: "Pan de Queso", price: "$3.50", description: "Colombian-style cheese bread with a soft, chewy center.", image: "/images/food/moreno-bakery-pan-de-queso.jpg" },
       { name: "Pan de Bono", price: "$3.00", description: "Colombian cheese roll made with yuca starch and queso fresco.", image: "/images/food/moreno-bakery-pan-de-bono.jpg" },
