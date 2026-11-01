@@ -210,7 +210,7 @@ export default function OrderAPiePage() {
               {sizeError && !threeInchTooFew && null}
 
               <div className="form-group" style={{ marginTop: "var(--space-lg)" }}>
-                <label htmlFor="pie-notes" className="form-label">Topping choice, allergies, or anything else we should know (optional)</label>
+                <label htmlFor="pie-notes" className="form-label">Allergies or anything else we should know (optional)</label>
                 <textarea id="pie-notes" className="form-input form-textarea" rows={3} value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="e.g. Dutch topping on the apple pie" />
               </div>
 
