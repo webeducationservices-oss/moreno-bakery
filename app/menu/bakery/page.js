@@ -92,7 +92,19 @@ export default function BakeryMenuPage() {
                 {cat.name}
                 <span className={styles.itemCount}>{cat.items.length}</span>
               </h2>
-              <p>{cat.description}</p>
+              <p>
+                {cat.id === "pies" && cat.description.includes('"Order a Pie"') ? (
+                  <>
+                    {cat.description.split('"Order a Pie"')[0]}
+                    <Link href="/order-a-pie" style={{ color: "var(--color-primary)", fontWeight: 700, textDecoration: "underline" }}>
+                      &quot;Order a Pie&quot;
+                    </Link>
+                    {cat.description.split('"Order a Pie"')[1]}
+                  </>
+                ) : (
+                  cat.description
+                )}
+              </p>
             </div>
 
             <div className={styles.itemListGrid}>
