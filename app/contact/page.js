@@ -136,8 +136,11 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
         </div>
       ) : (
         <>
-          <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
-          <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>On a phone, tap &quot;Choose File&quot; and select &quot;Photo Library&quot; to pick a photo from your gallery, or take a new one.</p>
+          <input ref={fileRef} type="file" accept="image/*" onChange={onFile} disabled={busy} style={{ display: "none" }} />
+          <button type="button" className="btn btn-secondary" style={{ width: "100%" }} onClick={() => fileRef.current && fileRef.current.click()} disabled={busy}>
+            📷 Select a Photo
+          </button>
+          <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Tap &quot;Select a Photo&quot; to choose one from your phone&apos;s photos.</p>
         </>
       )}
       {busy && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing photo…</p>}
