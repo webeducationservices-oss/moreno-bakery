@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
+import { GALLERY_PICKER_CATEGORIES } from "../data/galleryPhotos";
 
 const INQUIRY_TYPES = ["General", "Catering", "Wedding Cake", "Cake Order"];
 
