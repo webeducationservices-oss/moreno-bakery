@@ -520,8 +520,13 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
               <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => update("pickupDate", e.target.value)} />
             </div>
             <div className="form-group">
-              <label htmlFor="co-time" className="form-label">Pickup Time</label>
-              <input type="time" id="co-time" className="form-input" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)} />
+              <label htmlFor="co-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
+              <input type="time" id="co-time" className="form-input" min={timeMin} max={timeMax} value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)} />
+              {timeOutOfRange && (
+                <p role="alert" style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "6px" }}>
+                  Please choose a pickup time between {isSunday ? "9:00 AM and 3:45 PM on Sundays" : "7:00 AM and 6:45 PM, Monday through Saturday"}.
+                </p>
+              )}
             </div>
           </div>
           <div className="form-group">
