@@ -366,7 +366,7 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
 
           <div className={styles.stepNav}>
             <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.weddingDate || !data.guestCount}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.weddingDate || !data.guestCount || venueIncomplete}>
               Next: Your Dream Cake →
             </button>
           </div>
