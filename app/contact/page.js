@@ -534,7 +534,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           <div className={styles.formRow}>
             <div className="form-group">
               <label htmlFor="co-date" className="form-label">Pickup / Delivery Date</label>
-              <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => update("pickupDate", e.target.value)} />
+              <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
             </div>
             <div className="form-group">
               <label htmlFor="co-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
