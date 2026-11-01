@@ -568,10 +568,37 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
                 Delivery has its own separate fee, which will be added to the price of the order at the time the order is placed. The price is unique to every customer, depending on delivery location and order.
               </p>
             )}
+            {data.pickupType === "Delivery" && (
+              <div style={{ marginTop: "var(--space-md)" }}>
+                <div className="form-group">
+                  <label htmlFor="co-venue" className="form-label">Delivery Location / Venue (Florida only)</label>
+                  <input type="text" id="co-venue" className="form-input" required value={data.deliveryVenue} onChange={(e) => update("deliveryVenue", e.target.value)} placeholder="Venue name and street address" />
+                </div>
+                <div className={styles.formRow}>
+                  <div className="form-group">
+                    <label htmlFor="co-city" className="form-label">City</label>
+                    <input type="text" id="co-city" className="form-input" required value={data.deliveryCity} onChange={(e) => update("deliveryCity", e.target.value)} placeholder="e.g. Tampa" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="co-state" className="form-label">State</label>
+                    <input type="text" id="co-state" className="form-input" value="Florida" readOnly disabled />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="co-zip" className="form-label">ZIP Code</label>
+                    <input type="text" id="co-zip" className="form-input" required inputMode="numeric" maxLength={5} value={data.deliveryZip} onChange={(e) => update("deliveryZip", e.target.value.replace(/\D/g, ""))} placeholder="33511" />
+                  </div>
+                </div>
+                {data.deliveryZip.length === 5 && !zipOk && (
+                  <p role="alert" style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "-8px" }}>
+                    Delivery is only available to locations in Florida. Please enter a Florida ZIP code.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange || deliveryIncomplete}>
               Next: Your Cake →
             </button>
           </div>
