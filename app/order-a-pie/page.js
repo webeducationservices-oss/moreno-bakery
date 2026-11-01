@@ -176,7 +176,7 @@ export default function OrderAPiePage() {
               <div className={styles.formRow}>
                 <div className="form-group">
                   <label htmlFor="pie-date" className="form-label">Pickup Date</label>
-                  <input type="date" id="pie-date" className="form-input" required value={data.pickupDate} onChange={(e) => update("pickupDate", e.target.value)} />
+                  <input type="date" id="pie-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
                 </div>
                 <div className="form-group">
                   <label htmlFor="pie-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
