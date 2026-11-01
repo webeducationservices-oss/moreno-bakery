@@ -135,7 +135,10 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
           <button type="button" onClick={clearPhoto} aria-label="Remove photo" style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
         </div>
       ) : (
-        <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
+        <>
+          <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
+          <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>On a phone, tap &quot;Choose File&quot; and select &quot;Photo Library&quot; to pick a photo from your gallery, or take a new one.</p>
+        </>
       )}
       {busy && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing photo…</p>}
       {err && <p style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "6px" }}>{err}</p>}
