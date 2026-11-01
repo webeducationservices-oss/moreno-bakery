@@ -541,7 +541,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange}>
               Next: Your Cake →
             </button>
           </div>
