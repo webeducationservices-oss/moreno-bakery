@@ -105,6 +105,11 @@ export default function BakeryMenuPage() {
                   cat.description
                 )}
               </p>
+              {cat.id === "pies" && (
+                <Link href="/order-a-pie" className="btn btn-primary" style={{ marginTop: "var(--space-md)" }}>
+                  Order a Pie →
+                </Link>
+              )}
             </div>
 
             <div className={styles.itemListGrid}>
