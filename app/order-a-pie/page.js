@@ -119,7 +119,7 @@ export default function OrderAPiePage() {
               />
 
               <div className={styles.notice}>
-                <strong>Special order sizes:</strong> 3&quot; and 9&quot; pies. Blueberry and Cherry
+                <strong>Sizes:</strong> 5&quot; pies are available in-store daily; 3&quot; and 9&quot; pies are special order only. Blueberry and Cherry
                 pies are not regularly made in store and are special order only.
               </div>
 
