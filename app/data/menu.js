@@ -171,15 +171,6 @@ export const BAKERY_CATEGORIES = [
     ],
   },
   {
-    id: "order-a-pie",
-    name: "Order a Pie",
-    description: "5\" pies are available in-store daily. 3\" and 9\" pies are by special order only — call the store to place your order.",
-    image: "/images/food/moreno-bakery-5in-key-lime-pie.jpg",
-    items: [
-      { name: "Order a 3\" or 9\" Pie", price: "9\" $16.00", description: "Choose from any of our handmade pies in 3\" or 9\" sizes. Call the store at 813-689-0320 to place your special order.", tag: "Special Order", image: "/images/food/moreno-bakery-5in-key-lime-pie.jpg" },
-    ],
-  },
-  {
     id: "pies",
     name: "Pies",
     description: "Handmade pies 5\" available in-store daily. 3\" and 9\" pies are by special order only. To place an order for 3\" or 9\" pies, please visit the \"Order a Pie\" section in the menu or call the store at 813-689-0320.",
