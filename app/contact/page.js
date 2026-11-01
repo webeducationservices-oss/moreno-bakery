@@ -450,6 +450,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
     name: "", phone: "", email: "",
     pickupDate: "", pickupTime: "",
     pickupType: "",
+    deliveryVenue: "", deliveryCity: "", deliveryZip: "",
     cakeSize: "", cakeServes: "", cakeFlavor: "",
     fillingFlavor: "", icingFlavor: "",
     colors: "", designInfo: "", cakeMessage: "", topperLink: "",
@@ -470,6 +471,9 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const timeMax = isSunday ? "15:55" : "18:55";
   const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
   const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
+  // Delivery must be within Florida (FL ZIP codes run 32003–34997)
+  const zipOk = /^3[2-4]\d{3}$/.test(data.deliveryZip);
+  const deliveryIncomplete = data.pickupType === "Delivery" && (!data.deliveryVenue.trim() || !data.deliveryCity.trim() || !zipOk);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -477,6 +481,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
       `Pickup Date: ${data.pickupDate}`,
       `Pickup Time: ${data.pickupTime}`,
       `Pickup Type: ${data.pickupType}`,
+      ...(data.pickupType === "Delivery" ? [`Delivery Location: ${data.deliveryVenue}, ${data.deliveryCity}, FL ${data.deliveryZip}`] : []),
       `Cake Size: ${data.cakeSize}${data.cakeSize === "Other" && data.cakeServes ? ` (needs to serve ${data.cakeServes})` : ""}`,
       `Cake Flavor: ${data.cakeFlavor}`,
       `Filling: ${data.fillingFlavor}`,
@@ -558,10 +563,42 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
                 </button>
               ))}
             </div>
+            {data.pickupType === "Delivery" && (
+              <p role="note" style={{ color: "#b3261e", fontSize: "0.9rem", fontWeight: 600, marginTop: "var(--space-sm)" }}>
+                Delivery has its own separate fee, which will be added to the price of the order at the time the order is placed. The price is unique to every customer, depending on delivery location and order.
+              </p>
+            )}
+            {data.pickupType === "Delivery" && (
+              <div style={{ marginTop: "var(--space-md)" }}>
+                <div className="form-group">
+                  <label htmlFor="co-venue" className="form-label">Delivery Location / Venue (Florida only)</label>
+                  <input type="text" id="co-venue" className="form-input" required value={data.deliveryVenue} onChange={(e) => update("deliveryVenue", e.target.value)} placeholder="Venue name and street address" />
+                </div>
+                <div className={styles.formRow}>
+                  <div className="form-group">
+                    <label htmlFor="co-city" className="form-label">City</label>
+                    <input type="text" id="co-city" className="form-input" required value={data.deliveryCity} onChange={(e) => update("deliveryCity", e.target.value)} placeholder="e.g. Tampa" />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="co-state" className="form-label">State</label>
+                    <input type="text" id="co-state" className="form-input" value="Florida" readOnly disabled />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="co-zip" className="form-label">ZIP Code</label>
+                    <input type="text" id="co-zip" className="form-input" required inputMode="numeric" maxLength={5} value={data.deliveryZip} onChange={(e) => update("deliveryZip", e.target.value.replace(/\D/g, ""))} placeholder="33511" />
+                  </div>
+                </div>
+                {data.deliveryZip.length === 5 && !zipOk && (
+                  <p role="alert" style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "-8px" }}>
+                    Delivery is only available to locations in Florida. Please enter a Florida ZIP code.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange || deliveryIncomplete}>
               Next: Your Cake →
             </button>
           </div>
@@ -846,6 +883,11 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
               </div>
             </div>
           </div>
+          {data.serviceType === "Delivery" && (
+            <p role="note" style={{ color: "#b3261e", fontSize: "0.9rem", fontWeight: 600, marginBottom: "var(--space-md)" }}>
+              Delivery has its own separate fee, which will be added to the price of the order at the time the order is placed. The price is unique to every customer, depending on delivery location and order.
+            </p>
+          )}
           <div className="form-group">
             <label htmlFor="ci-venue" className="form-label">Venue / delivery location (optional)</label>
             <input type="text" id="ci-venue" className="form-input" value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Address or venue name and city" />
