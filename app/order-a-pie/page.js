@@ -180,12 +180,12 @@ export default function OrderAPiePage() {
                 </div>
                 <div className="form-group">
                   <label htmlFor="pie-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
-                  <input type="time" id="pie-time" className="form-input" min={timeMin} max={timeMax} title={`Pickup hours: ${timeHoursLabel}`} value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)} />
-                  {timeOutOfRange && (
-                    <p role="alert" style={{ color: "#b00020", fontSize: "0.85rem", marginTop: "6px" }}>
-                      Please choose a pickup time between {isSunday ? "9:00 AM and 3:45 PM on Sundays" : "7:00 AM and 6:45 PM, Monday through Saturday"}.
-                    </p>
-                  )}
+                  <select id="pie-time" className="form-input" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)}>
+                    <option value="">Select a time</option>
+                    {pickupTimeOptions(isSunday).map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
