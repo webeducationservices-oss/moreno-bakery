@@ -331,7 +331,6 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
               Receptions must be in Florida. Please enter a Florida ZIP code.
             </p>
           )}
-          <div>
           <div className="form-group">
             <label htmlFor="w-coordinator" className="form-label">Wedding Coordinator (if any)</label>
             <input type="text" id="w-coordinator" className="form-input" value={data.coordinator} onChange={(e) => update("coordinator", e.target.value)} placeholder="Name (optional)" />
