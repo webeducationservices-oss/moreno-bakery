@@ -160,8 +160,6 @@ export const BAKERY_CATEGORIES = [
       { name: "Cherry-Topped Cheesecake", price: "Personal $5.00 / 8\" $35", description: "Classic cheesecake topped with glazed cherries.", image: "/images/food/moreno-bakery-cherry-topped-cheesecake.jpg" },
       { name: "Strawberry-Topped Cheesecake", price: "Personal $6.00 / 8\" $40", description: "Rich cheesecake piled with fresh strawberries.", image: "/images/food/moreno-bakery-strawberry-topped-cheesecake.jpg" },
       { name: "Tres Leches", price: "By slice", description: "Traditional Cuban tres leches soaked in three milks.", image: "/images/food/moreno-bakery-tres-leches.jpg" },
-      { name: "Bread Pudding (Cuban Style)", price: "Slice $3.00 / Whole $10", description: "Traditional Cuban-style bread pudding baked in-house.", image: "/images/food/moreno-bakery-bread-pudding-cuban-style.jpg" },
-      { name: "Flan de Queso", price: "Mini $3.00 / 6.5\" $9", description: "Creamy Cuban cheese flan — silky smooth with caramel.", image: "/images/food/moreno-bakery-flan-de-queso.jpg" },
       { name: "Strawberry Shortcake", description: "Fresh layers of sponge cake, cream, and strawberries.", image: "/images/food/moreno-bakery-strawberry-shortcake.jpg" },
       { name: "Heart Shaped Chocolate Mousse Cake", description: "Romantic heart-shaped cake with chocolate mousse filling.", image: "/images/food/moreno-bakery-heart-shaped-chocolate-mousse.jpg" },
       { name: "Heart Shaped Dulce de Leche Cake", description: "Heart-shaped cake with rich dulce de leche filling.", image: "/images/food/moreno-bakery-heart-shaped-dulce-de-leche-cake.jpg" },
