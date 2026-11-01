@@ -100,6 +100,12 @@ export default function FoodMenuPage() {
                 </span>
               </h2>
               <p>{cat.description}</p>
+              {cat.name === "Soups" && (
+                <p>
+                  If you would like to know our soup availability today, please
+                  call us at <a href="tel:8136890320">813-689-0320</a>.
+                </p>
+              )}
             </div>
 
             {/* Categories with subcategories (Sandwiches, Hot Food) */}
