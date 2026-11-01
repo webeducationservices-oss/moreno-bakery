@@ -109,40 +109,51 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
   const fileRef = useRef(null);
+  const photos = data.photos || [];
+  const MAX_PHOTOS = 3;
   async function onFile(e) {
-    const file = e.target.files && e.target.files[0];
+    const files = Array.from((e.target.files) || []);
     e.target.value = "";
-    if (!file) return;
+    if (!files.length) return;
     setErr("");
-    if (!file.type.startsWith("image/") && !/\.(jpe?g|png|webp|heic|heif|gif)$/i.test(file.name)) { setErr("Please choose an image file (JPG, PNG, or HEIC)."); return; }
-    if (file.size > 15 * 1024 * 1024) { setErr("That image is too large — please pick one under 15MB."); return; }
+    const room = MAX_PHOTOS - photos.length;
+    let notice = "";
+    if (files.length > room) notice = `You can add up to ${MAX_PHOTOS} photos, so only the first ${room} were added.`;
     setBusy(true);
-    try {
-      const b64 = await compressImage(file);
-      if (b64.length > 4_000_000) { setErr("That photo is too large to send — please choose a smaller image."); setBusy(false); return; }
-      update("photo_base64", b64);
-      update("photo_name", file.name);
-    } catch {
-      setErr("We couldn't read that file — please try another image.");
+    const next = [...photos];
+    for (const file of files.slice(0, room)) {
+      if (!file.type.startsWith("image/") && !/\.(jpe?g|png|webp|heic|heif|gif)$/i.test(file.name)) { notice = "Please choose image files (JPG, PNG, or HEIC)."; continue; }
+      if (file.size > 15 * 1024 * 1024) { notice = `"${file.name}" is too large — please pick photos under 15MB.`; continue; }
+      try {
+        const b64 = await compressImage(file);
+        const total = next.reduce((s, p) => s + p.b64.length, 0) + b64.length;
+        if (total > 4_000_000) { notice = "Those photos are too large to send together — please choose smaller images."; continue; }
+        next.push({ name: file.name, b64 });
+      } catch {
+        notice = "We couldn't read one of those files — please try another image.";
+      }
     }
+    update("photos", next);
+    setErr(notice);
     setBusy(false);
   }
-  function clearPhoto() { update("photo_base64", ""); update("photo_name", ""); }
+  function removePhoto(i) { update("photos", photos.filter((_, idx) => idx !== i)); setErr(""); }
   return (
     <div className="form-group">
       <label className="form-label">{label}</label>
-      {data.photo_name ? (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3" }}>
-          <span style={{ fontSize: "0.9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📎 {data.photo_name}</span>
-          <button type="button" onClick={clearPhoto} aria-label="Remove photo" style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
+      {photos.map((p, i) => (
+        <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3", marginBottom: "8px" }}>
+          <span style={{ fontSize: "0.9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📎 {p.name}</span>
+          <button type="button" onClick={() => removePhoto(i)} aria-label={`Remove photo ${i + 1}`} style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
         </div>
-      ) : (
+      ))}
+      {photos.length < MAX_PHOTOS && (
         <>
-          <input ref={fileRef} type="file" accept="image/*" onChange={onFile} disabled={busy} style={{ display: "none" }} />
+          <input ref={fileRef} type="file" accept="image/*" multiple onChange={onFile} disabled={busy} style={{ display: "none" }} />
           <button type="button" className="btn btn-secondary" style={{ width: "100%" }} onClick={() => fileRef.current && fileRef.current.click()} disabled={busy}>
-            📷 Select a Photo
+            📷 {photos.length ? "Add Another Photo" : "Select a Photo"}
           </button>
-          <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Tap &quot;Select a Photo&quot; to choose one from your phone&apos;s photos.</p>
+          <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Tap &quot;Select a Photo&quot; to choose from your phone&apos;s photos. You can add up to 3 photos ({photos.length} of 3 added).</p>
         </>
       )}
       {busy && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing photo…</p>}
