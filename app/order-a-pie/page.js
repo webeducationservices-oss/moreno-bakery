@@ -189,6 +189,7 @@ export default function OrderAPiePage() {
                 <div className="form-group">
                   <label htmlFor="pie-date" className="form-label">Pickup Date</label>
                   <input type="date" id="pie-date" className="form-input" required min={minPickupDate} value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+                  <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Orders need at least 3 days&apos; notice.</p>
                 </div>
                 <div className="form-group">
                   <label htmlFor="pie-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
