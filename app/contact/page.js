@@ -727,6 +727,9 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           <div className="form-group">
             <label htmlFor="co-topper" className="form-label">Custom topper (optional)</label>
             <input type="text" id="co-topper" className="form-input" value={data.topperLink} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link or describe the topper you'd like" />
+            <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>
+              You may buy your own <strong>toppers</strong> and bring them into the bakery before your pickup date to be added to your cake at no extra fee. But if you would like us to order it and have it delivered to the bakery, the price of the topper/toppers will be added to the price of the cake.
+            </p>
           </div>
 
           <div className="form-group">
