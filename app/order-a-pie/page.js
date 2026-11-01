@@ -24,6 +24,7 @@ export default function OrderAPiePage() {
   const [pies, setPies] = useState([emptyPie()]);
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sizeError, setSizeError] = useState("");
 
   function update(field, value) {
     setData((prev) => ({ ...prev, [field]: value }));
