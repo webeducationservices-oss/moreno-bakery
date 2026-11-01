@@ -127,6 +127,25 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
     setBusy(false);
   }
   function clearPhoto() { update("photo_base64", ""); update("photo_name", ""); }
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [pickerCat, setPickerCat] = useState(Object.keys(GALLERY_PICKER_CATEGORIES)[0]);
+  async function pickFromGallery(img) {
+    setErr("");
+    setBusy(true);
+    try {
+      const res = await fetch(img.src);
+      const blob = await res.blob();
+      const ext = (img.src.split(".").pop() || "jpg").toLowerCase();
+      const file = new File([blob], `${img.alt}.${ext}`, { type: blob.type || `image/${ext === "jpg" ? "jpeg" : ext}` });
+      const b64 = await compressImage(file);
+      update("photo_base64", b64);
+      update("photo_name", `Gallery: ${img.alt}`);
+      setPickerOpen(false);
+    } catch {
+      setErr("We couldn't load that gallery photo — please try another.");
+    }
+    setBusy(false);
+  }
   return (
     <div className="form-group">
       <label className="form-label">{label}</label>
