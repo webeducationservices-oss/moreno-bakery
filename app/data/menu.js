@@ -254,6 +254,17 @@ export const BAKERY_CATEGORIES = [
     ],
   },
   {
+    id: "brownies",
+    name: "Brownies",
+    description: "Fudgy, rich brownies baked fresh in-house.",
+    image: "/images/food/moreno-bakery-fudgy-brownies-with-icing.jpg",
+    items: [
+      { name: "Fudgy Brownies with Icing", price: "$3.50", description: "Dense, fudgy chocolate brownie topped with chocolate icing.", image: "/images/food/moreno-bakery-fudgy-brownies-with-icing.jpg" },
+      { name: "Peanut Butter Brownies", price: "$3.50", description: "Fudgy brownie layered with creamy peanut butter.", image: "/images/food/moreno-bakery-peanut-butter-brownies.jpg" },
+      { name: "Cheesecake Brownies", price: "$3.50", description: "Fudgy brownie swirled with creamy cheesecake batter.", image: "/images/food/moreno-bakery-cheesecake-brownies.jpg" },
+    ],
+  },
+  {
     id: "breads",
     name: "Breads",
     description: "Fresh-baked Cuban bread, pan de queso, guava stuffed bread, media noche rolls, and dinner rolls.",
