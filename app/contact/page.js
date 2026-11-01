@@ -853,7 +853,7 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
       phone: data.phone,
       inquiry_type: "Catering",
       message,
-      photo_base64: data.photo_base64,
+      ...photoFields(data),
       _honey: data._honey,
     });
   }
