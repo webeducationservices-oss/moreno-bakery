@@ -16,6 +16,7 @@ const NAV_ITEMS = [
       { label: "Food Menu", href: "/menu/food" },
       { label: "Catering Menu", href: "/menu/catering" },
       { label: "Order a Custom Cake", href: "/contact?form=cake-order" },
+      { label: "Order a Pie", href: "/order-a-pie" },
     ],
   },
   { label: "Catering", href: "/catering" },
