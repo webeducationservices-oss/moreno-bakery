@@ -382,7 +382,7 @@ export const FOOD_CATEGORIES = [
         items: [
           { name: "Lamb Shank", price: "$18.00", description: "Cooked in marsala wine with rosemary, olives, onion, peppers, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-lamb-shank.jpg" },
           { name: "Shrimp Enchilado", price: "$18.00", description: "Shrimp in a tomato wine sauce with onions, garlic, and smoked paprika. Served with choice of two sides.", image: "/images/food/moreno-bakery-shrimp-enchilado.jpg" },
-          { name: "Fried Shrimp", price: "$18.00", description: "Shrimp fried in corn meal, flour and Louisiana seasoning.", image: "/images/food/moreno-bakery-fried-shrimp.jpg" },
+          { name: "Fried Shrimp", price: "$18.00", description: "Shrimp fried in corn meal, flour and Louisiana seasoning. Served with choice of two sides.", image: "/images/food/moreno-bakery-fried-shrimp.jpg" },
         ],
       },
       {
