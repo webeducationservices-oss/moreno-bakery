@@ -243,7 +243,6 @@ export const BAKERY_CATEGORIES = [
       { name: "Lemon Gooey Butter Cake", price: "$3.50", description: "Bright lemon twist on our classic gooey butter cake.", image: "/images/food/moreno-bakery-lemon-gooey-butter-cake.jpg" },
       { name: "Blueberry Gooey Butter Cake", price: "$3.50", description: "Our classic gooey butter cake with sweet blueberries.", image: "/images/food/moreno-bakery-gooey-butter-cake.jpg" },
       { name: "Pumpkin Gooey Butter Cake", price: "$3.50", description: "Warm pumpkin spice version of our gooey butter cake.", image: "/images/food/moreno-bakery-pumpkin-gooey-butter-cake.jpg" },
-      { name: "Rainbow Squares", price: "$3.00", description: "Colorful layered almond cake with raspberry jam and chocolate.", image: "/images/food/moreno-bakery-rainbow-squares.jpg" },
       { name: "Chocolate or Raspberry Cigars", price: "$3.00", description: "Rolled pastry filled with chocolate or raspberry.", image: "/images/food/moreno-bakery-chocolate-or-raspberry-cigars.jpg" },
       { name: "Rugelach", price: "Individual $0.85 / Half lb $6 / One lb $12", description: "Apricot, Chocolate, Cinnamon Raisin Walnut, or Raspberry.", image: "/images/food/moreno-bakery-rugelach.jpg" },
       { name: "Babka", price: "$15.00", description: "Chocolate, Raisin, or Raspberry. Available by special order.", image: "/images/food/moreno-bakery-babka.jpg" },
