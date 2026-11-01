@@ -173,7 +173,7 @@ export const BAKERY_CATEGORIES = [
   {
     id: "pies",
     name: "Pies",
-    description: "Hand-made pies in 3\", 5\", and 9\" sizes. 5\" available in store daily; 3\" and 9\" by special order.",
+    description: "Handmade pies 5\" available in-store daily. 3\" and 9\" pies are by special order only. To place an order for 3\" or 9\" pies, please visit the \"Order a Pie\" section in the menu or call the store at 813-689-0320.",
     image: "/images/food/moreno-bakery-5in-key-lime-pie.jpg",
     items: [
       { name: "Apple Pie", price: "5\" $6.00 / 9\" $16.00", description: "Choice of Dutch, Iced, Plain, or Lattice topping (+$5).", image: "/images/food/moreno-bakery-moms-apple-square.jpg" },
