@@ -8,6 +8,23 @@ const PIE_FLAVORS = (BAKERY_CATEGORIES.find((c) => c.id === "pies")?.items || []
 const PIE_SIZES = ['3"', '5"', '9"'];
 const PIE_TOPPINGS = ["Smooth top w/ icing", "Smooth top no icing", "Dutch crumble topping", "Lattice top"];
 
+// Builds the list of allowed pickup times (every 15 minutes) for the chosen day.
+function pickupTimeOptions(isSunday) {
+  const start = isSunday ? 9 * 60 : 7 * 60;
+  const end = isSunday ? 15 * 60 + 45 : 18 * 60 + 45;
+  const options = [];
+  for (let m = start; m <= end; m += 15) {
+    const h24 = Math.floor(m / 60);
+    const min = m % 60;
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+    options.push({
+      value: `${String(h24).padStart(2, "0")}:${String(min).padStart(2, "0")}`,
+      label: `${h12}:${String(min).padStart(2, "0")} ${h24 < 12 ? "AM" : "PM"}`,
+    });
+  }
+  return options;
+}
+
 function emptyPie() {
   return { flavor: "", size: '9"', topping: PIE_TOPPINGS[0], qty: "1" };
 }
