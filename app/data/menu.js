@@ -364,7 +364,7 @@ export const FOOD_CATEGORIES = [
       {
         name: "$16 Combos",
         items: [
-          { name: "Chicken Marsala", price: "$16.00", description: "Chicken breast in a marsala wine sauce with mushrooms, onions, garlic, and cream.", image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg" },
+          { name: "Chicken Marsala", price: "$16.00", description: "Chicken breast in a marsala wine sauce with mushrooms, onions, garlic, and cream. Served with choice of two sides.", image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg" },
           { name: "Mojo Chicken", price: "$16.00", description: "Boneless chicken thighs smothered in mojo, cooked with onions, garlic, and cumin.", image: "/images/food/moreno-bakery-mojo-chicken-combo.jpg" },
           { name: "Fricase de Pollo", price: "$16.00", description: "Boneless chicken thighs in a rich tomato wine sauce with onions, peppers, and garlic.", image: "/images/food/moreno-bakery-fricase-de-pollo.jpg" },
           { name: "Fried Fish", price: "$16.00", description: "Swai fish fried in corn meal, flour and Louisiana seasoning.", image: "/images/food/moreno-bakery-fried-fish-combo.jpg" },
