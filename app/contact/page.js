@@ -170,6 +170,8 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
     budget: "",
     saveTopTier: "",
     venue: "",
+    venueCity: "",
+    venueZip: "",
     delivery: "",
     sameSpace: "",
     weddingTime: "",
