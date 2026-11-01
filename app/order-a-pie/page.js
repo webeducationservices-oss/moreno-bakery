@@ -182,6 +182,14 @@ export default function OrderAPiePage() {
                     </select>
                   </div>
                   <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label htmlFor={`pie-topping-${i}`} className="form-label">Topping</label>
+                    <select id={`pie-topping-${i}`} className="form-input" value={pie.topping} onChange={(e) => updatePie(i, "topping", e.target.value)}>
+                      {PIE_TOPPINGS.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group" style={{ marginBottom: 0 }}>
                     <label htmlFor={`pie-qty-${i}`} className="form-label">Qty</label>
                     <input type="number" id={`pie-qty-${i}`} min="1" className="form-input" required value={pie.qty} onChange={(e) => updatePie(i, "qty", e.target.value)} />
                   </div>
