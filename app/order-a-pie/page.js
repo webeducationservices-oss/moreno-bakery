@@ -8,6 +8,26 @@ const PIE_FLAVORS = (BAKERY_CATEGORIES.find((c) => c.id === "pies")?.items || []
 const PIE_SIZES = ['3"', '5"', '9"'];
 const PIE_TOPPINGS = ["Smooth top w/ icing", "Smooth top no icing", "Dutch crumble topping", "Lattice top"];
 
+// Builds the list of allowed pickup times (every 15 minutes) for the chosen day.
+function pickupTimeOptions(isSunday) {
+  const start = isSunday ? 9 * 60 : 7 * 60;
+  const end = isSunday ? 15 * 60 + 55 : 18 * 60 + 55;
+  const options = [];
+  const slots = [];
+  for (let m = start; m <= end; m += 15) slots.push(m);
+  if (slots[slots.length - 1] !== end) slots.push(end);
+  for (const m of slots) {
+    const h24 = Math.floor(m / 60);
+    const min = m % 60;
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+    options.push({
+      value: `${String(h24).padStart(2, "0")}:${String(min).padStart(2, "0")}`,
+      label: `${h12}:${String(min).padStart(2, "0")} ${h24 < 12 ? "AM" : "PM"}`,
+    });
+  }
+  return options;
+}
+
 function emptyPie() {
   return { flavor: "", size: '9"', topping: PIE_TOPPINGS[0], qty: "1" };
 }
@@ -86,6 +106,12 @@ export default function OrderAPiePage() {
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // Pickup hours: Mon–Sat 7:00 AM – 6:45 PM, Sunday 9:00 AM – 3:45 PM
+  const isSunday = data.pickupDate ? new Date(`${data.pickupDate}T00:00:00`).getDay() === 0 : false;
+  const timeMin = isSunday ? "09:00" : "07:00";
+  const timeMax = isSunday ? "15:55" : "18:55";
+  const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
+  const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
   const hasPie = pies.some((p) => p.flavor);
   const threeInchTotal = pies
     .filter((p) => p.size === '3"')
@@ -115,7 +141,7 @@ export default function OrderAPiePage() {
                 Thank you! Our bakers will reach out to confirm the details. For faster service,
                 call <a href="tel:8136890320">813-689-0320</a>.
               </p>
-              <p>Please note this is a request and not a confirmed order until we contact you.</p>
+              <p>Please note this is a request and not a confirmed order. Your order is only confirmed once a member of our team contacts you to confirm it. Every order will require a deposit to confirm it. You will receive an email or phone call from the store to confirm your order within 24-48 hours.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
@@ -153,11 +179,16 @@ export default function OrderAPiePage() {
               <div className={styles.formRow}>
                 <div className="form-group">
                   <label htmlFor="pie-date" className="form-label">Pickup Date</label>
-                  <input type="date" id="pie-date" className="form-input" required value={data.pickupDate} onChange={(e) => update("pickupDate", e.target.value)} />
+                  <input type="date" id="pie-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="pie-time" className="form-label">Pickup Time</label>
-                  <input type="time" id="pie-time" className="form-input" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)} />
+                  <label htmlFor="pie-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
+                  <select id="pie-time" className="form-input" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)}>
+                    <option value="">Select a time</option>
+                    {pickupTimeOptions(isSunday).map((o) => (
+                      <option key={o.value} value={o.value}>{o.label}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
@@ -214,7 +245,7 @@ export default function OrderAPiePage() {
                 <textarea id="pie-notes" className="form-input form-textarea" rows={3} value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="e.g. Nut allergy, gift box, etc." />
               </div>
 
-              <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending || !hasPie}>
+              <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending || !hasPie || timeOutOfRange}>
                 {sending ? "Sending..." : "Submit Pie Order 🥧"}
               </button>
               <p className={styles.note}>

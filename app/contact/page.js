@@ -423,6 +423,26 @@ const CAKE_ORDER_STEPS = [
   { id: 3, label: "Design", icon: "🎨" },
 ];
 
+// Builds the list of allowed pickup times (every 15 minutes) for the chosen day.
+function pickupTimeOptions(isSunday) {
+  const start = isSunday ? 9 * 60 : 7 * 60;
+  const end = isSunday ? 15 * 60 + 55 : 18 * 60 + 55;
+  const options = [];
+  const slots = [];
+  for (let m = start; m <= end; m += 15) slots.push(m);
+  if (slots[slots.length - 1] !== end) slots.push(end);
+  for (const m of slots) {
+    const h24 = Math.floor(m / 60);
+    const min = m % 60;
+    const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+    options.push({
+      value: `${String(h24).padStart(2, "0")}:${String(min).padStart(2, "0")}`,
+      label: `${h12}:${String(min).padStart(2, "0")} ${h24 < 12 ? "AM" : "PM"}`,
+    });
+  }
+  return options;
+}
+
 function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
   useStepReveal(step, onStepChange);
@@ -443,6 +463,13 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
 
   function nextStep() { setStep((s) => Math.min(s + 1, 3)); }
   function prevStep() { setStep((s) => Math.max(s - 1, 1)); }
+
+  // Pickup hours: Mon–Sat 7:00 AM – 6:45 PM, Sunday 9:00 AM – 3:45 PM
+  const isSunday = data.pickupDate ? new Date(`${data.pickupDate}T00:00:00`).getDay() === 0 : false;
+  const timeMin = isSunday ? "09:00" : "07:00";
+  const timeMax = isSunday ? "15:55" : "18:55";
+  const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
+  const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -510,11 +537,16 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           <div className={styles.formRow}>
             <div className="form-group">
               <label htmlFor="co-date" className="form-label">Pickup / Delivery Date</label>
-              <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => update("pickupDate", e.target.value)} />
+              <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
             </div>
             <div className="form-group">
-              <label htmlFor="co-time" className="form-label">Pickup Time</label>
-              <input type="time" id="co-time" className="form-input" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)} />
+              <label htmlFor="co-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
+              <select id="co-time" className="form-input" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)}>
+                <option value="">Select a time</option>
+                {pickupTimeOptions(isSunday).map((o) => (
+                  <option key={o.value} value={o.value}>{o.label}</option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="form-group">
@@ -529,7 +561,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange}>
               Next: Your Cake →
             </button>
           </div>
@@ -1017,7 +1049,8 @@ function ContactPageInner() {
                   </p>
                   {(inquiryType === "Cake Order" || inquiryType === "Wedding Cake" || inquiryType === "Catering") && (
                     <p>
-                      Please note that this is not a finalized or confirmed order. Every order will require a deposit to confirm it.
+                      Please note that this is not a finalized or confirmed order. Your order is only confirmed once a member of our team contacts you to confirm it. Every order will require a deposit to confirm it.
+                      {" "}You will receive an email or phone call from the store to confirm your order within 24-48 hours.
                     </p>
                   )}
                 </div>
