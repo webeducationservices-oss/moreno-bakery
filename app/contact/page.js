@@ -735,7 +735,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
               Bringing my own toppers
             </label>
             <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "0", lineHeight: 1.7 }}>
-              You may buy your own <strong>toppers</strong> and bring them into the bakery before your pickup date to be added to your cake with no extra fee. If you are bringing your own topper, just select &quot;Bringing my own toppers&quot; instead of pasting a link.
+              You may buy your own <strong style={{ marginRight: "0.25em" }}>toppers</strong> and bring them into the bakery before your pickup date to be added to your cake with no extra fee. If you are bringing your own topper, just select &quot;Bringing my own toppers&quot; instead of pasting a link.
             </p>
           </div>
 
