@@ -389,7 +389,7 @@ export const FOOD_CATEGORIES = [
         name: "$22 Combos",
         items: [
           { name: "Oxtail", price: "$22.00", description: "Oxtail cooked with tomato paste, wine, olives, onion, peppers, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-oxtail.jpg" },
-          { name: "Beef Stew", price: "$22.00", description: "Beef in a sauce of tomato paste, wine, and beef stock with potatoes and cumin.", image: "/images/food/moreno-bakery-beef-stew-combo.jpg" },
+          { name: "Beef Stew", price: "$22.00", description: "Beef in a sauce of tomato paste, wine, and beef stock with potatoes and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-beef-stew-combo.jpg" },
         ],
       },
     ],
