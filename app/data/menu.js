@@ -403,7 +403,7 @@ export const FOOD_CATEGORIES = [
       { name: "Collard Greens", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Slow-cooked Southern-style collard greens.", image: "/images/food/moreno-bakery-collard-greens.jpg" },
       { name: "Yuca", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Tender boiled yuca with garlic mojo sauce.", tag: "Vegetarian", image: "/images/food/moreno-bakery-yuca.jpg" },
       { name: "Spinach Gratin", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Creamy baked spinach with a golden cheese top.", tag: "Vegetarian", image: "/images/food/moreno-bakery-spinach-gratin.jpg" },
-      { name: "Smoked Gouda Mac 'n Cheese", price: "$4.00", description: "Rich and creamy mac & cheese with smoked gouda.", tag: "Vegetarian", image: "/images/food/moreno-bakery-smoked-gouda-mac-n-cheese.jpg" },
+      { name: "Smoked Gouda Mac 'n Cheese", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Rich and creamy mac & cheese with smoked gouda.", tag: "Vegetarian", image: "/images/food/moreno-bakery-smoked-gouda-mac-n-cheese.jpg" },
       { name: "Plantains Maduros", price: "$4.00", description: "Sweet ripe plantains caramelized to perfection.", tag: "Vegetarian", image: "/images/food/moreno-bakery-plantains-maduros.jpg" },
       { name: "Tostones", price: "$4.00", description: "Crispy twice-fried green plantains.", tag: "Vegetarian", image: "/images/food/moreno-bakery-tostones.jpg" },
       { name: "Sweet Potatoes", price: "$4.00", description: "Seasoned and roasted sweet potatoes.", tag: "Vegetarian", image: "/images/food/moreno-bakery-sweet-potatoes.jpg" },
