@@ -851,6 +851,11 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
               </div>
             </div>
           </div>
+          {data.serviceType === "Delivery" && (
+            <p role="note" style={{ color: "#b3261e", fontSize: "0.9rem", fontWeight: 600, marginBottom: "var(--space-md)" }}>
+              Delivery has its own separate fee, which will be added to the price of the order at the time the order is placed. The price is unique to every customer, depending on delivery location and order.
+            </p>
+          )}
           <div className="form-group">
             <label htmlFor="ci-venue" className="form-label">Venue / delivery location (optional)</label>
             <input type="text" id="ci-venue" className="form-input" value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Address or venue name and city" />
