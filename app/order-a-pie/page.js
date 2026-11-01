@@ -156,7 +156,7 @@ export default function OrderAPiePage() {
                   <input type="date" id="pie-date" className="form-input" required value={data.pickupDate} onChange={(e) => update("pickupDate", e.target.value)} />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="pie-time" className="form-label">Pickup Time</label>
+                  <label htmlFor="pie-time" className="form-label">Pickup Time (7:00 AM – 6:45 PM)</label>
                   <input type="time" id="pie-time" className="form-input" min="07:00" max="18:45" title="Pickup is between 7:00 AM and 6:45 PM" value={data.pickupTime} onChange={(e) => update("pickupTime", e.target.value)} />
                 </div>
               </div>
