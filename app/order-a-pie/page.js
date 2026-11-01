@@ -86,6 +86,10 @@ export default function OrderAPiePage() {
   }
 
   const hasPie = pies.some((p) => p.flavor);
+  const threeInchTotal = pies
+    .filter((p) => p.size === '3"')
+    .reduce((sum, p) => sum + (parseInt(p.qty, 10) || 0), 0);
+  const threeInchTooFew = threeInchTotal > 0 && threeInchTotal < 12;
 
   return (
     <>
