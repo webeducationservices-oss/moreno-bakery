@@ -406,7 +406,7 @@ export const FOOD_CATEGORIES = [
       { name: "Smoked Gouda Mac 'n Cheese", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Rich and creamy mac & cheese with smoked gouda.", tag: "Vegetarian", image: "/images/food/moreno-bakery-smoked-gouda-mac-n-cheese.jpg" },
       { name: "Plantains Maduros", price: "$4.00", description: "Sweet ripe plantains caramelized to perfection.", tag: "Vegetarian", image: "/images/food/moreno-bakery-plantains-maduros.jpg" },
       { name: "Tostones", price: "$4.00", description: "Crispy twice-fried green plantains.", tag: "Vegetarian", image: "/images/food/moreno-bakery-tostones.jpg" },
-      { name: "Sweet Potatoes", price: "$4.00", description: "Seasoned and roasted sweet potatoes.", tag: "Vegetarian", image: "/images/food/moreno-bakery-sweet-potatoes.jpg" },
+      { name: "Sweet Potatoes", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Seasoned and roasted sweet potatoes.", tag: "Vegetarian", image: "/images/food/moreno-bakery-sweet-potatoes.jpg" },
       { name: "White Rice", price: "$4.00", description: "Fluffy steamed white rice.", tag: "Vegetarian", image: "/images/food/moreno-bakery-white-rice.jpg" },
       { name: "Yellow Rice", price: "$4.00", description: "Saffron-seasoned yellow rice, a Cuban staple.", tag: "Vegetarian", image: "/images/food/moreno-bakery-yellow-rice.jpg" },
       { name: "French Fries", price: "$4.00", description: "Crispy golden French fries.", image: "/images/food/moreno-bakery-french-fries.jpg" },
