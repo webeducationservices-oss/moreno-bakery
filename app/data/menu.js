@@ -430,7 +430,7 @@ export const FOOD_CATEGORIES = [
   {
     id: "soups",
     name: "Soups",
-    description: "Daily rotating soups — Cuban stews, chowders, gumbo, and comfort classics. $5 each.",
+    description: "Daily rotating soups — Cuban stews, chowders, gumbo, and comfort classics. Starting at $5 each.",
     image: "/images/food/moreno-bakery-black-beans.jpg",
     items: [
       { name: "Seafood Chowder", price: "$5.00", description: "Shrimp, crab, scallops and fish in a light creamy broth with carrots and potatoes.", image: "/images/food/moreno-bakery-seafood-chowder.jpg" },
