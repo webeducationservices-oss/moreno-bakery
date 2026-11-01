@@ -193,6 +193,13 @@ export default function OrderAPiePage() {
               ))}
               <button type="button" className="btn btn-secondary btn-sm" onClick={addPie}>+ Add another pie</button>
 
+              {threeInchTooFew && (
+                <p role="alert" style={{ color: "#b00020", marginTop: "var(--space-md)", fontWeight: 600 }}>
+                  3&quot; pies have a minimum order of 12 pies (you have {threeInchTotal}). Please increase the quantity to at least 12.
+                </p>
+              )}
+              {sizeError && !threeInchTooFew && null}
+
               <div className="form-group" style={{ marginTop: "var(--space-lg)" }}>
                 <label htmlFor="pie-notes" className="form-label">Topping choice, allergies, or anything else we should know (optional)</label>
                 <textarea id="pie-notes" className="form-input form-textarea" rows={3} value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="e.g. Dutch topping on the apple pie" />
