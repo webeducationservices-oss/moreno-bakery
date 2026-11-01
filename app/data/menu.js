@@ -322,7 +322,6 @@ export const BAKERY_CATEGORIES = [
       { name: "Turnovers", price: "$2.65–$2.90", description: "Apple, Cherry, Guava, Quesitos, or Guava & Cheese.", image: "/images/food/moreno-bakery-breakfast-turnovers.jpg" },
       { name: "Sticky Buns", price: "$3.50", description: "Warm caramel-topped buns with pecans and cinnamon.", image: "/images/food/moreno-bakery-sticky-buns.jpg" },
       { name: "Crumb Cake", price: "$3.30", description: "Buttery cake topped with a generous layer of crumb topping.", image: "/images/food/moreno-bakery-russian-coffee-cake.jpg" },
-      { name: "Babka", price: "$15.00", description: "Chocolate, Raisin, or Raspberry. Special order.", tag: "Special Order", image: "/images/food/moreno-bakery-breakfast-babka.jpg" },
     ],
   },
 ];
