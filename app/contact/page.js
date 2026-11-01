@@ -194,6 +194,10 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
     setStep((s) => Math.max(s - 1, 1));
   }
 
+  // Reception must be in Florida (FL ZIP codes run 32003–34997)
+  const venueZipOk = /^3[2-4]\d{3}$/.test(data.venueZip);
+  const venueIncomplete = !data.venue.trim() || !data.venueCity.trim() || !venueZipOk;
+
   function handleSubmit(e) {
     e.preventDefault();
     const message = [
