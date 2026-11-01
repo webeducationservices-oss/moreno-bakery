@@ -206,7 +206,7 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
       `Wedding Date: ${data.weddingDate}`,
       `Guest Count: ${data.guestCount}`,
       `Coordinator: ${data.coordinator || "N/A"}`,
-      `Venue: ${data.venue}`,
+      `Venue: ${data.venue}, ${data.venueCity}, FL ${data.venueZip}`,
       `Same Space: ${data.sameSpace}`,
       `Wedding Time: ${data.weddingTime}`,
       `Cake Cut Time: ${data.cakeCutTime}`,
