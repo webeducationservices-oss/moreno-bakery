@@ -44,6 +44,11 @@ export default function OrderAPiePage() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (data._honey) return;
+    if (threeInchTotal > 0 && threeInchTotal < 12) {
+      setSizeError('3" pies have a minimum order of 12 pies. Please increase your 3" quantity to at least 12, or choose a different size.');
+      return;
+    }
+    setSizeError("");
     setSending(true);
     const pieLines = pies
       .filter((p) => p.flavor)
