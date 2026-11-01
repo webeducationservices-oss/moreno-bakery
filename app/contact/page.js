@@ -426,7 +426,7 @@ const CAKE_ORDER_STEPS = [
 // Builds the list of allowed pickup times (every 15 minutes) for the chosen day.
 function pickupTimeOptions(isSunday) {
   const start = isSunday ? 9 * 60 : 7 * 60;
-  const end = isSunday ? 15 * 60 + 55 : 18 * 60 + 45;
+  const end = isSunday ? 15 * 60 + 55 : 18 * 60 + 55;
   const options = [];
   const slots = [];
   for (let m = start; m <= end; m += 15) slots.push(m);
