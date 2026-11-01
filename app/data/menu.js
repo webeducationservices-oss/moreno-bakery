@@ -159,7 +159,6 @@ export const BAKERY_CATEGORIES = [
       { name: "Cherry-Topped Cheesecake", price: "Personal $5.00 / 8\" $35", description: "Classic cheesecake topped with glazed cherries.", image: "/images/food/moreno-bakery-cherry-topped-cheesecake.jpg" },
       { name: "Strawberry-Topped Cheesecake", price: "Personal $6.00 / 8\" $40", description: "Rich cheesecake piled with fresh strawberries.", image: "/images/food/moreno-bakery-strawberry-topped-cheesecake.jpg" },
       { name: "Tres Leches", price: "By slice", description: "Traditional Cuban tres leches soaked in three milks.", image: "/images/food/moreno-bakery-tres-leches.jpg" },
-      { name: "Pineapple Upside Down Cake", price: "Personal $4.50 / 8\" $35 / 10\" $45", description: "Classic caramelized pineapple cake, baked fresh.", image: "/images/food/moreno-bakery-pineapple-upside-down-cake.jpg" },
       { name: "Bread Pudding (Cuban Style)", price: "Slice $3.00 / Whole $10", description: "Traditional Cuban-style bread pudding baked in-house.", image: "/images/food/moreno-bakery-bread-pudding-cuban-style.jpg" },
       { name: "Flan de Queso", price: "Mini $3.00 / 6.5\" $9", description: "Creamy Cuban cheese flan — silky smooth with caramel.", image: "/images/food/moreno-bakery-flan-de-queso.jpg" },
       { name: "Strawberry Shortcake", description: "Fresh layers of sponge cake, cream, and strawberries.", image: "/images/food/moreno-bakery-strawberry-shortcake.jpg" },
