@@ -468,7 +468,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const isSunday = data.pickupDate ? new Date(`${data.pickupDate}T00:00:00`).getDay() === 0 : false;
   const timeMin = isSunday ? "09:00" : "07:00";
   const timeMax = isSunday ? "15:55" : "18:55";
-  const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:45 PM";
+  const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
   const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
 
   function handleSubmit(e) {
