@@ -751,6 +751,7 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
     name: "", phone: "", email: "",
     eventType: "", eventDate: "", guestCount: "",
     mealStyle: "", budget: "", serviceType: "", venue: "",
+    deliveryVenue: "", deliveryCity: "", deliveryZip: "",
     dietary: "", vision: "",
     photo_base64: "", photo_name: "",
     _honey: "",
@@ -759,6 +760,10 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
   function update(field, value) { setData((prev) => ({ ...prev, [field]: value })); }
   function nextStep() { setStep((s) => Math.min(s + 1, 3)); }
   function prevStep() { setStep((s) => Math.max(s - 1, 1)); }
+
+  // Delivery must be within Florida (FL ZIP codes run 32003–34997)
+  const zipOk = /^3[2-4]\d{3}$/.test(data.deliveryZip);
+  const deliveryIncomplete = data.serviceType === "Delivery" && (!data.deliveryVenue.trim() || !data.deliveryCity.trim() || !zipOk);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -769,7 +774,9 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
       `Meal Style: ${data.mealStyle || "Open to suggestions"}`,
       `Budget: ${data.budget || "Not specified"}`,
       `Service: ${data.serviceType || "Not specified"}`,
-      `Venue / Location: ${data.venue || "N/A"}`,
+      ...(data.serviceType === "Delivery"
+        ? [`Delivery Location: ${data.deliveryVenue}, ${data.deliveryCity}, FL ${data.deliveryZip}`]
+        : [`Venue / Location: ${data.venue || "N/A"}`]),
       `Dietary Needs: ${data.dietary || "None"}`,
       `Vision / Notes: ${data.vision || "None"}`,
     ].join("\n");
@@ -888,17 +895,45 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
               Delivery has its own separate fee, which will be added to the price of the order at the time the order is placed. The price is unique to every customer, depending on delivery location and order.
             </p>
           )}
-          <div className="form-group">
-            <label htmlFor="ci-venue" className="form-label">Venue / delivery location (optional)</label>
-            <input type="text" id="ci-venue" className="form-input" value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Address or venue name and city" />
-          </div>
+          {data.serviceType === "Delivery" ? (
+            <div style={{ marginTop: "var(--space-md)" }}>
+              <div className="form-group">
+                <label htmlFor="ci-dvenue" className="form-label">Delivery Location / Venue (Florida only)</label>
+                <input type="text" id="ci-dvenue" className="form-input" required value={data.deliveryVenue} onChange={(e) => update("deliveryVenue", e.target.value)} placeholder="Venue name and street address" />
+              </div>
+              <div className={styles.formRow}>
+                <div className="form-group">
+                  <label htmlFor="ci-city" className="form-label">City</label>
+                  <input type="text" id="ci-city" className="form-input" required value={data.deliveryCity} onChange={(e) => update("deliveryCity", e.target.value)} placeholder="e.g. Tampa" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="ci-state" className="form-label">State</label>
+                  <input type="text" id="ci-state" className="form-input" value="Florida" readOnly disabled />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="ci-zip" className="form-label">ZIP Code</label>
+                  <input type="text" id="ci-zip" className="form-input" required inputMode="numeric" maxLength={5} value={data.deliveryZip} onChange={(e) => update("deliveryZip", e.target.value.replace(/\D/g, ""))} placeholder="33511" />
+                </div>
+              </div>
+              {data.deliveryZip.length === 5 && !zipOk && (
+                <p role="alert" style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "-8px" }}>
+                  Delivery is only available to locations in Florida. Please enter a Florida ZIP code.
+                </p>
+              )}
+            </div>
+          ) : (
+            <div className="form-group">
+              <label htmlFor="ci-venue" className="form-label">Venue / delivery location (optional)</label>
+              <input type="text" id="ci-venue" className="form-input" value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Address or venue name and city" />
+            </div>
+          )}
           <div className="form-group">
             <label htmlFor="ci-dietary" className="form-label">Any allergies or dietary needs? (optional)</label>
             <input type="text" id="ci-dietary" className="form-input" value={data.dietary} onChange={(e) => update("dietary", e.target.value)} placeholder="e.g. vegetarian options, nut allergy..." />
           </div>
           <div className={styles.stepNav}>
             <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.guestCount}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.guestCount || deliveryIncomplete}>
               Next: Your Vision →
             </button>
           </div>
