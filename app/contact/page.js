@@ -730,7 +730,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
             <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "12px", lineHeight: 1.6 }}>
               If you would like us to order your topper through the bakery, the price of the topper will be added to the price of your cake. Please make sure your topper can be delivered within the time frame of your cake order.
             </p>
-            <label htmlFor="co-topper-own" style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "16px", marginBottom: "16px", fontSize: "0.95rem", cursor: "pointer" }}>
+            <label htmlFor="co-topper-own" style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "32px", marginBottom: "28px", fontSize: "0.95rem", cursor: "pointer" }}>
               <input type="checkbox" id="co-topper-own" checked={data.topperLink === "Bringing my own toppers"} onChange={(e) => update("topperLink", e.target.checked ? "Bringing my own toppers" : "")} />
               Bringing my own toppers
             </label>
