@@ -102,7 +102,7 @@ export default function FoodMenuPage() {
               <p>{cat.description}</p>
               {cat.name === "Soups" && (
                 <p>
-                  If you would like to know our soup availability today, please
+                  If you would like to know which soups we have available today, please
                   call us at <a href="tel:8136890320">813-689-0320</a>.
                 </p>
               )}
