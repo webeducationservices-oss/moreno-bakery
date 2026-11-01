@@ -373,7 +373,7 @@ export const FOOD_CATEGORIES = [
       {
         name: "$17 Combos",
         items: [
-          { name: "Ropa Vieja", price: "$17.00", description: "Shredded beef in a sauce of tomato, onion, bell pepper, garlic, and cumin.", image: "/images/food/moreno-bakery-ropa-vieja-combo.jpg" },
+          { name: "Ropa Vieja", price: "$17.00", description: "Shredded beef in a sauce of tomato, onion, bell pepper, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-ropa-vieja-combo.jpg" },
           { name: "Picadillo", price: "$17.00", description: "Ground beef in tomato sauce with onions, garlic, peppers, olives, raisins, and capers.", image: "/images/food/moreno-bakery-picadillo-combo.jpg" },
         ],
       },
