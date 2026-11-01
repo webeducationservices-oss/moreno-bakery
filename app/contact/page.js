@@ -478,6 +478,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
       `Pickup Date: ${data.pickupDate}`,
       `Pickup Time: ${data.pickupTime}`,
       `Pickup Type: ${data.pickupType}`,
+      ...(data.pickupType === "Delivery" ? [`Delivery Location: ${data.deliveryVenue}, ${data.deliveryCity}, FL ${data.deliveryZip}`] : []),
       `Cake Size: ${data.cakeSize}${data.cakeSize === "Other" && data.cakeServes ? ` (needs to serve ${data.cakeServes})` : ""}`,
       `Cake Flavor: ${data.cakeFlavor}`,
       `Filling: ${data.fillingFlavor}`,
