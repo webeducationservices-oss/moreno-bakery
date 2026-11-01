@@ -170,6 +170,8 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
     budget: "",
     saveTopTier: "",
     venue: "",
+    venueCity: "",
+    venueZip: "",
     delivery: "",
     sameSpace: "",
     weddingTime: "",
@@ -192,6 +194,10 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
     setStep((s) => Math.max(s - 1, 1));
   }
 
+  // Reception must be in Florida (FL ZIP codes run 32003–34997)
+  const venueZipOk = /^3[2-4]\d{3}$/.test(data.venueZip);
+  const venueIncomplete = !data.venue.trim() || !data.venueCity.trim() || !venueZipOk;
+
   function handleSubmit(e) {
     e.preventDefault();
     const message = [
@@ -200,7 +206,7 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
       `Wedding Date: ${data.weddingDate}`,
       `Guest Count: ${data.guestCount}`,
       `Coordinator: ${data.coordinator || "N/A"}`,
-      `Venue: ${data.venue}`,
+      `Venue: ${data.venue}, ${data.venueCity}, FL ${data.venueZip}`,
       `Same Space: ${data.sameSpace}`,
       `Wedding Time: ${data.weddingTime}`,
       `Cake Cut Time: ${data.cakeCutTime}`,
@@ -303,9 +309,28 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
             </div>
           </div>
           <div className="form-group">
-            <label htmlFor="w-venue" className="form-label">Where is your reception?</label>
-            <input type="text" id="w-venue" className="form-input" value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Venue name and city" />
+            <label htmlFor="w-venue" className="form-label">Where is your reception? (Florida only)</label>
+            <input type="text" id="w-venue" className="form-input" required value={data.venue} onChange={(e) => update("venue", e.target.value)} placeholder="Venue name and street address" />
           </div>
+          <div className={styles.formRow}>
+            <div className="form-group">
+              <label htmlFor="w-city" className="form-label">City</label>
+              <input type="text" id="w-city" className="form-input" required value={data.venueCity} onChange={(e) => update("venueCity", e.target.value)} placeholder="e.g. Tampa" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="w-state" className="form-label">State</label>
+              <input type="text" id="w-state" className="form-input" value="Florida" readOnly disabled />
+            </div>
+            <div className="form-group">
+              <label htmlFor="w-zip" className="form-label">ZIP Code</label>
+              <input type="text" id="w-zip" className="form-input" required inputMode="numeric" maxLength={5} value={data.venueZip} onChange={(e) => update("venueZip", e.target.value.replace(/\D/g, ""))} placeholder="33511" />
+            </div>
+          </div>
+          {data.venueZip.length === 5 && !venueZipOk && (
+            <p role="alert" style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "-8px", marginBottom: "var(--space-md)" }}>
+              Receptions must be in Florida. Please enter a Florida ZIP code.
+            </p>
+          )}
           <div className="form-group">
             <label htmlFor="w-coordinator" className="form-label">Wedding Coordinator (if any)</label>
             <input type="text" id="w-coordinator" className="form-input" value={data.coordinator} onChange={(e) => update("coordinator", e.target.value)} placeholder="Name (optional)" />
@@ -340,7 +365,7 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
 
           <div className={styles.stepNav}>
             <button type="button" className="btn btn-secondary" onClick={prevStep}>← Back</button>
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.weddingDate || !data.guestCount}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.weddingDate || !data.guestCount || venueIncomplete}>
               Next: Your Dream Cake →
             </button>
           </div>
