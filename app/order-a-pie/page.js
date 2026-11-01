@@ -54,7 +54,7 @@ export default function OrderAPiePage() {
     setSending(true);
     const pieLines = pies
       .filter((p) => p.flavor)
-      .map((p) => `${p.qty} x ${p.size} ${p.flavor}`);
+      .map((p) => `${p.qty} x ${p.size} ${p.flavor} (${p.topping})`);
     const message = [
       `Pickup Date: ${data.pickupDate}`,
       `Pickup Time: ${data.pickupTime || "Not specified"}`,
