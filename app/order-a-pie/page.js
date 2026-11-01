@@ -86,6 +86,12 @@ export default function OrderAPiePage() {
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  // Pickup hours: Mon–Sat 7:00 AM – 6:45 PM, Sunday 9:00 AM – 3:45 PM
+  const isSunday = data.pickupDate ? new Date(`${data.pickupDate}T00:00:00`).getDay() === 0 : false;
+  const timeMin = isSunday ? "09:00" : "07:00";
+  const timeMax = isSunday ? "15:45" : "18:45";
+  const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:45 PM" : "Mon–Sat: 7:00 AM – 6:45 PM";
+  const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
   const hasPie = pies.some((p) => p.flavor);
   const threeInchTotal = pies
     .filter((p) => p.size === '3"')
