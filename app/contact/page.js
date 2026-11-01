@@ -103,39 +103,68 @@ async function compressImage(file, maxDim = 1400, quality = 0.8) {
   return out.slice(out.indexOf(",") + 1);
 }
 
+// Turns the chosen photos into the fields sent with the form (first photo
+// uses the original photo_base64 field; extras are photo_base64_2 / _3).
+function photoFields(data) {
+  const photos = data.photos || [];
+  const out = { photo_base64: photos[0] ? photos[0].b64 : "" };
+  if (photos[1]) out.photo_base64_2 = photos[1].b64;
+  if (photos[2]) out.photo_base64_3 = photos[2].b64;
+  return out;
+}
+
 // Reusable inspiration-photo uploader. Writes base64 to data.photo_base64
 // (the field form-notify uploads to the lead) + a filename to data.photo_name.
 function InspirationPhoto({ data, update, label = "Add an inspiration photo (optional)" }) {
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
+  const fileRef = useRef(null);
+  const photos = data.photos || [];
+  const MAX_PHOTOS = 3;
   async function onFile(e) {
-    const file = e.target.files && e.target.files[0];
-    if (!file) return;
+    const files = Array.from((e.target.files) || []);
+    e.target.value = "";
+    if (!files.length) return;
     setErr("");
-    if (!file.type.startsWith("image/")) { setErr("Please choose an image file (JPG, PNG, or HEIC)."); return; }
-    if (file.size > 15 * 1024 * 1024) { setErr("That image is too large — please pick one under 15MB."); return; }
+    const room = MAX_PHOTOS - photos.length;
+    let notice = "";
+    if (files.length > room) notice = `You can add up to ${MAX_PHOTOS} photos, so only the first ${room} were added.`;
     setBusy(true);
-    try {
-      const b64 = await compressImage(file);
-      if (b64.length > 4_000_000) { setErr("That photo is too large to send — please choose a smaller image."); setBusy(false); return; }
-      update("photo_base64", b64);
-      update("photo_name", file.name);
-    } catch {
-      setErr("We couldn't read that file — please try another image.");
+    const next = [...photos];
+    for (const file of files.slice(0, room)) {
+      if (!file.type.startsWith("image/") && !/\.(jpe?g|png|webp|heic|heif|gif)$/i.test(file.name)) { notice = "Please choose image files (JPG, PNG, or HEIC)."; continue; }
+      if (file.size > 15 * 1024 * 1024) { notice = `"${file.name}" is too large — please pick photos under 15MB.`; continue; }
+      try {
+        const b64 = await compressImage(file);
+        const total = next.reduce((s, p) => s + p.b64.length, 0) + b64.length;
+        if (total > 4_000_000) { notice = "Those photos are too large to send together — please choose smaller images."; continue; }
+        next.push({ name: file.name, b64 });
+      } catch {
+        notice = "We couldn't read one of those files — please try another image.";
+      }
     }
+    update("photos", next);
+    setErr(notice);
     setBusy(false);
   }
-  function clearPhoto() { update("photo_base64", ""); update("photo_name", ""); }
+  function removePhoto(i) { update("photos", photos.filter((_, idx) => idx !== i)); setErr(""); }
   return (
     <div className="form-group">
       <label className="form-label">{label}</label>
-      {data.photo_name ? (
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3" }}>
-          <span style={{ fontSize: "0.9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📎 {data.photo_name}</span>
-          <button type="button" onClick={clearPhoto} aria-label="Remove photo" style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
+      {photos.map((p, i) => (
+        <div key={i} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px", padding: "10px 12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3", marginBottom: "8px" }}>
+          <span style={{ fontSize: "0.9rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>📎 {p.name}</span>
+          <button type="button" onClick={() => removePhoto(i)} aria-label={`Remove photo ${i + 1}`} style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
         </div>
-      ) : (
-        <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
+      ))}
+      {photos.length < MAX_PHOTOS && (
+        <>
+          <input ref={fileRef} type="file" accept="image/*" multiple onChange={onFile} disabled={busy} style={{ display: "none" }} />
+          <button type="button" className="btn btn-secondary" style={{ width: "100%" }} onClick={() => fileRef.current && fileRef.current.click()} disabled={busy}>
+            📷 {photos.length ? "Add Another Photo" : "Select a Photo"}
+          </button>
+          <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Tap &quot;Select a Photo&quot; to choose from your phone&apos;s photos. You can add up to 3 photos ({photos.length} of 3 added).</p>
+        </>
       )}
       {busy && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing photo…</p>}
       {err && <p style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "6px" }}>{err}</p>}
@@ -226,7 +255,7 @@ function WeddingCakeForm({ onSubmit, sending, onStepChange }) {
       phone: data.phone,
       inquiry_type: "Wedding",
       message,
-      photo_base64: data.photo_base64,
+      ...photoFields(data),
       _honey: data._honey,
     });
   }
@@ -468,6 +497,13 @@ function pickupTimeOptions(isSunday) {
   return options;
 }
 
+// Earliest allowed pickup date: 3 days after today (YYYY-MM-DD, local time).
+function earliestPickupDate() {
+  const d = new Date();
+  d.setDate(d.getDate() + 3);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
   useStepReveal(step, onStepChange);
@@ -496,6 +532,8 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const timeMax = isSunday ? "15:55" : "18:55";
   const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
   const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
+  const minPickupDate = earliestPickupDate();
+  const dateTooSoon = !!data.pickupDate && data.pickupDate < minPickupDate;
   // Delivery must be within Florida (FL ZIP codes run 32003–34997)
   const zipOk = /^3[2-4]\d{3}$/.test(data.deliveryZip);
   const deliveryIncomplete = data.pickupType === "Delivery" && (!data.deliveryVenue.trim() || !data.deliveryCity.trim() || !zipOk);
@@ -525,7 +563,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
       phone: data.phone,
       inquiry_type: "Cake Order",
       message,
-      photo_base64: data.photo_base64,
+      ...photoFields(data),
       _honey: data._honey,
     });
   }
@@ -567,7 +605,8 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           <div className={styles.formRow}>
             <div className="form-group">
               <label htmlFor="co-date" className="form-label">Pickup / Delivery Date</label>
-              <input type="date" id="co-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+              <input type="date" id="co-date" className="form-input" required min={minPickupDate} value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+              <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Orders need at least 3 days&apos; notice.</p>
             </div>
             <div className="form-group">
               <label htmlFor="co-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
@@ -623,7 +662,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           </div>
           <div className={styles.stepNav}>
             <div />
-            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || timeOutOfRange || deliveryIncomplete}>
+            <button type="button" className="btn btn-primary" onClick={nextStep} disabled={!data.name || !data.email || !data.phone || !data.pickupDate || dateTooSoon || timeOutOfRange || deliveryIncomplete}>
               Next: Your Cake →
             </button>
           </div>
@@ -716,7 +755,17 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
 
           <div className="form-group">
             <label htmlFor="co-topper" className="form-label">Custom topper (optional)</label>
-            <input type="text" id="co-topper" className="form-input" value={data.topperLink} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link or describe the topper you'd like" />
+            <input type="text" id="co-topper" className="form-input" value={data.topperLink === "Bringing my own toppers" ? "" : data.topperLink} disabled={data.topperLink === "Bringing my own toppers"} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link or describe the topper you'd like" />
+            <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "12px", lineHeight: 1.6 }}>
+              If you would like us to order your topper through the bakery, the price of the topper will be added to the price of your cake. Please make sure your topper can be delivered within the time frame of your cake order.
+            </p>
+            <label htmlFor="co-topper-own" style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "32px", marginBottom: "28px", fontSize: "0.95rem", cursor: "pointer" }}>
+              <input type="checkbox" id="co-topper-own" checked={data.topperLink === "Bringing my own toppers"} onChange={(e) => update("topperLink", e.target.checked ? "Bringing my own toppers" : "")} />
+              Bringing my own toppers
+            </label>
+            <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "0", lineHeight: 1.7 }}>
+              You may buy your own <strong style={{ marginRight: "0.25em" }}>toppers</strong> and bring them into the bakery before your pickup date to be added to your cake with no extra fee. If you are bringing your own topper, just select &quot;Bringing my own toppers&quot; instead of pasting a link.
+            </p>
           </div>
 
           <div className="form-group">
@@ -814,7 +863,7 @@ function CateringInquiryForm({ onSubmit, sending, onStepChange }) {
       phone: data.phone,
       inquiry_type: "Catering",
       message,
-      photo_base64: data.photo_base64,
+      ...photoFields(data),
       _honey: data._honey,
     });
   }

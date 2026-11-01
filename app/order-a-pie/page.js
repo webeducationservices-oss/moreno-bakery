@@ -28,6 +28,13 @@ function pickupTimeOptions(isSunday) {
   return options;
 }
 
+// Earliest allowed pickup date: 3 days after today (YYYY-MM-DD, local time).
+function earliestPickupDate() {
+  const d = new Date();
+  d.setDate(d.getDate() + 3);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 function emptyPie() {
   return { flavor: "", size: '9"', topping: PIE_TOPPINGS[0], qty: "1" };
 }
@@ -112,6 +119,8 @@ export default function OrderAPiePage() {
   const timeMax = isSunday ? "15:55" : "18:55";
   const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
   const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
+  const minPickupDate = earliestPickupDate();
+  const dateTooSoon = !!data.pickupDate && data.pickupDate < minPickupDate;
   const hasPie = pies.some((p) => p.flavor);
   const threeInchTotal = pies
     .filter((p) => p.size === '3"')
@@ -179,7 +188,8 @@ export default function OrderAPiePage() {
               <div className={styles.formRow}>
                 <div className="form-group">
                   <label htmlFor="pie-date" className="form-label">Pickup Date</label>
-                  <input type="date" id="pie-date" className="form-input" required value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+                  <input type="date" id="pie-date" className="form-input" required min={minPickupDate} value={data.pickupDate} onChange={(e) => setData((prev) => ({ ...prev, pickupDate: e.target.value, pickupTime: "" }))} />
+                  <p style={{ fontSize: "0.85rem", color: "#6a6560", marginTop: "6px" }}>Orders need at least 3 days&apos; notice.</p>
                 </div>
                 <div className="form-group">
                   <label htmlFor="pie-time" className="form-label">Pickup Time ({timeHoursLabel})</label>
@@ -245,7 +255,7 @@ export default function OrderAPiePage() {
                 <textarea id="pie-notes" className="form-input form-textarea" rows={3} value={data.notes} onChange={(e) => update("notes", e.target.value)} placeholder="e.g. Nut allergy, gift box, etc." />
               </div>
 
-              <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending || !hasPie || timeOutOfRange}>
+              <button type="submit" className="btn btn-primary btn-lg" style={{ width: "100%" }} disabled={sending || !hasPie || timeOutOfRange || dateTooSoon}>
                 {sending ? "Sending..." : "Submit Pie Order 🥧"}
               </button>
               <p className={styles.note}>
