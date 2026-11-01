@@ -348,6 +348,7 @@ export const FOOD_CATEGORIES = [
     id: "hot-food",
     name: "Hot Food Combos",
     description: "Cuban-style hot meals served with your choice of two sides.",
+    priceNote: "Extra side upcharge-$2.50",
     image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg",
     subcategories: [
       {
@@ -355,40 +356,40 @@ export const FOOD_CATEGORIES = [
         items: [
           { name: "Arroz con Pollo", price: "$15.00", description: "A traditional Tampa favorite. Served with choice of two sides.", image: "/images/food/moreno-bakery-arroz-con-pollo.jpg" },
           { name: "Arroz con Gandules", price: "$15.00", description: "Pigeon peas with yellow rice, ham and pork. Served with choice of two sides.", image: "/images/food/moreno-bakery-arroz-con-gandules.jpg" },
-          { name: "Fried Rice", price: "$15.00", description: "Jasmine rice with pork, ham, chicken, eggs, bean sprouts, soy sauce and spices.", image: "/images/food/moreno-bakery-fried-rice.jpg" },
-          { name: "Roast Pork", price: "$15.00", description: "Smothered in mojo then cooked with onions, garlic, and cumin.", image: "/images/food/moreno-bakery-roast-pork-combo.jpg" },
-          { name: "Chicken Tenders", price: "$15.00", description: "Tender white meat, breaded and fried.", image: "/images/food/moreno-bakery-chicken-tenders.jpg" },
+          { name: "Fried Rice", price: "$15.00", description: "Jasmine rice with pork, ham, chicken, eggs, bean sprouts, soy sauce and spices. Served with choice of two sides.", image: "/images/food/moreno-bakery-fried-rice.jpg" },
+          { name: "Roast Pork", price: "$15.00", description: "Smothered in mojo then cooked with onions, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-roast-pork-combo.jpg" },
+          { name: "Chicken Tenders", price: "$15.00", description: "Tender white meat, breaded and fried. Served with choice of two sides.", image: "/images/food/moreno-bakery-chicken-tenders.jpg" },
         ],
       },
       {
         name: "$16 Combos",
         items: [
-          { name: "Chicken Marsala", price: "$16.00", description: "Chicken breast in a marsala wine sauce with mushrooms, onions, garlic, and cream.", image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg" },
-          { name: "Mojo Chicken", price: "$16.00", description: "Boneless chicken thighs smothered in mojo, cooked with onions, garlic, and cumin.", image: "/images/food/moreno-bakery-mojo-chicken-combo.jpg" },
-          { name: "Fricase de Pollo", price: "$16.00", description: "Boneless chicken thighs in a rich tomato wine sauce with onions, peppers, and garlic.", image: "/images/food/moreno-bakery-fricase-de-pollo.jpg" },
-          { name: "Fried Fish", price: "$16.00", description: "Swai fish fried in corn meal, flour and Louisiana seasoning.", image: "/images/food/moreno-bakery-fried-fish-combo.jpg" },
+          { name: "Chicken Marsala", price: "$16.00", description: "Chicken breast in a marsala wine sauce with mushrooms, onions, garlic, and cream. Served with choice of two sides.", image: "/images/food/moreno-bakery-chicken-marsala-combo.jpg" },
+          { name: "Mojo Chicken", price: "$16.00", description: "Boneless chicken thighs smothered in mojo, cooked with onions, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-mojo-chicken-combo.jpg" },
+          { name: "Fricase de Pollo", price: "$16.00", description: "Boneless chicken thighs in a rich tomato wine sauce with onions, peppers, and garlic. Served with choice of two sides.", image: "/images/food/moreno-bakery-fricase-de-pollo.jpg" },
+          { name: "Fried Fish", price: "$16.00", description: "Swai fish fried in corn meal, flour and Louisiana seasoning. Served with choice of two sides.", image: "/images/food/moreno-bakery-fried-fish-combo.jpg" },
         ],
       },
       {
         name: "$17 Combos",
         items: [
-          { name: "Ropa Vieja", price: "$17.00", description: "Shredded beef in a sauce of tomato, onion, bell pepper, garlic, and cumin.", image: "/images/food/moreno-bakery-ropa-vieja-combo.jpg" },
-          { name: "Picadillo", price: "$17.00", description: "Ground beef in tomato sauce with onions, garlic, peppers, olives, raisins, and capers.", image: "/images/food/moreno-bakery-picadillo-combo.jpg" },
+          { name: "Ropa Vieja", price: "$17.00", description: "Shredded beef in a sauce of tomato, onion, bell pepper, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-ropa-vieja-combo.jpg" },
+          { name: "Picadillo", price: "$17.00", description: "Ground beef in tomato sauce with onions, garlic, peppers, olives, raisins, and capers. Served with choice of two sides.", image: "/images/food/moreno-bakery-picadillo-combo.jpg" },
         ],
       },
       {
         name: "$18 Combos",
         items: [
-          { name: "Lamb Shank", price: "$18.00", description: "Cooked in marsala wine with rosemary, olives, onion, peppers, garlic, and cumin.", image: "/images/food/moreno-bakery-lamb-shank.jpg" },
-          { name: "Shrimp Enchilado", price: "$18.00", description: "Shrimp in a tomato wine sauce with onions, garlic, and smoked paprika.", image: "/images/food/moreno-bakery-shrimp-enchilado.jpg" },
-          { name: "Fried Shrimp", price: "$18.00", description: "Shrimp fried in corn meal, flour and Louisiana seasoning.", image: "/images/food/moreno-bakery-fried-shrimp.jpg" },
+          { name: "Lamb Shank", price: "$18.00", description: "Cooked in marsala wine with rosemary, olives, onion, peppers, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-lamb-shank.jpg" },
+          { name: "Shrimp Enchilado", price: "$18.00", description: "Shrimp in a tomato wine sauce with onions, garlic, and smoked paprika. Served with choice of two sides.", image: "/images/food/moreno-bakery-shrimp-enchilado.jpg" },
+          { name: "Fried Shrimp", price: "$18.00", description: "Shrimp fried in corn meal, flour and Louisiana seasoning. Served with choice of two sides.", image: "/images/food/moreno-bakery-fried-shrimp.jpg" },
         ],
       },
       {
         name: "$22 Combos",
         items: [
-          { name: "Oxtail", price: "$22.00", description: "Oxtail cooked with tomato paste, wine, olives, onion, peppers, garlic, and cumin.", image: "/images/food/moreno-bakery-oxtail.jpg" },
-          { name: "Beef Stew", price: "$22.00", description: "Beef in a sauce of tomato paste, wine, and beef stock with potatoes and cumin.", image: "/images/food/moreno-bakery-beef-stew-combo.jpg" },
+          { name: "Oxtail", price: "$22.00", description: "Oxtail cooked with tomato paste, wine, olives, onion, peppers, garlic, and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-oxtail.jpg" },
+          { name: "Beef Stew", price: "$22.00", description: "Beef in a sauce of tomato paste, wine, and beef stock with potatoes and cumin. Served with choice of two sides.", image: "/images/food/moreno-bakery-beef-stew-combo.jpg" },
         ],
       },
     ],
