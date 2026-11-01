@@ -169,7 +169,7 @@ export default function OrderAPiePage() {
                     <select id={`pie-flavor-${i}`} className="form-input" required value={pie.flavor} onChange={(e) => updatePie(i, "flavor", e.target.value)}>
                       <option value="">Select a pie</option>
                       {PIE_FLAVORS.map((f) => (
-                        <option key={f} value={f}>{f}</option>
+                        <option key={f} value={f}>{f === "Kentucky Derby Pie" ? `${f} (contains alcohol)` : f}</option>
                       ))}
                     </select>
                   </div>
