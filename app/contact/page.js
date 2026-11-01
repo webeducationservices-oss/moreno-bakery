@@ -1050,7 +1050,7 @@ function ContactPageInner() {
                   {(inquiryType === "Cake Order" || inquiryType === "Wedding Cake" || inquiryType === "Catering") && (
                     <p>
                       Please note that this is not a finalized or confirmed order. Your order is only confirmed once a member of our team contacts you to confirm it. Every order will require a deposit to confirm it.
-                      {inquiryType === "Cake Order" && " You will receive an email or phone call from the store to confirm your order within 24-48 hours."}
+                      {" "}You will receive an email or phone call from the store to confirm your order within 24-48 hours.
                     </p>
                   )}
                 </div>
