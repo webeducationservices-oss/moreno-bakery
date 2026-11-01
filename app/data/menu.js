@@ -410,7 +410,7 @@ export const FOOD_CATEGORIES = [
       { name: "White Rice", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Fluffy steamed white rice.", tag: "Vegetarian", image: "/images/food/moreno-bakery-white-rice.jpg" },
       { name: "Yellow Rice", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Saffron-seasoned yellow rice, a Cuban staple.", tag: "Vegetarian", image: "/images/food/moreno-bakery-yellow-rice.jpg" },
       { name: "French Fries", price: "$4.00", description: "Crispy golden French fries.", image: "/images/food/moreno-bakery-french-fries.jpg" },
-      { name: "Green Beans", price: "$4.00", description: "Tender sautéed green beans.", tag: "Vegetarian", image: "/images/food/moreno-bakery-green-beans.jpg" },
+      { name: "Green Beans", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Tender sautéed green beans.", tag: "Vegetarian", image: "/images/food/moreno-bakery-green-beans.jpg" },
     ],
   },
   {
