@@ -119,6 +119,8 @@ export default function OrderAPiePage() {
   const timeMax = isSunday ? "15:55" : "18:55";
   const timeHoursLabel = isSunday ? "Sunday: 9:00 AM – 3:55 PM" : "Mon–Sat: 7:00 AM – 6:55 PM";
   const timeOutOfRange = !!data.pickupTime && (data.pickupTime < timeMin || data.pickupTime > timeMax);
+  const minPickupDate = earliestPickupDate();
+  const dateTooSoon = !!data.pickupDate && data.pickupDate < minPickupDate;
   const hasPie = pies.some((p) => p.flavor);
   const threeInchTotal = pies
     .filter((p) => p.size === '3"')
