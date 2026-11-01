@@ -28,6 +28,13 @@ function pickupTimeOptions(isSunday) {
   return options;
 }
 
+// Earliest allowed pickup date: 3 days after today (YYYY-MM-DD, local time).
+function earliestPickupDate() {
+  const d = new Date();
+  d.setDate(d.getDate() + 3);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 function emptyPie() {
   return { flavor: "", size: '9"', topping: PIE_TOPPINGS[0], qty: "1" };
 }
