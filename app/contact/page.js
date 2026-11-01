@@ -1049,7 +1049,7 @@ function ContactPageInner() {
                   </p>
                   {(inquiryType === "Cake Order" || inquiryType === "Wedding Cake" || inquiryType === "Catering") && (
                     <p>
-                      Please note that this is not a finalized or confirmed order. Every order will require a deposit to confirm it.
+                      Please note that this is not a finalized or confirmed order. Your order is only confirmed once a member of our team contacts you to confirm it. Every order will require a deposit to confirm it.
                     </p>
                   )}
                 </div>
