@@ -442,7 +442,7 @@ export const FOOD_CATEGORIES = [
       { name: "Loaded Potato Soup", price: "$5.00", description: "Potatoes with bacon, onions, sage, sharp cheddar, and cream.", image: "/images/food/moreno-bakery-loaded-potato-soup.jpg" },
       { name: "Broccoli Cheese Soup", price: "$5.00", description: "Creamy broccoli soup with cheddar cheese.", tag: "Vegetarian", image: "/images/food/moreno-bakery-broccoli-cheese-soup.jpg" },
       { name: "Split Pea Soup (Chicharo)", price: "$5.00", description: "Green peas and ham with onions, celery, carrots, garlic, and thyme.", image: "/images/food/moreno-bakery-split-pea-soup.jpg" },
-      { name: "Red Beans and Rice", price: "$5.00", description: "New Orleans-style red beans and sausages over white rice.", image: "/images/food/moreno-bakery-red-beans-and-rice.jpg" },
+      { name: "Red Bean Soup", price: "$5.00", description: "New Orleans-style red beans and sausages over white rice.", image: "/images/food/moreno-bakery-red-beans-and-rice.jpg" },
     ],
   },
   {
