@@ -99,7 +99,7 @@ export default function FoodMenuPage() {
                     : cat.items.length}
                 </span>
               </h2>
-              <p>{cat.description}</p>
+              <p>{cat.description}{cat.priceNote && <div>{cat.priceNote}</div>}</p>
               {cat.name === "Soups" && (
                 <p>
                   If you would like to know which soups we have available today, please
