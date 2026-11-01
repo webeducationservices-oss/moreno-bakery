@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
-import { GALLERY_PICKER_CATEGORIES } from "../data/galleryPhotos";
 
 const INQUIRY_TYPES = ["General", "Catering", "Wedding Cake", "Cake Order"];
 
@@ -127,25 +126,6 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
     setBusy(false);
   }
   function clearPhoto() { update("photo_base64", ""); update("photo_name", ""); }
-  const [pickerOpen, setPickerOpen] = useState(false);
-  const [pickerCat, setPickerCat] = useState(Object.keys(GALLERY_PICKER_CATEGORIES)[0]);
-  async function pickFromGallery(img) {
-    setErr("");
-    setBusy(true);
-    try {
-      const res = await fetch(img.src);
-      const blob = await res.blob();
-      const ext = (img.src.split(".").pop() || "jpg").toLowerCase();
-      const file = new File([blob], `${img.alt}.${ext}`, { type: blob.type || `image/${ext === "jpg" ? "jpeg" : ext}` });
-      const b64 = await compressImage(file);
-      update("photo_base64", b64);
-      update("photo_name", `Gallery: ${img.alt}`);
-      setPickerOpen(false);
-    } catch {
-      setErr("We couldn't load that gallery photo — please try another.");
-    }
-    setBusy(false);
-  }
   return (
     <div className="form-group">
       <label className="form-label">{label}</label>
@@ -155,29 +135,7 @@ function InspirationPhoto({ data, update, label = "Add an inspiration photo (opt
           <button type="button" onClick={clearPhoto} aria-label="Remove photo" style={{ border: "none", background: "transparent", cursor: "pointer", fontSize: "1rem", color: "#888", flexShrink: 0 }}>✕</button>
         </div>
       ) : (
-        <>
-          <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
-          <button type="button" className="btn btn-secondary btn-sm" style={{ marginTop: "10px" }} onClick={() => setPickerOpen((o) => !o)} disabled={busy}>
-            {pickerOpen ? "Close gallery" : "Or choose from our gallery"}
-          </button>
-          {pickerOpen && (
-            <div style={{ marginTop: "12px", padding: "12px", border: "1px solid #e2d9cf", borderRadius: "8px", background: "#faf7f3" }}>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "12px" }}>
-                {Object.keys(GALLERY_PICKER_CATEGORIES).map((c) => (
-                  <button type="button" key={c} onClick={() => setPickerCat(c)} style={{ padding: "6px 10px", borderRadius: "999px", border: "1px solid #d8cdbf", background: pickerCat === c ? "#2b2118" : "#fff", color: pickerCat === c ? "#fff" : "#2b2118", fontSize: "0.8rem", cursor: "pointer" }}>{c}</button>
-                ))}
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(90px, 1fr))", gap: "8px", maxHeight: "300px", overflowY: "auto" }}>
-                {GALLERY_PICKER_CATEGORIES[pickerCat].map((img) => (
-                  <button type="button" key={img.src} onClick={() => pickFromGallery(img)} aria-label={`Choose ${img.alt}`} title={img.alt} style={{ padding: 0, border: "1px solid #e2d9cf", borderRadius: "6px", overflow: "hidden", background: "#fff", cursor: "pointer" }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={img.src} alt={img.alt} loading="lazy" style={{ width: "100%", aspectRatio: "1 / 1", objectFit: "cover", display: "block" }} />
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </>
+        <input type="file" accept="image/*" className="form-input" onChange={onFile} disabled={busy} />
       )}
       {busy && <p style={{ color: "#6a6560", fontSize: "0.85rem", marginTop: "6px" }}>Processing photo…</p>}
       {err && <p style={{ color: "#b3261e", fontSize: "0.85rem", marginTop: "6px" }}>{err}</p>}
