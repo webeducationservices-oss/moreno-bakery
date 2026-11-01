@@ -108,11 +108,13 @@ async function compressImage(file, maxDim = 1400, quality = 0.8) {
 function InspirationPhoto({ data, update, label = "Add an inspiration photo (optional)" }) {
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
+  const fileRef = useRef(null);
   async function onFile(e) {
     const file = e.target.files && e.target.files[0];
+    e.target.value = "";
     if (!file) return;
     setErr("");
-    if (!file.type.startsWith("image/")) { setErr("Please choose an image file (JPG, PNG, or HEIC)."); return; }
+    if (!file.type.startsWith("image/") && !/\.(jpe?g|png|webp|heic|heif|gif)$/i.test(file.name)) { setErr("Please choose an image file (JPG, PNG, or HEIC)."); return; }
     if (file.size > 15 * 1024 * 1024) { setErr("That image is too large — please pick one under 15MB."); return; }
     setBusy(true);
     try {
