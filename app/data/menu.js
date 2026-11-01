@@ -243,6 +243,7 @@ export const BAKERY_CATEGORIES = [
       { name: "Vanilla Gooey Butter Cake", price: "$3.50", description: "St. Louis-style cake with a rich, gooey custard center.", image: "/images/food/moreno-bakery-gooey-butter-cake.jpg" },
       { name: "Guava Gooey Butter Cake", price: "$3.50", description: "Our gooey butter cake swirled with sweet guava paste.", image: "/images/food/moreno-bakery-guava-gooey-butter-cake.jpg" },
       { name: "Lemon Gooey Butter Cake", price: "$3.50", description: "Bright lemon twist on our classic gooey butter cake.", image: "/images/food/moreno-bakery-lemon-gooey-butter-cake.jpg" },
+      { name: "Blueberry Gooey Butter Cake", price: "$3.50", description: "Our classic gooey butter cake with sweet blueberries.", image: "/images/food/moreno-bakery-gooey-butter-cake.jpg" },
       { name: "Pumpkin Gooey Butter Cake", price: "$3.50", description: "Warm pumpkin spice version of our gooey butter cake.", tag: "Seasonal", image: "/images/food/moreno-bakery-pumpkin-gooey-butter-cake.jpg" },
       { name: "Fudgy Brownies with Icing", price: "$3.50", description: "Dense, fudgy chocolate brownie topped with chocolate icing.", image: "/images/food/moreno-bakery-fudgy-brownies-with-icing.jpg" },
       { name: "Peanut Butter Brownies", price: "$3.50", description: "Fudgy brownie layered with creamy peanut butter.", image: "/images/food/moreno-bakery-peanut-butter-brownies.jpg" },
