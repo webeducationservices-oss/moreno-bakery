@@ -229,7 +229,7 @@ export const BAKERY_CATEGORIES = [
     items: [
       { name: "Eclairs", price: "$3.50", description: "Choux pastry filled with custard and topped with chocolate ganache.", image: "/images/food/moreno-bakery-eclairs.jpg" },
       { name: "Cream Horns", price: "$3.50", description: "Bavarian Cream or Whipped Cream filling.", image: "/images/food/moreno-bakery-cream-horns.jpg" },
-      { name: "Napoleon", price: "$3.50", description: "Dulce de Leche or Custard filled.", image: "/images/food/moreno-bakery-napoleon-pastry.jpg" },
+      { name: "Napoleon", price: "$3.50", description: "Puff pastry layered with custard and topped with white icing and chocolate ganache.", image: "/images/food/moreno-bakery-napoleon-pastry.jpg" },
       { name: "Dulce de Leche Napoleon", price: "$3.50", description: "Flaky puff pastry layered with rich dulce de leche cream.", image: "/images/food/moreno-bakery-dulce-de-leche-napoleon.jpg" },
       { name: "Mini Cannoli", price: "$2.50", description: "Powdered with mini chocolate chips, chocolate dipped, or chocolate filled & dipped.", image: "/images/food/moreno-bakery-mini-cannolis.jpg" },
       { name: "Danish", price: "$3.00", description: "Blueberry, Cheese, Cherry, or Guava & Cheese.", image: "/images/food/moreno-bakery-danish-pastry.jpg" },
