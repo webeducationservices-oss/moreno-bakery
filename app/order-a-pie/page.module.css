@@ -1,0 +1,89 @@
+.hero {
+  background: #faf7f3;
+  padding: var(--space-3xl, 64px) 0 var(--space-xl, 32px);
+  text-align: center;
+}
+
+.hero p {
+  max-width: 640px;
+  margin: var(--space-sm, 12px) auto 0;
+  color: #6a6560;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: var(--space-xl, 32px) var(--space-md, 16px) var(--space-3xl, 64px);
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e2d9cf;
+  border-radius: 12px;
+  padding: var(--space-xl, 32px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+}
+
+.notice {
+  background: #faf7f3;
+  border-left: 4px solid #b5895a;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: var(--space-lg, 24px);
+  font-size: 0.95rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md, 16px);
+}
+
+.pieRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 90px auto;
+  gap: 10px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.removeBtn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #888;
+  padding: 10px;
+}
+
+.sectionTitle {
+  margin: var(--space-lg, 24px) 0 var(--space-sm, 12px);
+  font-size: 1.15rem;
+}
+
+.note {
+  margin-top: var(--space-md, 16px);
+  font-size: 0.85rem;
+  color: #6a6560;
+  text-align: center;
+}
+
+.success {
+  text-align: center;
+  padding: var(--space-lg, 24px) 0;
+}
+
+@media (max-width: 640px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+  .pieRow {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pieRow > :first-child {
+    grid-column: 1 / -1;
+  }
+  .card {
+    padding: var(--space-lg, 24px) var(--space-md, 16px);
+  }
+}
