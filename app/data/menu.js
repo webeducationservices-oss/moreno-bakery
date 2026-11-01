@@ -396,7 +396,7 @@ export const FOOD_CATEGORIES = [
   {
     id: "sides",
     name: "Sides",
-    description: "Homemade sides from $4 each — rice, plantains, mac & cheese, and more.",
+    description: "Homemade sides starting at $4 each — rice, plantains, mac & cheese, and more.",
     image: "/images/food/moreno-bakery-plantains-maduros.jpg",
     items: [
       { name: "Mashed Potatoes", price: "$4.00", description: "Creamy homemade mashed potatoes.", image: "/images/food/moreno-bakery-mashed-potatoes.jpg" },
