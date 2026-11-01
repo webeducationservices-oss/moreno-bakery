@@ -468,6 +468,13 @@ function pickupTimeOptions(isSunday) {
   return options;
 }
 
+// Earliest allowed pickup date: 3 days after today (YYYY-MM-DD, local time).
+function earliestPickupDate() {
+  const d = new Date();
+  d.setDate(d.getDate() + 3);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 function CakeOrderForm({ onSubmit, sending, onStepChange }) {
   const [step, setStep] = useState(1);
   useStepReveal(step, onStepChange);
