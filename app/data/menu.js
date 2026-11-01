@@ -399,7 +399,7 @@ export const FOOD_CATEGORIES = [
     description: "Homemade sides starting at $4 each — rice, plantains, mac & cheese, and more.",
     image: "/images/food/moreno-bakery-plantains-maduros.jpg",
     items: [
-      { name: "Mashed Potatoes", price: "$4.00", description: "Creamy homemade mashed potatoes.", image: "/images/food/moreno-bakery-mashed-potatoes.jpg" },
+      { name: "Mashed Potatoes", price: "Sm. $4.00 / Med. $7.00 / Lg. $14.00", description: "Creamy homemade mashed potatoes.", image: "/images/food/moreno-bakery-mashed-potatoes.jpg" },
       { name: "Collard Greens", price: "$4.00", description: "Slow-cooked Southern-style collard greens.", image: "/images/food/moreno-bakery-collard-greens.jpg" },
       { name: "Yuca", price: "$4.00", description: "Tender boiled yuca with garlic mojo sauce.", tag: "Vegetarian", image: "/images/food/moreno-bakery-yuca.jpg" },
       { name: "Spinach Gratin", price: "$4.00", description: "Creamy baked spinach with a golden cheese top.", tag: "Vegetarian", image: "/images/food/moreno-bakery-spinach-gratin.jpg" },
