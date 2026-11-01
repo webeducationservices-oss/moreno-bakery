@@ -5,7 +5,7 @@ import { BAKERY_CATEGORIES } from "../data/menu";
 import styles from "./page.module.css";
 
 const PIE_FLAVORS = (BAKERY_CATEGORIES.find((c) => c.id === "pies")?.items || []).map((p) => p.name);
-const PIE_SIZES = ['3"', '9"'];
+const PIE_SIZES = ['3"', '5"', '9"'];
 
 function emptyPie() {
   return { flavor: "", size: '9"', qty: "1" };
