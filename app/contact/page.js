@@ -727,7 +727,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
           <div className="form-group">
             <label htmlFor="co-topper" className="form-label">Custom topper (optional)</label>
             <input type="text" id="co-topper" className="form-input" value={data.topperLink === "Bringing my own toppers" ? "" : data.topperLink} disabled={data.topperLink === "Bringing my own toppers"} onChange={(e) => update("topperLink", e.target.value)} placeholder="Paste a link or describe the topper you'd like" />
-            <label htmlFor="co-topper-own" style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "8px", fontSize: "0.95rem", cursor: "pointer" }}>
+            <label htmlFor="co-topper-own" style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "16px", marginBottom: "16px", fontSize: "0.95rem", cursor: "pointer" }}>
               <input type="checkbox" id="co-topper-own" checked={data.topperLink === "Bringing my own toppers"} onChange={(e) => update("topperLink", e.target.checked ? "Bringing my own toppers" : "")} />
               Bringing my own toppers
             </label>
