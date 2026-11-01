@@ -178,7 +178,7 @@ export const BAKERY_CATEGORIES = [
     items: [
       { name: "Apple Pie", price: "5\" $6.00 / 9\" $16.00", description: "Choice of Dutch, Iced, Plain, or Lattice topping (+$5).", image: "/images/food/moreno-bakery-moms-apple-square.jpg" },
       { name: "Blueberry Pie", price: "5\" $6.00 / 9\" $16.00", description: "Fresh blueberry filling with choice of topping. Not regularly made in store — special order only.", image: "/images/food/moreno-bakery-blueberry-pie.jpg" },
-      { name: "Cherry Pie", price: "5\" $6.00 / 9\" $16.00", description: "Sweet cherry filling with choice of topping.", image: "/images/food/moreno-bakery-cherry-pie.jpg" },
+      { name: "Cherry Pie", price: "5\" $6.00 / 9\" $16.00", description: "Sweet cherry filling with choice of topping. Not regularly made in store — special order only.", image: "/images/food/moreno-bakery-cherry-pie.jpg" },
       { name: "Chocolate Cream Pie", price: "5\" $6.00 / 9\" $16.00", description: "Rich chocolate cream in a flaky crust.", image: "/images/food/moreno-bakery-chocolate-cream-pie.jpg" },
       { name: "Coconut Cream Pie", price: "5\" $6.00 / 9\" $16.00", description: "Silky coconut cream filling topped with toasted coconut.", image: "/images/food/moreno-bakery-5in-coconut-cream-pie.jpg" },
       { name: "Dutch Apple Pie", price: "5\" $6.00 / 9\" $16.00", description: "Apple pie with a buttery streusel crumb topping.", image: "/images/food/moreno-bakery-dutch-apple-pie.jpg" },
