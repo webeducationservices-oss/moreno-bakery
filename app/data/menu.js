@@ -356,7 +356,7 @@ export const FOOD_CATEGORIES = [
         items: [
           { name: "Arroz con Pollo", price: "$15.00", description: "A traditional Tampa favorite. Served with choice of two sides.", image: "/images/food/moreno-bakery-arroz-con-pollo.jpg" },
           { name: "Arroz con Gandules", price: "$15.00", description: "Pigeon peas with yellow rice, ham and pork. Served with choice of two sides.", image: "/images/food/moreno-bakery-arroz-con-gandules.jpg" },
-          { name: "Fried Rice", price: "$15.00", description: "Jasmine rice with pork, ham, chicken, eggs, bean sprouts, soy sauce and spices.", image: "/images/food/moreno-bakery-fried-rice.jpg" },
+          { name: "Fried Rice", price: "$15.00", description: "Jasmine rice with pork, ham, chicken, eggs, bean sprouts, soy sauce and spices. Served with choice of two sides.", image: "/images/food/moreno-bakery-fried-rice.jpg" },
           { name: "Roast Pork", price: "$15.00", description: "Smothered in mojo then cooked with onions, garlic, and cumin.", image: "/images/food/moreno-bakery-roast-pork-combo.jpg" },
           { name: "Chicken Tenders", price: "$15.00", description: "Tender white meat, breaded and fried.", image: "/images/food/moreno-bakery-chicken-tenders.jpg" },
         ],
