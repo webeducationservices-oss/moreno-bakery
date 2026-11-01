@@ -553,7 +553,7 @@ function CakeOrderForm({ onSubmit, sending, onStepChange }) {
       phone: data.phone,
       inquiry_type: "Cake Order",
       message,
-      photo_base64: data.photo_base64,
+      ...photoFields(data),
       _honey: data._honey,
     });
   }
